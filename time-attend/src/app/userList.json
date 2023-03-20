@@ -1,0 +1,143 @@
+{
+  "user": [
+    {
+      "id": 1,
+      "userName": "123",
+      "name": "123",
+      "email": "cjp@gmail.com",
+      "password": "12345678",
+      "accessType": "admin",
+      "employeeName": "chris jay pedra"
+    },
+    {
+      "userName": "321",
+      "email": "sample@gmail.com",
+      "password": "12345678",
+      "accessType": "admin",
+      "id": 2,
+      "employeeName": "sample jay pedra"
+    },
+    {
+      "userName": "sample1",
+      "email": "sample@gmail.com",
+      "password": "12345678",
+      "accessType": "admin",
+      "employeeName": "sample1name",
+      "id": 3
+    }
+  ],
+  "employee": [
+    {
+      "id": 1,
+      "userName": "123",
+      "password": "12345678",
+      "accessType": "admin",
+      "fname": "cj",
+      "mname": "a",
+      "lname": "pedra",
+      "email": "cjp@gmail.com",
+      "number": "09457313338",
+      "position": "intern",
+      "department": "front-end",
+      "attendance": "active"
+    },
+    {
+      "userName": "kaydee",
+      "fname": "kaedehara",
+      "mname": "inazuma",
+      "lname": "kazuha",
+      "number": "093984934",
+      "position": "interns",
+      "department": "backend",
+      "email": "inazuma@gmail.com",
+      "password": "12345678",
+      "accessType": "user",
+      "id": 2,
+      "attendance": "active"
+    },
+    {
+      "userName": "11",
+      "fname": "venti",
+      "mname": "anemo",
+      "lname": "barbatos",
+      "number": "12",
+      "position": "archon",
+      "department": "teyvat",
+      "email": "12@12",
+      "password": "11111111",
+      "attendance": "active",
+      "accessType": "user",
+      "id": 5
+    },
+    {
+      "userName": "sampleusername",
+      "fname": "fichli",
+      "mname": "imnacheach",
+      "lname": "amy",
+      "number": "099821211",
+      "position": "programmer",
+      "department": "IT",
+      "email": "sample@gmail.com",
+      "password": "12345678",
+      "attendance": "new Employee",
+      "accessType": "user",
+      "id": 6
+    }
+  ],
+  "individual_attendance": [
+    {
+      "id": 1,
+      "date": "March 16, 2023",
+      "attendance": "present",
+      "attendees": {
+        "fname": "cj",
+        "mname": "a",
+        "lname": "pedra",
+        "position": "intern",
+        "department": "front-end",
+        "time_in": "9:48:34 PM",
+        "time_out": "8:00:00 AM"
+      }
+    },
+    {
+      "id": 2,
+      "date": "March 16, 2023",
+      "attendance": "late",
+      "attendees": {
+        "fname": "cj",
+        "mname": "a",
+        "lname": "pedra",
+        "position": "intern",
+        "department": "front-end",
+        "time_in": "9:48:34 PM",
+        "time_out": "8:00:00 AM"
+      }
+    },
+    {
+      "id": 3,
+      "date": "March 18, 2023",
+      "attendance": "absent",
+      "attendees": {
+        "fname": "cj",
+        "mname": "a",
+        "lname": "pedra",
+        "position": "intern",
+        "department": "front-end",
+        "time_in": "9:48:34 PM",
+        "time_out": "8:00:00 AM"
+      }
+    }
+  ],
+  "attendance_list": [
+    {
+      "id": 1,
+      "date": "March 16, 2023",
+      "attendees": {
+        "present": 10,
+        "absent": 1,
+        "late": 1,
+        "leave": 0
+      }
+    }
+  ]
+}

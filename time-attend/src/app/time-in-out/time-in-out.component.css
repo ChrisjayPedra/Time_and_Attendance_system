@@ -1,0 +1,57 @@
+
+nz-content {
+  margin: 0 20px;
+  background: transparent;
+}
+
+nz-breadcrumb {
+  margin: 20px 0;
+  background:transparent;
+
+}
+
+
+
+.card{
+  justify-content: center;
+  background: rgba(210, 255, 221, 0.616);
+  border-color: rgb(36, 65, 38);
+  border-radius: 25px;
+}
+
+.trigger {
+  font-size: 18px;
+  line-height: 64px;
+  padding: 0 24px;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.trigger:hover {
+  color: #1890ff;
+}
+nz-avatar {
+  margin-top: 16px;
+  margin-right: 16px;
+}
+.logo {
+  height: 32px;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 16px;
+}
+nz-header {
+  background:transparent;
+  padding: 0;
+}
+
+
+nz-footer {
+  text-align: center;
+   background:transparent;
+}
+.layout {
+  min-height: 100vh;
+  background-color: transparent;
+}
+
+

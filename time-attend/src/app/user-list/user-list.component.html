@@ -1,0 +1,116 @@
+
+<nz-content style="background: transparent">
+
+  <nz-breadcrumb>
+    <nz-breadcrumb-item style="font-size:1.3vw">Admin List</nz-breadcrumb-item>
+  </nz-breadcrumb>
+
+  <!-- <button nz-button nzType="primary" [nzSize]="size" nzShape="round" [routerLink]="['/home/userlist/adduser']">
+    <span nz-icon  nz-Align="center" nz-icon nzType="user-add" nzTheme="outline"></span>
+   Add admin
+  </button> -->
+
+  <button (click)="exportTableToExcel()" nz-button nz-Align="right" nzType="primary" [nzSize]="size" nzShape="round">
+    <span nz-icon  nz-Align="center" nz-icon nzType="user-add" nzTheme="outline"></span>
+  Export Data
+  </button>
+  <br />
+  <br />
+  <div class="inner-content">
+                                 <nz-table #smallTable nzSize="middle" #editRowTable nzBordered id="userList_sheet"[nzData]=" data_list" >
+                                  <thead >
+                                    <tr style="height: 20px">
+
+                                      <th nzAlign="center" nzWidth="3%" >ID</th>
+                                      <th  nzAlign="center" nzWidth="15%" nzCustomFilter>Username
+                                        <nz-filter-trigger  nzAlign="right" [(nzVisible)]="visible" [nzActive]="searchValue.length > 0" [nzDropdownMenu]="menu">
+                                          <span nz-icon nzType="search"></span>
+                                        </nz-filter-trigger>
+                                      </th>
+                                      <th nzAlign="center" nzWidth="15%">Password</th>
+                                      <th nzAlign="center" nzWidth="15%">First name</th>
+                                      <th nzAlign="center" nzWidth="15%">Middle name</th>
+                                      <th nzAlign="center" nzWidth="15%">Last name</th>
+                                      <th nzAlign="center" nzWidth="15%">Department</th>
+                                      <th nzAlign="center" nzWidth="15%">Position</th>
+                                      <th nzAlign="center" nzWidth="9%"> Access Type</th>
+                                      <th nzAlign="center" nzWidth="9%"> Action</th>
+
+                                    </tr>
+                                  </thead>
+                                  <tbody >
+
+                                    <tr  *ngFor="let data of editRowTable.data" class="editable-row">
+                                      <td nzAlign="center">{{ data.id }}</td>
+                                      <ng-container *ngIf="!editCache[data.id].edit; else editTemplate">
+
+                                        <td nzAlign="center">{{ data.userName}}</td>
+                                        <td nzAlign="center">{{ data.password}}</td>
+                                        <td nzAlign="center">{{ data.fname}}</td>
+                                        <td nzAlign="center">{{ data.mname}}</td>
+                                        <td nzAlign="center">{{ data.lname}}</td>
+                                        <td nzAlign="center">{{ data.department}}</td>
+                                        <td nzAlign="center">{{ data.position}}</td>
+                                        <td nzAlign="center">{{ data.accessType}}</td>
+                                        <td nzAlign="center" >
+                                          <a (click)="startEdit(data.id)" style="padding:10px">
+                                          <span nz-icon nzType="edit" nzTheme="outline"></span> Edit
+
+                                        </a>
+
+                                          <a nz-popconfirm nzPopconfirmTitle="Sure to delete?" (nzOnConfirm)="deleteUser(data.id)"  nz-button nzType="link" nzDanger>
+                                          <span nz-icon nzType="user-delete" nzTheme="outline" ></span>Delete
+                                          </a>
+
+                                        </td>
+
+                                      </ng-container>
+                                      <ng-template #editTemplate>
+                                        <td><input type="text" nz-input [(ngModel)]="editCache[data.id].data.userName" /></td>
+                                        <td><input type="text" nz-input [(ngModel)]="editCache[data.id].data.fname" /></td>
+                                        <td><input type="text" nz-input [(ngModel)]="editCache[data.id].data.mname" /></td>
+                                        <td><input type="text" nz-input [(ngModel)]="editCache[data.id].data.lname" /></td>
+                                        <td><input type="text" nz-input [(ngModel)]="editCache[data.id].data.department" /></td>
+                                        <td><input type="text" nz-input [(ngModel)]="editCache[data.id].data.position" /></td>
+
+
+                                        <td><input type="text" nz-input [(ngModel)]="editCache[data.id].data.password" /></td>
+                                        <td nzAlign="center">
+
+
+
+                                          <nz-select nzPlaceHolder="Select an Access type" [(ngModel)]="editCache[data.id].data.accessType">
+                                            <nz-option nzValue="admin" nzLabel="Admin"></nz-option>
+                                            <nz-option nzValue="user" nzLabel="User"></nz-option>
+                                          </nz-select>
+
+                                        </td>
+
+                                        <td nzAlign="center">
+                                          <a (click)="saveUser(data.id)" class="save">Save</a>
+                                          <a nz-popconfirm nzPopconfirmTitle="Sure to cancel?" (nzOnConfirm)="cancelEdit(data.id)">Cancel</a>
+                                        </td>
+
+                                      </ng-template>
+
+
+                                    </tr>
+                                  </tbody>
+                                </nz-table>
+                                <nz-dropdown-menu #menu="nzDropdownMenu">
+                                  <div class="ant-table-filter-dropdown">
+                                    <div class="search-box">
+                                      <input type="text" nz-input placeholder="Search name" [(ngModel)]="searchValue" />
+                                      <button nz-button nzSize="small" nzType="primary" (click)="search()" class="search-button">Search</button>
+                                      <button nz-button nzSize="small" (click)="reset()">Reset</button>
+                                    </div>
+                                  </div>
+                                </nz-dropdown-menu>
+
+
+
+  </div>
+
+  <router-outlet></router-outlet>
+</nz-content>
+

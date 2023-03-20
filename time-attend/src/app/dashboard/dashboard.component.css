@@ -1,0 +1,21 @@
+
+nz-content {
+  margin: 0 20px;
+  background: transparent;
+}
+
+nz-breadcrumb {
+  margin: 20px 0;
+  background:transparent;
+
+}
+
+
+
+.card{
+  justify-content: center;
+  background: rgba(210, 255, 221, 0.616);
+  border-color: rgb(36, 65, 38);
+  border-radius: 25px;
+}
+

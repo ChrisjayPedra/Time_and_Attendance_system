@@ -1,0 +1,128 @@
+
+<nz-content style="background: transparent">
+
+  <nz-breadcrumb>
+    <nz-breadcrumb-item style="font-size:1.3vw">Attendance List</nz-breadcrumb-item>
+  </nz-breadcrumb>
+  <button (click)="exportTableToExcel()" nz-button nz-Align="right" nzType="primary" [nzSize]="size" nzShape="round">
+    <span nz-icon  nz-Align="center" nz-icon nzType="user-add" nzTheme="outline"></span>
+  Export Data
+  </button>
+
+  <!-- <button (click)="exportTableToExcel"></button> -->
+
+  <nz-date-picker [(ngModel)]="date" (ngModelChange)="onChange($event)"></nz-date-picker>
+
+
+  <br />
+  <br />
+  <div class="inner-content">
+                                 <nz-table #smallTable nzSize="small" #editRowTable nzBordered id="attendance_sheet" [nzData]="attendance_list" >
+                                  <thead >
+                                    <tr style="height: 20px">
+
+                                      <th nzAlign="center" nzWidth="3%" >Date</th>
+                                      <th  nzAlign="center" nzWidth="10%" nzCustomFilter> First name
+                                        <nz-filter-trigger  nzAlign="right" [(nzVisible)]="visible" [nzActive]="searchValue.length > 0" [nzDropdownMenu]="menu">
+                                          <span nz-icon nzType="search"></span>
+                                        </nz-filter-trigger>
+                                      </th>
+
+                                      <th nzAlign="center" nzWidth="10%">Middle name</th>
+                                      <th nzAlign="center" nzWidth="10%">Last name</th>
+                                      <th nzAlign="center" nzWidth="10%">Position</th>
+                                      <th nzAlign="center" nzWidth="10%">Department</th>
+                                      <th nzAlign="center" nzWidth="5%">Time-In</th>
+                                      <th nzAlign="center" nzWidth="5%">Time-Out</th>
+                                      <th nzAlign="center" nzWidth="5%">Status</th>
+                                      <th nzAlign="center" nzWidth="10%">Action</th>
+
+                                    </tr>
+                                  </thead>
+                                  <tbody >
+
+
+                                    <tr  *ngFor="let data of  editRowTable.data" class="editable-row">
+
+                                        <td nzAlign="center">{{ data.date }}</td>
+
+                                        <ng-container *ngIf="!editCache[data.id].edit; else editTemplate">
+
+                                        <td nzAlign="center">{{ data.attendees.fname}}</td>
+                                        <td nzAlign="center">{{ data.attendees.mname}}</td>
+                                        <td nzAlign="center">{{ data.attendees.lname}}</td>
+                                        <td nzAlign="center">{{ data.attendees.position}}</td>
+                                        <td nzAlign="center">{{ data.attendees.department}}</td>
+                                        <td nzAlign="center">{{ data.attendees.time_in}}</td>
+                                        <td nzAlign="center">{{ data.attendees.time_out}}</td>
+                                        <td nzAlign="center">{{ data.attendance}}</td>
+                                        <td nzAlign="center">
+                                          <a (click)="startEdit(data.id)" style="padding:10px">
+                                          <span nz-icon nzType="edit" nzTheme="outline"></span> Edit
+
+                                          </a>
+
+                                          <a nz-popconfirm nzPopconfirmTitle="Sure to delete?" (nzOnConfirm)="deleteEmployee(data.id)"  nz-button nzType="link" nzDanger>
+                                          <span nz-icon nzType="user-delete" nzTheme="outline" ></span>Delete
+                                          </a>
+
+                                        </td>
+
+                                      </ng-container>
+                                      <ng-template #editTemplate>
+
+                                        <td><input type="text" nz-input [(ngModel)]="editCache[data.id].data.attendees.fname" /></td>
+                                        <td><input type="text" nz-input [(ngModel)]="editCache[data.id].data.attendees.mname" /></td>
+                                        <td><input type="text" nz-input [(ngModel)]="editCache[data.id].data.attendees.lname" /></td>
+                                        <td><input type="text" nz-input [(ngModel)]="editCache[data.id].data.attendees.position" /></td>
+                                        <td><input type="text" nz-input [(ngModel)]="editCache[data.id].data.attendees.department" /></td>
+                                        <td><input type="text" nz-input [(ngModel)]="editCache[data.id].data.attendees.time_in" /></td>
+                                        <td><input type="text" nz-input [(ngModel)]="editCache[data.id].data.attendees.time_out" /></td>
+
+                                        <td nzAlign="center">
+
+                                          <!-- attendance -->
+                                          <nz-select nzPlaceHolder="Select an Access type" [(ngModel)]="editCache[data.id].data.attendance">
+                                            <nz-option nzValue="present" nzLabel="Present"></nz-option>
+                                            <nz-option nzValue="absent" nzLabel="Absent"></nz-option>
+                                            <nz-option nzValue="late" nzLabel="Late"></nz-option>
+                                            <!-- <nz-option nzValue="leave" nzLabel="Leave"></nz-option> -->
+                                          </nz-select>
+                                          <!-- attendance -->
+
+                                        </td>
+
+
+
+
+                                        <td nzAlign="center">
+                                          <a (click)="saveUser(data.id)" class="save">Save</a>
+                                          <a nz-popconfirm nzPopconfirmTitle="Sure to cancel?" (nzOnConfirm)="cancelEdit(data.id)">Cancel</a>
+                                        </td>
+
+                                      </ng-template>
+
+
+                                    </tr>
+
+
+
+                                  </tbody>
+                                </nz-table>
+                                <nz-dropdown-menu #menu="nzDropdownMenu">
+                                  <div class="ant-table-filter-dropdown">
+                                    <div class="search-box">
+                                      <input type="text" nz-input placeholder="Search name" [(ngModel)]="searchValue" />
+                                      <button nz-button nzSize="small" nzType="primary" (click)="search()" class="search-button">Search</button>
+                                      <button nz-button nzSize="small" (click)="reset()">Reset</button>
+                                    </div>
+                                  </div>
+                                </nz-dropdown-menu>
+
+
+
+  </div>
+
+  <router-outlet></router-outlet>
+</nz-content>
+
