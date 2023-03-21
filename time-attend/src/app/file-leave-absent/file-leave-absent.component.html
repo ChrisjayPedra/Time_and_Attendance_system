@@ -1,0 +1,95 @@
+<nz-content style="background: transparent">
+  <nz-breadcrumb>
+   <nz-breadcrumb-item style="font-size:1.3vw">Appy for Leave or Absent</nz-breadcrumb-item>
+
+  </nz-breadcrumb>
+
+
+
+
+
+  <!-- <button nz-button (click)="time_out()" [disabled]="buttonOut" nz-button nz-Align="right" nzType="primary" nzShape="round">
+    <span nz-icon  nz-Align="center" nz-icon nzType="user-add" nzTheme="outline"></span>
+    time Out
+  </button> -->
+
+
+
+  <br />
+  <div class="inner-content">
+
+<nz-card  *ngIf="open_card" class="card"style="background-color:white; text-align:center" nzTitle="Apply Form">
+  <form nz-form [formGroup]="validateForm"  class="register-form" (ngSubmit)="apply_leave()">
+
+    <nz-form-item>
+      <nz-form-label [nzSpan]="7" >Type</nz-form-label>
+      <nz-form-control [nzSpan]="12" >
+        <nz-radio-group formControlName="applyType"[(ngModel)]="radioValue">
+          <label nz-radio nzValue="leave">Leave</label>
+          <label nz-radio nzValue="Absent">Absent</label>
+        </nz-radio-group>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSpan]="7" >Date From and Date To </nz-form-label>
+      <nz-form-control [nzSpan]="12" >
+        <nz-date-picker formControlName="date_from" [(ngModel)]="date_from" ></nz-date-picker>
+      </nz-form-control>
+      <nz-form-control [nzSpan]="12" >
+        <nz-date-picker formControlName="date_to" [(ngModel)]="date_to" ></nz-date-picker>
+      </nz-form-control>
+    </nz-form-item>
+
+
+
+    <nz-form-item>
+      <nz-form-label [nzSpan]="7" >Reasons</nz-form-label>
+      <nz-form-control [nzSpan]="12" >
+        <nz-textarea-count >
+          <textarea formControlName="reason" nz-input rows="2" placeholder="Type here your reason"></textarea>
+        </nz-textarea-count>
+      </nz-form-control>
+    </nz-form-item>
+
+
+
+    <nz-form-item>
+      <nz-form-control [nzOffset]="6" [nzSpan]="12">
+        <button nz-button nzType="primary" [disabled]="!validateForm.valid"  nzShape="round">Apply</button>
+        <button nz-button (click)="resetForm($event)"  nzShape="round">Reset</button>
+      </nz-form-control>
+    </nz-form-item>
+
+  </form>
+  </nz-card>
+
+  <nz-result  *ngIf="open_result_pending" [nzIcon]="'smile-twotone'" nzTitle="Successfully Purchased Cloud Server ECS!" nzSubTitle="Order number: 2017182818828182881 Cloud server configuration takes 1-5 minutes, please wait.">
+    <div nz-result-extra>
+      <button nz-button nzType="primary">back to dashboard</button>
+
+    </div>
+  </nz-result>
+
+  <nz-result  *ngIf="open_result_approved" nzStatus="success" nzTitle="Successfully Purchased Cloud Server ECS!" nzSubTitle="Order number: 2017182818828182881 Cloud server configuration takes 1-5 minutes, please wait.">
+    <div nz-result-extra>
+      <button nz-button nzType="primary">back to dashboard</button>
+
+    </div>
+  </nz-result>
+
+  <nz-result  *ngIf="open_result_declined" nzStatus="error" nzTitle="Successfully Purchased Cloud Server ECS!" nzSubTitle="Order number: 2017182818828182881 Cloud server configuration takes 1-5 minutes, please wait.">
+    <div nz-result-extra>
+      <button nz-button nzType="primary">back to dashboard</button>
+
+    </div>
+  </nz-result>
+
+
+  </div>
+
+
+</nz-content>
+
+
+

@@ -95,6 +95,8 @@ import { AdduserComponent } from './adduser/adduser.component';
 import { AttendanceComponent } from './attendance/attendance.component';
 import { AddemployeeComponent } from './addemployee/addemployee.component';
 import { TimeInOutComponent } from './time-in-out/time-in-out.component';
+import { InOutComponent } from './in-out/in-out.component';
+import { FileLeaveAbsentComponent } from './file-leave-absent/file-leave-absent.component';
 
 
 registerLocaleData(en);
@@ -111,6 +113,8 @@ registerLocaleData(en);
     AttendanceComponent,
     AddemployeeComponent,
     TimeInOutComponent,
+    InOutComponent,
+    FileLeaveAbsentComponent,
 
   ],
   imports: [

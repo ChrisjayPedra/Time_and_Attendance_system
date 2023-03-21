@@ -29,13 +29,13 @@ LoginComponent {
       });
       const user = res.find((a:any)=>{
         this.User.setUserid(a.id);
-        return a.userName === this.validateForm.value.userName && a.password === this.validateForm.value.password && a.accessType === 'user'
+        return a.userName === this.validateForm.value.userName && a.password === this.validateForm.value.password && a.accessType === 'employee'
 
       });
 
       if(user){
         alert('you are successfully login');
-        this.router.navigate(['/time_in_out'])
+        this.router.navigate(['/time_in_out/in_out'])
         this.validateForm.reset();
 
       }else if (admin){

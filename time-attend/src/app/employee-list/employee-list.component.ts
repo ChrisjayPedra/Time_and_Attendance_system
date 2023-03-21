@@ -195,6 +195,13 @@ interface EmployeeList {
       position: string;
       department: string;
       attendance: string;
+      apply:{
+        type:string;
+        date_to:string;
+        date_from:string;
+        reason:string;
+        approval:string;
+      }
 }
 
 

@@ -28,104 +28,138 @@
   ],
   "employee": [
     {
-      "id": 1,
-      "userName": "123",
-      "password": "12345678",
-      "accessType": "admin",
+      "userName": "cjp",
       "fname": "cj",
       "mname": "a",
       "lname": "pedra",
-      "email": "cjp@gmail.com",
       "number": "09457313338",
-      "position": "intern",
-      "department": "front-end",
-      "attendance": "active"
-    },
-    {
-      "userName": "kaydee",
-      "fname": "kaedehara",
-      "mname": "inazuma",
-      "lname": "kazuha",
-      "number": "093984934",
-      "position": "interns",
-      "department": "backend",
-      "email": "inazuma@gmail.com",
-      "password": "12345678",
-      "accessType": "user",
-      "id": 2,
-      "attendance": "active"
-    },
-    {
-      "userName": "11",
-      "fname": "venti",
-      "mname": "anemo",
-      "lname": "barbatos",
-      "number": "12",
-      "position": "archon",
-      "department": "teyvat",
-      "email": "12@12",
-      "password": "11111111",
-      "attendance": "active",
-      "accessType": "user",
-      "id": 5
-    },
-    {
-      "userName": "sampleusername",
-      "fname": "fichli",
-      "mname": "imnacheach",
-      "lname": "amy",
-      "number": "099821211",
-      "position": "programmer",
+      "position": "frontend",
       "department": "IT",
-      "email": "sample@gmail.com",
+      "email": "w@w",
       "password": "12345678",
       "attendance": "new Employee",
-      "accessType": "user",
+      "accessType": "admin",
       "id": 6
+    },
+    {
+      "userName": "user2",
+      "fname": "user2",
+      "mname": "midle",
+      "lname": "lastname",
+      "email": "w@2",
+      "number": "sasasasa",
+      "position": "manager",
+      "department": "saleforce",
+      "password": "1",
+      "attendance": "active",
+      "accessType": "employee",
+      "id": 7,
+      "apply": {
+        "type": "leave",
+        "date_to": "February 28, 2023",
+        "date_from": "March 30, 2023",
+        "reason": "asas",
+        "approval": "pending"
+      }
+    },
+    {
+      "userName": "mona",
+      "fname": "mona",
+      "mname": "mona",
+      "lname": "mona",
+      "email": "w@w",
+      "number": "mona",
+      "position": "mona",
+      "department": "mona",
+      "password": "11111111",
+      "attendance": "new Employee",
+      "accessType": "employee",
+      "id": 8,
+      "apply": {
+        "type": "leave",
+        "date_to": "March 19, 2023",
+        "date_from": "March 25, 2023",
+        "reason": "as",
+        "approval": "pending"
+      }
+    },
+    {
+      "userName": "user1",
+      "fname": "samplefname",
+      "mname": "sapmlemname",
+      "lname": "samplelname",
+      "number": "samplenmumber",
+      "position": "samplepo",
+      "department": "sampledep",
+      "email": "2@2",
+      "password": "11111111",
+      "attendance": "new Employee",
+      "accessType": "employee",
+      "id": 9
+    },
+    {
+      "userName": "1",
+      "fname": "1",
+      "mname": "1",
+      "lname": "1",
+      "number": "1",
+      "position": "1",
+      "department": "1",
+      "email": "2!@1",
+      "password": "11111111",
+      "attendance": "new Employee",
+      "accessType": "employee",
+      "id": 10
     }
   ],
   "individual_attendance": [
     {
-      "id": 1,
-      "date": "March 16, 2023",
+      "date": "March 21, 2023",
       "attendance": "present",
+      "up_to": "old",
       "attendees": {
-        "fname": "cj",
-        "mname": "a",
-        "lname": "pedra",
-        "position": "intern",
-        "department": "front-end",
-        "time_in": "9:48:34 PM",
-        "time_out": "8:00:00 AM"
-      }
+        "userName": "1",
+        "fname": "1",
+        "mname": "1",
+        "lname": "1",
+        "position": "1",
+        "department": "1",
+        "time_in": "1:52 PM",
+        "time_out": "1:53 PM"
+      },
+      "id": 1
     },
     {
-      "id": 2,
-      "date": "March 16, 2023",
-      "attendance": "late",
+      "date": "March 21, 2023",
+      "attendance": "present",
+      "up_to": "old",
       "attendees": {
-        "fname": "cj",
-        "mname": "a",
-        "lname": "pedra",
-        "position": "intern",
-        "department": "front-end",
-        "time_in": "9:48:34 PM",
-        "time_out": "8:00:00 AM"
-      }
+        "userName": "mona",
+        "fname": "mona",
+        "mname": "mona",
+        "lname": "mona",
+        "position": "mona",
+        "department": "mona",
+        "time_in": "1:53 PM",
+        "time_out": "4:18 PM"
+      },
+      "id": 2
     },
     {
-      "id": 3,
-      "date": "March 18, 2023",
-      "attendance": "absent",
+      "date": "March 21, 2023",
+      "attendance": "present",
+      "up_to": "old",
       "attendees": {
-        "fname": "cj",
-        "mname": "a",
-        "lname": "pedra",
-        "position": "intern",
-        "department": "front-end",
-        "time_in": "9:48:34 PM",
-        "time_out": "8:00:00 AM"
-      }
+        "userName": "1",
+        "fname": "1",
+        "mname": "1",
+        "lname": "1",
+        "position": "1",
+        "department": "1",
+        "time_in": "4:17 PM",
+        "time_out": "4:19 PM"
+      },
+      "id": 3
     }
   ],
   "attendance_list": [

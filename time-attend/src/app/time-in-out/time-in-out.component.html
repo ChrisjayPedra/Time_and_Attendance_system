@@ -7,19 +7,19 @@
 
 
     <ul nz-menu nzTheme="light"  style="border-radius:5px; background:transparent" nzMode="inline">
-      <li nz-menu-item    [routerLink]="['/home/dashboard']"  nzSelected>
+      <li nz-menu-item    [routerLink]="['/time_in_out/in_out']"  nzSelected>
 
         <span nz-icon nzType="windows" nzTheme="outline"></span>
         <span><a >Time In/Out</a></span>
       </li>
-      <li nz-menu-item [routerLink]="['/home/attendance']">
-        <span nz-icon nzType="team"  ></span>
+      <li nz-menu-item [routerLink]="['/time_in_out/file_leave_absent']">
+        <span nz-icon nzType="windows"  ></span>
         <span>File Leave/Absent</span>
       </li>
-      <li nz-menu-item [routerLink]="['/home/attendance']">
+      <!-- <li nz-menu-item [routerLink]="['/home/attendance']">
         <span nz-icon nzType="team"  ></span>
         <span>Settings</span>
-      </li>
+      </li> -->
       <li nz-menu-item [routerLink]="['']">
         <span nz-icon nzType="logout"  ></span>
         <span>Logout</span>
@@ -36,7 +36,9 @@
         (click)="isCollapsed = !isCollapsed"
       ></span>
     </nz-header>
-    <router-outlet></router-outlet>
+    <router-outlet>
+
+    </router-outlet>
   </nz-layout>
 </nz-layout>
 

@@ -1,0 +1,89 @@
+<nz-content style="background: transparent">
+  <nz-breadcrumb>
+    <nz-breadcrumb-item style="font-size:1.3vw">Dashboard</nz-breadcrumb-item>
+  <nz-breadcrumb-item style="font-size:1.3vw">Username:{{user_name}}</nz-breadcrumb-item>
+  <nz-breadcrumb-item style="font-size:1.3vw">{{currentDateTime}}</nz-breadcrumb-item>
+
+  </nz-breadcrumb>
+
+
+
+
+  <button  nz-button [disabled]="buttonIn"  (click)="time_in()" nz-button nz-Align="right" nzType="primary" nzShape="round">
+    <span nz-icon  nz-Align="center" nz-icon nzType="user-add" nzTheme="outline"></span>
+    time In
+  </button>
+  <button nz-button (click)="time_out()" [disabled]="buttonOut" nz-button nz-Align="right" nzType="primary" nzShape="round">
+    <span nz-icon  nz-Align="center" nz-icon nzType="user-add" nzTheme="outline"></span>
+    time Out
+  </button>
+
+
+
+  <br />
+  <div class="inner-content">
+
+    <div nz-row>
+
+
+
+
+
+      <div class="col" [nzXs]="{ span: 2, offset: 3 }" nz-col>
+
+        <nz-card class="card" style="width:100px;" nzTitle="present Today"  style="font-size: 50px; text-align:center" >
+          <div   nz-icon nzType="snippets" style="font-size: 50px; text-align:center" nzTheme="outline"></div>
+          <!-- <h3   style="font-size: 50px; text-align:center">{{present_count}}</h3> -->
+        </nz-card>
+
+
+
+      </div>
+
+
+      <div class="col" [nzXs]="{ span: 2, offset: 3 }" nz-col>
+
+        <nz-card class="card" style="width:100px;" nzTitle="absent Today"  style="font-size: 50px; text-align:center" >
+          <div   nz-icon nzType="snippets" style="font-size: 50px; text-align:center" nzTheme="outline"></div>
+          <!-- <h3   style="font-size: 50px; text-align:center">{{absent_count}}</h3> -->
+        </nz-card>
+
+
+
+      </div>
+
+
+      <div class="col" [nzXs]="{ span: 2, offset: 3 }" nz-col>
+
+        <nz-card class="card" style="width:100px;" nzTitle="late Today"  style="font-size: 50px; text-align:center" >
+          <div   nz-icon nzType="snippets" style="font-size: 50px; text-align:center" nzTheme="outline"></div>
+          <!-- <h3   style="font-size: 50px; text-align:center">{{late_count}}</h3> -->
+        </nz-card>
+
+
+    </div>
+
+
+    <div class="col" [nzXs]="{ span: 2, offset: 3 }" nz-col>
+
+      <nz-card class="card" style="width:100px;" nzTitle="leave Today"  style="font-size: 50px; text-align:center" >
+        <div   nz-icon nzType="snippets" style="font-size: 50px; text-align:center" nzTheme="outline"></div>
+        <!-- <h3   style="font-size: 50px; text-align:center">{{leave_count}}</h3> -->
+      </nz-card>
+
+
+  </div>
+
+
+
+    </div>
+
+
+
+
+  </div>
+
+</nz-content>
+
+
+

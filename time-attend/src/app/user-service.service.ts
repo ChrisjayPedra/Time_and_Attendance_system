@@ -1,13 +1,11 @@
 import { Injectable } from '@angular/core';
-import { AnonymousSubject } from 'rxjs/internal/Subject';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserServiceService {
   message!: any;
-
-
+  data_data: any[] = [];
 
   constructor() {
 
@@ -19,3 +17,4 @@ export class UserServiceService {
     return this.message
   }
 }
+

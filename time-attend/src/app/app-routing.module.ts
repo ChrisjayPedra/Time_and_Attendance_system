@@ -1,3 +1,5 @@
+import { FileLeaveAbsentComponent } from './file-leave-absent/file-leave-absent.component';
+import { InOutComponent } from './in-out/in-out.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -18,7 +20,12 @@ const routes: Routes = [
               children:[{path: 'adduser', component:AdduserComponent}]},
              {path: 'employeelist', component:EmployeeListComponent,
               children:[{path: 'addemployee', component:AddemployeeComponent}]}]},
-  {path: 'time_in_out', component: TimeInOutComponent},
+
+
+
+  {path: 'time_in_out', component: TimeInOutComponent,
+  children:[{path: 'in_out', component:InOutComponent},
+            {path: 'file_leave_absent', component:FileLeaveAbsentComponent}]},
 
 ];
 

@@ -71,6 +71,8 @@ export class AddemployeeComponent {
         this.message.create('error','Something went wrong');
         this.validateForm.reset()
       });
+
+
   }
 
   resetForm(e: MouseEvent): void {

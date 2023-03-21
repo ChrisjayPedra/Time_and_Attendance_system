@@ -203,6 +203,13 @@ interface UsersList {
   position: string;
   department: string;
   attendance: string;
+  apply:{
+    type:string;
+    date_to:string;
+    date_from:string;
+    reason:string;
+    approval:string;
+  }
 }
 interface UsersList_final {
 
@@ -218,6 +225,13 @@ interface UsersList_final {
   position: string;
   department: string;
   attendance: string;
+  apply:{
+    type:string;
+    date_to:string;
+    date_from:string;
+    reason:string;
+    approval:string;
+  }
 }
 
 interface dataList {
@@ -234,4 +248,11 @@ interface dataList {
   position: string;
   department: string;
   attendance: string;
+  apply:{
+    type:string;
+    date_to:string;
+    date_from:string;
+    reason:string;
+    approval:string;
+  }
 }
