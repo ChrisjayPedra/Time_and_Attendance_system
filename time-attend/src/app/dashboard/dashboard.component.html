@@ -3,15 +3,12 @@
   <nz-breadcrumb>
     <nz-breadcrumb-item style="font-size:1.3vw">Dashboard</nz-breadcrumb-item>
     <nz-breadcrumb-item style="font-size:1.3vw">{{date}}</nz-breadcrumb-item>
-
+    <h1>{{ currentTimee | date: 'mediumTime' }}</h1>
+    <button class="button_change" (click)="open()">Apply Request</button>
   </nz-breadcrumb>
   <br />
   <div class="inner-content">
-
     <div nz-row>
-
-
-
 
       <div class="col" [nzXs]="{ span: 7, offset: 3 }" nz-col>
 
@@ -89,3 +86,44 @@
 
   </div>
 </nz-content>
+
+
+<nz-drawer
+[nzBodyStyle]="{ overflow: 'auto' }"
+[nzMaskClosable]="false"
+[nzWidth]="720"
+[nzVisible]="visible"
+nzTitle="Employee Request list"
+(nzOnClose)="close()"
+
+>
+<ng-container class="container"  *nzDrawerContent>
+  <div  *ngFor="let employee of employee_list_final">
+    <div class="Employee List">
+      <nz-card class="cart-card" nzHoverable style="width:600px; border-radius:25px;  border-color: black;">
+        <h3 >{{employee.id}}</h3>
+        <h3>{{employee.fname}}</h3>
+        <h3>{{employee.mname}}</h3>
+        <h3>{{employee.lname}}</h3>
+        <p>{{employee.apply.date_from}}</p>
+        <p>{{employee.apply.date_to}}</p>
+        <h3>{{employee.department}}</h3>
+        <h3>{{employee.position}}</h3>
+        <h3>{{employee.apply.reason}}</h3>
+        <nz-select nzPlaceHolder="Select an status type" [(ngModel)]="employee.apply.approval">
+          <nz-option nzValue="approved" nzLabel="Approved"></nz-option>
+          <nz-option nzValue="declined" nzLabel="declined"></nz-option>
+          <nz-option nzValue="pending" nzLabel="Pending"></nz-option>
+        </nz-select>
+        <div style="float: right; height:160px">
+          <button nz-button nzType="primary" (click)="submit(employee.id)">Submit</button>
+        </div>
+      </nz-card>
+    </div>
+
+  </div>
+
+</ng-container>
+
+
+</nz-drawer>
