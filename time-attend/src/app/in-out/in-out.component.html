@@ -1,87 +1,100 @@
 <nz-content style="background: transparent">
-  <nz-breadcrumb>
-    <nz-breadcrumb-item style="font-size:1.3vw">Dashboard</nz-breadcrumb-item>
-  <nz-breadcrumb-item style="font-size:1.3vw">Username:{{user_name}}</nz-breadcrumb-item>
-  <nz-breadcrumb-item style="font-size:1.3vw">{{currentDateTime}}</nz-breadcrumb-item>
-
-  </nz-breadcrumb>
 
 
 
 
-  <button  nz-button [disabled]="buttonIn"  (click)="time_in()" nz-button nz-Align="right" nzType="primary" nzShape="round">
-    <span nz-icon  nz-Align="center" nz-icon nzType="user-add" nzTheme="outline"></span>
-    time In
-  </button>
-  <button nz-button (click)="time_out()" [disabled]="buttonOut" nz-button nz-Align="right" nzType="primary" nzShape="round">
-    <span nz-icon  nz-Align="center" nz-icon nzType="user-add" nzTheme="outline"></span>
-    time Out
-  </button>
+  <nz-page-header style="margin:0% ; padding:0%">
+    <nz-page-header-title style="font-size:1.3vw">Welcome {{user_name}} </nz-page-header-title>
+    <nz-page-header-subtitle>Dashboard Employee </nz-page-header-subtitle>
+    <nz-page-header-extra>
+      <nz-space>
+        <nz-row >
+          <nz-statistic  nzTitle="Date" nzValue="{{date}}" style="margin: 0 20px"></nz-statistic>
+          <div class="blob">
+            <nz-statistic  nzTitle="Time" nzValue="{{currentTimee | date: 'mediumTime' }}"></nz-statistic>
+          </div>
+       </nz-row>
+        </nz-space>
+    </nz-page-header-extra>
+    <nz-page-header-content>
+      <button   class="button_change"  [disabled]="buttonIn"  nzShape="round" (click)="time_in()"  nz-button nzType="primary" style="margin: 0 10px">Time In</button>
+      <button   class="button_change"  nzShape="round" (click)="time_out()" [disabled]="buttonOut" nz-button nzType="primary" style="margin: 0 10px">Time Out</button>
+
+
+    </nz-page-header-content>
+
+  </nz-page-header>
 
 
 
-  <br />
-  <div class="inner-content">
 
-    <div nz-row>
+  <nz-calendar   [(ngModel)]="selectedDate" (ngModelChange)="onDateChange($event)" class="calendar"  nzHeight="600px" [nzFullscreen]="true" >
 
+    <ul *nzDateCell="let date" class="events">
+        <div *ngFor="let item of present" >
+              <ng-container *ngIf="getMonthData(item.date,date)">
+                <ng-container *ngIf="getDateData(item.date,date)">
 
+                  <nz-tag [nzColor]="'green'">Present<nz-badge [nzStatus]="'success'" [nzText]="item.attendees.fname"></nz-badge></nz-tag>
 
+                </ng-container>
+              </ng-container>
+        </div>
+        <div *ngFor="let item of absent" >
+          <ng-container *ngIf="getMonthData(item.date,date)">
+            <ng-container *ngIf="getDateData(item.date,date)">
 
+              <nz-tag [nzColor]="'red'">Absent<nz-badge [nzStatus]="'error'" [nzText]="item.attendees.fname"></nz-badge></nz-tag>
 
-      <div class="col" [nzXs]="{ span: 2, offset: 3 }" nz-col>
-
-        <nz-card class="card" style="width:100px;" nzTitle="present Today"  style="font-size: 50px; text-align:center" >
-          <div   nz-icon nzType="snippets" style="font-size: 50px; text-align:center" nzTheme="outline"></div>
-          <!-- <h3   style="font-size: 50px; text-align:center">{{present_count}}</h3> -->
-        </nz-card>
-
-
-
-      </div>
-
-
-      <div class="col" [nzXs]="{ span: 2, offset: 3 }" nz-col>
-
-        <nz-card class="card" style="width:100px;" nzTitle="absent Today"  style="font-size: 50px; text-align:center" >
-          <div   nz-icon nzType="snippets" style="font-size: 50px; text-align:center" nzTheme="outline"></div>
-          <!-- <h3   style="font-size: 50px; text-align:center">{{absent_count}}</h3> -->
-        </nz-card>
-
-
-
-      </div>
-
-
-      <div class="col" [nzXs]="{ span: 2, offset: 3 }" nz-col>
-
-        <nz-card class="card" style="width:100px;" nzTitle="late Today"  style="font-size: 50px; text-align:center" >
-          <div   nz-icon nzType="snippets" style="font-size: 50px; text-align:center" nzTheme="outline"></div>
-          <!-- <h3   style="font-size: 50px; text-align:center">{{late_count}}</h3> -->
-        </nz-card>
-
+            </ng-container>
+          </ng-container>
 
     </div>
 
+    <div *ngFor="let item of late" >
+      <ng-container *ngIf="getMonthData(item.date,date)">
+        <ng-container *ngIf="getDateData(item.date,date)">
 
-    <div class="col" [nzXs]="{ span: 2, offset: 3 }" nz-col>
+          <nz-tag [nzColor]="'yellow'">Late<nz-badge [nzStatus]="'warning'" [nzText]="item.attendees.fname"></nz-badge></nz-tag>
 
-      <nz-card class="card" style="width:100px;" nzTitle="leave Today"  style="font-size: 50px; text-align:center" >
-        <div   nz-icon nzType="snippets" style="font-size: 50px; text-align:center" nzTheme="outline"></div>
-        <!-- <h3   style="font-size: 50px; text-align:center">{{leave_count}}</h3> -->
-      </nz-card>
+        </ng-container>
+      </ng-container>
+
+</div>
+
+        <div *ngFor="let item of calapproved">
+                  <ng-container *ngIf="getMonthData(item.apply.date_from,date)">
+                    <ng-container *ngIf="getDateData(item.apply.date_from,date)">
+                      <nz-tag [nzColor]="'magenta'"> Start  of leave  <nz-badge [nzStatus]="'success'" [nzText]="item.fname"></nz-badge></nz-tag>
+
+                    </ng-container>
+                  </ng-container>
+                  <ng-container *ngIf="getMonthData(item.apply.date_to,date)">
+                    <ng-container *ngIf="getDateData(item.apply.date_to,date)">
+                      <nz-tag [nzColor]="'purple'"> End  of leave  <nz-badge nzColor="#f50" [nzText]="item.fname"></nz-badge></nz-tag>
+
+                    </ng-container>
+                  </ng-container>
+
+                </div>
+                <div *ngFor="let item of eventlist">
+                  <ng-container *ngIf="getMonthData(item.date,date)">
+                    <ng-container *ngIf="getDateData(item.date,date)">
+                      <div *ngIf="item.eventtype ==='meeting'">
+                        <nz-tag [nzColor]="'orange'"> Meeting  <nz-badge nzColor="#f50" [nzText]="item.eventtype"> {{item.time}} {{item.description}}</nz-badge></nz-tag>
+                      </div>
+                      <div *ngIf="item.eventtype ==='activity'">
+                        <nz-tag [nzColor]="'black'"> Activity  <nz-badge nzColor="#f50" [nzText]="item.eventtype"> {{item.time}} {{item.description}}</nz-badge></nz-tag>
+                      </div>
+                    </ng-container>
+                  </ng-container>
+                </div>
+
+    </ul>
+
+  </nz-calendar>
 
 
-  </div>
-
-
-
-    </div>
-
-
-
-
-  </div>
 
 </nz-content>
 

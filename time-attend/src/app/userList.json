@@ -62,11 +62,11 @@
       "accessType": "employee",
       "id": 7,
       "apply": {
-        "approval": "approved",
-        "date_to": "March 25, 2023",
-        "date_from": "March 22, 2023",
-        "reason": "sickleave",
-        "type": "Absent"
+        "type": "leave",
+        "date_to": "March 7, 2023",
+        "date_from": "March 15, 2023",
+        "reason": "as",
+        "approval": "pending"
       }
     },
     {
@@ -152,6 +152,49 @@
         "reason": "Vacation leave",
         "type": "leave"
       }
+    },
+    {
+      "userName": "jem",
+      "fname": "Jeremy",
+      "mname": "kilem",
+      "lname": "Caparas",
+      "number": "0978655443",
+      "position": "backend",
+      "department": "IT",
+      "email": "jem@gmail.com",
+      "password": "22222222",
+      "attendance": "new Employee",
+      "accessType": "employee",
+      "apply": {
+        "type": "",
+        "date_to": "",
+        "date_from": "",
+        "reason": "",
+        "approval": ""
+      },
+      "id": 12
+    },
+    {
+      "userName": "12",
+      "fname": "12",
+      "mname": "12",
+      "lname": "12",
+      "number": "12",
+      "position": "12",
+      "department": "12",
+      "email": "122@1",
+      "password": "1212121212",
+      "attendance": "new Employee",
+      "accessType": "employee",
+      "apply": {
+        "type": "",
+        "date_to": "",
+        "date_from": "",
+        "reason": "",
+        "approval": ""
+      },
+      "profile": "Khaiostomization Expert v3.png",
+      "id": 13
     }
   ],
   "individual_attendance": [
@@ -188,54 +231,38 @@
       "id": 2
     },
     {
-      "date": "March 21, 2023",
-      "attendance": "late",
-      "up_to": "old",
-      "attendees": {
-        "userName": "cj",
-        "fname": "Chris jay",
-        "mname": "Almerino",
-        "lname": "Pedra",
-        "position": "front-end",
-        "department": "IT",
-        "time_in": "10:52 PM",
-        "time_out": "10:54 PM"
-      },
-      "id": 4
-    },
-    {
-      "date": "March 23, 2023",
+      "date": "March 24, 2023",
       "attendance": "present",
       "up_to": "latest",
       "attendees": {
         "id": 8,
         "userName": "mona",
         "fname": "Mona",
-        "mname": "mona",
-        "lname": "mona",
-        "position": "mona",
-        "department": "mona",
-        "time_in": "3:10 PM",
+        "mname": "M.",
+        "lname": "Megistus",
+        "position": "manager",
+        "department": "Saleforce",
+        "time_in": "9:20 PM",
         "time_out": "-----"
       },
-      "id": 6
+      "id": 3
     },
     {
-      "date": "March 23, 2023",
+      "date": "March 24, 2023",
       "attendance": "present",
       "up_to": "latest",
       "attendees": {
-        "id": 7,
-        "userName": "user2",
-        "fname": "luigi",
+        "id": 10,
+        "userName": "carlo",
+        "fname": "carlo",
         "mname": "M",
-        "lname": "Plumpber",
-        "position": "manager",
-        "department": "saleforce",
-        "time_in": "7:01 PM",
+        "lname": "Delcruz",
+        "position": "Backend",
+        "department": "IT",
+        "time_in": "12:25 PM",
         "time_out": "-----"
       },
-      "id": 7
+      "id": 4
     }
   ],
   "attendance_list": [
@@ -248,6 +275,22 @@
         "late": 1,
         "leave": 0
       }
+    }
+  ],
+  "events": [
+    {
+      "eventtype": "activity",
+      "date": "March 24, 2023",
+      "time": "5:19: PM",
+      "description": "Meeting with prof",
+      "id": 4
+    },
+    {
+      "eventtype": "activity",
+      "date": "March 29, 2023",
+      "time": "11:06: PM",
+      "description": "gathering with co workers",
+      "id": 5
     }
   ]
 }

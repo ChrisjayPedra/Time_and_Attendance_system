@@ -1,3 +1,4 @@
+import { TimeInOutComponent } from './../time-in-out/time-in-out.component';
 import { HttpClient } from '@angular/common/http';
 import { Component ,OnInit,ChangeDetectionStrategy,ViewChild,TemplateRef,} from '@angular/core';
 import { Router } from '@angular/router';
@@ -24,12 +25,14 @@ registerLocaleData(en);
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
+
 export class DashboardComponent {
   eventForm!: FormGroup;
   inputValue!: string;
   test1!:'2';
   Empdate = '24';
   isVisible = false;
+  isVisiblee = false;
   editCache:{ [key: number]: { data: employeeList } } = {};
   selectedDate!: Date;
   size: NzButtonSize = 'large';
@@ -52,16 +55,78 @@ export class DashboardComponent {
   employee_list_final : employeeListfinal[]=[];
   approval_list : approval_list[]=[];
   calapproved : cal_approved[]=[];
+  eventlist : event_list[]=[];
   currentTimee: Date | undefined;
 pending_count!:number;
 caldate:any;
 calmonth: any;
+
+validateForm!: FormGroup;
+radioValue = 'A';
+time_sta= new Date();
+date_from: any | null;
+
+dateEv:any|null
+timeEv:any|null;
+
+
+editCachee: { [key: number]: { edit: boolean; data: event_list } } = {};
+
+startEditt(id: number): void {
+  this.editCachee[id].edit = true;
+}
+
+cancelEditt(id: number): void {
+  const index = this.eventlist.findIndex(item => item.id === id);
+  this.editCachee[id] = {
+    data: { ...this.eventlist[index] },
+    edit: false
+  };
+}
+
+updateEditCachee(): void {
+  this.eventlist.forEach(item => {
+    this.editCachee[item.id] = {
+      edit: false,
+      data: { ...item }
+
+    };
+
+  });
+}
+
+saveUserr(id: number): void {
+  const index = this.eventlist.findIndex(item => item.id === id);
+  Object.assign(this.eventlist[index], this.editCachee[id].data);
+
+      this.crudHttpService.updateevent(id,this.editCachee[id].data).subscribe((response)=>{
+        this.eventList();
+            },(error=>{
+
+      }));
+
+  this.editCachee[id].edit = false;
+}
+
+
+
+deleteEmployee(attendance: any){
+  this.crudHttpService.deleteevent(attendance).subscribe((response)=>{
+
+    this.eventList();
+  },(error=>{
+  }));
+}
+
 
 
 
 
 addEvent(){
   this.isVisible = true;
+}
+editEvent(){
+  this.isVisiblee = true;
 }
 
 
@@ -74,6 +139,11 @@ handleOk(): void {
 handleCancel(): void {
   console.log('Clicked Cancel');
   this.isVisible = false;
+}
+
+handleCancell(): void {
+  console.log('Clicked Cancel');
+  this.isVisiblee = false;
 }
 
   onDateChange(date: Date) {
@@ -113,6 +183,7 @@ handleCancel(): void {
   Approval:'pending' | undefined;
   apply_date:any;
   visible = false;
+
   open(): void {
     this.visible = true;
   }
@@ -120,8 +191,6 @@ handleCancel(): void {
   close(): void {
 
     this.visible = false;
-
-
 
   }
 
@@ -210,26 +279,60 @@ handleCancel(): void {
 
 
 
-
+createEvent(){
+  console.log('eventForm',this.validateForm.value)
+  this.dateEv = this.datepipe.transform((this.validateForm.value.date_from), 'MMMM d, y');
+  this.timeEv = this.datepipe.transform((this.validateForm.value.timePicker), 'h:mm: a');
+  let event={
+    eventtype:this.validateForm.value.eventType,
+    date:this.dateEv,
+    time:this.timeEv,
+    description:this.validateForm.value.description
+  }
+      this.crudHttpService.addevent(event).subscribe((response)=> {
+        console.log('submit',this.validateForm.value)
+        this.validateForm.reset();
+        this.eventList();
+    }, err=>{
+      this.validateForm.reset()
+    });
+}
 
 
 
   constructor(private fb: FormBuilder,private modal: NzModalService,public datepipe: DatePipe,private _http:HttpClient,  private router:Router, private crudHttpService: CrudHttpService) {
+    this.validateForm = this.fb.group({
+      eventType: ['', [Validators.required]],
+      date_from: ['', [Validators.required]],
+      timePicker: [null],
+      description: ['', [Validators.required]]
+    });
+
     let currentDateTime =this.datepipe.transform((new Date), 'MMMM d, y');
     this.date =  currentDateTime;
     console.log(currentDateTime);
     setInterval(() => {
       this.currentTimee = new Date();
     }, 1000);
-    this.eventForm = this.fb.group({
-      title: [''],
-      eventType: [''],
-      datePicker: [''],
-      timePicker: [''],
-      description: [''],
 
-    });
+
+
   }
+
+
+
+  resetForm(e: MouseEvent): void {
+    e.preventDefault();
+    this.validateForm.reset();
+    for (const key in this.validateForm.controls) {
+      if (this.validateForm.controls.hasOwnProperty(key)) {
+        this.validateForm.controls[key].markAsPristine();
+        this.validateForm.controls[key].updateValueAndValidity();
+      }
+    }
+  }
+
+
 
   userList(){
     this.crudHttpService.userlist().subscribe((Response)=>{
@@ -295,7 +398,6 @@ handleCancel(): void {
     }));
 
   }
-
 
   attaendanceCount(){
 
@@ -374,11 +476,30 @@ handleCancel(): void {
     // this.userList();
     this.employeeList();
     this.attaendanceCount()
+    this.eventList();
+  }
+  eventList() {
+
+    this.crudHttpService.eventlist().subscribe((Response)=>{
+
+      this.eventlist = Object.values(Response)
+      console.log('EventList',this.eventlist);
+      this.updateEditCachee();
+    })
+
+
+
   }
 
 
 }
-
+interface event_list{
+  id: number;
+  eventtype: string,
+  time:string,
+  date:string,
+  description:string,
+}
 
 interface employeeList{
 

@@ -10,6 +10,7 @@ export class CrudHttpService {
   apiUrluser: string = 'http://localhost:3000/user';
   apiUrlemployee: string = 'http://localhost:3000/employee';
   apiUrlattendace: string = 'http://localhost:3000/individual_attendance';
+  apiUrlevents: string = 'http://localhost:3000/events';
 
 
   headers = new HttpHeaders().set('Content-type', 'application/json');
@@ -131,7 +132,40 @@ getAttendanceDateID(id:any){
     return this.http.get(url);
   }
 
+//events
 
+eventlist():  Observable<any>{
+  return this.http.get(this.apiUrlevents);
+}
+
+addevent(data:any): Observable<any> {
+
+  let url = this.apiUrlevents;
+
+  return this.http.post(url, data).pipe( catchError(this.handleError) );
+}
+
+updateevent(id:any, data:any){
+
+  let url = `${this.apiUrlevents}/${id}`;
+
+  return this.http.put(url, data).pipe( catchError(this.handleError))
+
+}
+deleteevent(id:any): Observable<any>{
+
+  let url = `${this.apiUrlevents}/${id}`;
+
+  return this.http.delete(url).pipe( catchError(this.handleError))
+
+}
+
+geteventID(id:any){
+
+    let url = `${this.apiUrlevents}/${id}`;
+
+    return this.http.get(url);
+  }
 
 
 

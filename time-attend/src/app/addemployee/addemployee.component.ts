@@ -3,10 +3,11 @@ import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, ValidationErrors, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Observable, Observer } from 'rxjs';
+import { filter, Observable, Observer } from 'rxjs';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { CrudHttpService } from '../crud-http-service.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { NzUploadChangeParam, NzUploadFile } from 'ng-zorro-antd/upload';
 
 @Component({
   selector: 'app-addemployee',
@@ -15,8 +16,8 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 })
 export class AddemployeeComponent {
 
-
-
+  uploading = false;
+  selectedFile!: File;
 
   validateForm!: FormGroup;
   passwordVisible = false;
@@ -46,9 +47,9 @@ export class AddemployeeComponent {
 
 
 
-
  submitForm(){
-    let employee = {
+
+    const employee = {
       userName: this.validateForm.value.userName,
       fname:this.validateForm.value.fname,
       mname:this.validateForm.value.mname,
@@ -66,15 +67,19 @@ export class AddemployeeComponent {
         date_from:'',
         reason:'',
         approval:'',
-      }
+      },
+
     }
     this.crudHttpService.addEmployee(employee).subscribe((response)=> {
           console.log('submit',this.validateForm.value)
+          console.log('submit',employee)
           this.validateForm.reset();
           this.addemployeeNotif();
+          this.uploading = false;
           this.employeeList.employeeList();
           this.router.navigate(['/home/employeelist'])
       }, err=>{
+        this.uploading = false;
         this.message.create('error','Something went wrong');
         this.validateForm.reset()
       });

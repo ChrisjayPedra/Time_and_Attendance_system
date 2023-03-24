@@ -1,0 +1,31 @@
+.card{
+  width: 570px;
+  height: 400px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  max-width: 100%;
+  max-height: 100%;
+  overflow: auto;
+  padding: 1em 1em;
+  display: table;
+  border-radius: 25px;
+  border-color: rgb(0, 0, 0);
+}
+.register-form {
+  max-width: 570px;
+}
+nz-content {
+  margin: 0 20px;
+  background: transparent;
+}
+
+nz-breadcrumb {
+  margin: 20px 0;
+  /* margin-left: 10px; */
+  background:transparent;
+
+}

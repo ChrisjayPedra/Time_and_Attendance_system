@@ -1,11 +1,7 @@
 
-
-<nz-card class="card"style="background-color:white; text-align:center" nzTitle="Add Employee">
+<nz-card class="card" style="background-color:white; text-align:center" nzTitle="Register Employee">
 
   <form nz-form [formGroup]="validateForm"  class="register-form" (ngSubmit)="submitForm()">
-
-
-
 
     <nz-form-item>
       <nz-form-label [nzSpan]="7" nzRequired>First name</nz-form-label>
@@ -93,16 +89,6 @@
     </nz-form-item>
 
     <nz-form-item>
-      <nz-form-label [nzSpan]="7" nzFor="accessType" nzRequired>Access Type</nz-form-label>
-      <nz-form-control [nzSpan]="12" nzErrorTip="Please select Access Type">
-        <nz-select formControlName="accessType" nzPlaceHolder="Select an Access type">
-          <nz-option nzValue="admin" nzLabel="Admin"></nz-option>
-          <nz-option nzValue="employee" nzLabel="employee"></nz-option>
-        </nz-select>
-      </nz-form-control>
-    </nz-form-item>
-
-    <nz-form-item>
       <nz-form-label [nzSpan]="7" nzRequired>Password</nz-form-label>
       <nz-form-control [nzSpan]="12" nzHasFeedback [nzErrorTip]="passwordErrorTpl">
 
@@ -139,13 +125,12 @@
     </nz-form-item>
     <nz-form-item>
       <nz-form-control [nzOffset]="6" [nzSpan]="12">
-        <button nz-button nzType="primary" [disabled]="!validateForm.valid"    nzShape="round">Register</button>
+        <button nz-button nzType="primary" [disabled]="!validateForm.valid"  nzShape="round">Register</button>
         <button nz-button (click)="resetForm($event)"  nzShape="round">Reset</button>
-        <button nz-button nzType="primary" nzShape="round" [routerLink]="['/home/employeelist']">Back</button>
+        <button nz-button nzType="primary" nzShape="round" [routerLink]="['']">Back</button>
       </nz-form-control>
 
     </nz-form-item>
-
   </form>
   </nz-card>
 

@@ -95,6 +95,7 @@ import { AddemployeeComponent } from './addemployee/addemployee.component';
 import { TimeInOutComponent } from './time-in-out/time-in-out.component';
 import { InOutComponent } from './in-out/in-out.component';
 import { FileLeaveAbsentComponent } from './file-leave-absent/file-leave-absent.component';
+import { RegisterComponent } from './register/register.component';
 
 registerLocaleData(en);
 
@@ -112,6 +113,7 @@ registerLocaleData(en);
     TimeInOutComponent,
     InOutComponent,
     FileLeaveAbsentComponent,
+    RegisterComponent,
 
   ],
   imports: [

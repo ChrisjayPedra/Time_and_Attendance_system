@@ -1,3 +1,4 @@
+
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, ValidationErrors, FormBuilder, Validators } from '@angular/forms';
@@ -5,16 +6,14 @@ import { Router } from '@angular/router';
 import { Observable, Observer } from 'rxjs';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { CrudHttpService } from '../crud-http-service.service';
-import { UserListComponent } from '../user-list/user-list.component';
 import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
-  selector: 'app-adduser',
-  templateUrl: './adduser.component.html',
-  styleUrls: ['./adduser.component.css']
+  selector: 'app-register',
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.css']
 })
-export class AdduserComponent {
-
+export class RegisterComponent {
 
 
   validateForm!: FormGroup;
@@ -23,7 +22,7 @@ export class AdduserComponent {
 
 
 
- addUserNotif(): void {
+ addemployeeNotif(): void {
     this.notification.create(
       'success',
       'Successful',
@@ -47,24 +46,36 @@ export class AdduserComponent {
 
 
  submitForm(){
-    let user = {
+    let employee = {
       userName: this.validateForm.value.userName,
+      fname:this.validateForm.value.fname,
+      mname:this.validateForm.value.mname,
+      lname:this.validateForm.value.lname,
+      number:this.validateForm.value.number,
+      position:this.validateForm.value.position,
+      department:this.validateForm.value.department,
       email:this.validateForm.value.email,
       password:this.validateForm.value.password,
-      accessType:this.validateForm.value.accessType,
-      employeeName:this.validateForm.value.employeeName
+      attendance:'new Employee',
+      accessType:'employee',
+      apply:{
+        type:'',
+        date_to:'',
+        date_from:'',
+        reason:'',
+        approval:'',
+      }
     }
-    this.crudHttpService.addUser(user).subscribe((response)=> {
+    this.crudHttpService.addEmployee(employee).subscribe((response)=> {
           console.log('submit',this.validateForm.value)
           this.validateForm.reset();
-          this.addUserNotif();
-          this.userList.userList();
-          this.router.navigate(['/home/userlist'])
-
+          this.router.navigate([''])
       }, err=>{
         this.message.create('error','Something went wrong');
         this.validateForm.reset()
       });
+
+
   }
 
   resetForm(e: MouseEvent): void {
@@ -86,7 +97,7 @@ export class AdduserComponent {
 
   new Observable((observer: Observer<ValidationErrors | null>) => {
 
-      this.crudHttpService.userlist().subscribe((Response)=>{
+      this.crudHttpService.employeelist().subscribe((Response)=>{
 
         setTimeout(() => {
           Response.find((a:any)=>{
@@ -129,16 +140,19 @@ export class AdduserComponent {
 
 
 
-  constructor(private message:NzMessageService ,private userList:UserListComponent,private notification: NzNotificationService, private crudHttpService: CrudHttpService, private fb: FormBuilder, private _http:HttpClient, private router:Router) {
+  constructor(private message:NzMessageService ,private notification: NzNotificationService, private crudHttpService: CrudHttpService, private fb: FormBuilder, private _http:HttpClient, private router:Router) {
 
     this.validateForm = this.fb.group({
       userName: ['', [Validators.required], [this.userNameAsyncValidator]],
       email: ['', [Validators.email, Validators.required]],
       password: ['', [Validators.required,Validators.minLength]],
-      accessType: ['', [Validators.required]],
-      employeeName: ['', [Validators.required]],
+      fname: ['', [Validators.required]],
+      mname: ['', [Validators.required]],
+      lname: ['', [Validators.required]],
+      number: ['', [Validators.required]],
+      position: ['', [Validators.required]],
+      department: ['', [Validators.required]],
       confirm: ['', [this.confirmValidator]],
-
     });
 
   }
@@ -146,3 +160,7 @@ export class AdduserComponent {
 
 
 }
+
+
+
+

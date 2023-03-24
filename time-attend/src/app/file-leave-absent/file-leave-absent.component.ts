@@ -54,6 +54,7 @@ export class FileLeaveAbsentComponent implements OnInit {
 
   }
   submitForm(){
+    console.log('asasasasas',Object.values(this.validateForm))
 
      const  [{id,userName,password,accessType,fname,mname,lname,email,number,position,department,attendance}] = Object.values(this.user_info_update)
     console.log('apply id',id,userName,password,accessType,fname,mname,lname,email,number,position,department,attendance)
