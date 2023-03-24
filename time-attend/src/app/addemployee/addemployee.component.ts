@@ -59,7 +59,14 @@ export class AddemployeeComponent {
       email:this.validateForm.value.email,
       password:this.validateForm.value.password,
       attendance:'new Employee',
-      accessType:this.validateForm.value.accessType
+      accessType:this.validateForm.value.accessType,
+      apply:{
+        type:'',
+        date_to:'',
+        date_from:'',
+        reason:'',
+        approval:'',
+      }
     }
     this.crudHttpService.addEmployee(employee).subscribe((response)=> {
           console.log('submit',this.validateForm.value)

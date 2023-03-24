@@ -29,25 +29,32 @@
   "employee": [
     {
       "userName": "cjp",
-      "fname": "cj",
-      "mname": "a",
-      "lname": "pedra",
+      "fname": "Chris",
+      "mname": "A",
+      "lname": "Pedra",
       "number": "09457313338",
       "position": "frontend",
       "department": "IT",
-      "email": "w@w",
+      "email": "chrisjay00.cjp@gmail.com",
       "password": "12345678",
       "attendance": "new Employee",
       "accessType": "admin",
-      "id": 6
+      "id": 6,
+      "apply": {
+        "approval": "approved",
+        "date_to": "March 30, 2023",
+        "date_from": "March 22, 2023",
+        "reason": "sickleave",
+        "type": "Absent"
+      }
     },
     {
       "userName": "user2",
-      "fname": "user2",
-      "mname": "midle",
-      "lname": "lastname",
-      "email": "w@2",
-      "number": "sasasasa",
+      "fname": "luigi",
+      "mname": "M",
+      "lname": "Plumpber",
+      "email": "user@gmail.com",
+      "number": "09424568164",
       "position": "manager",
       "department": "saleforce",
       "password": "1",
@@ -55,32 +62,32 @@
       "accessType": "employee",
       "id": 7,
       "apply": {
-        "type": "leave",
-        "date_to": "February 28, 2023",
-        "date_from": "March 30, 2023",
-        "reason": "asas",
-        "approval": "pending"
+        "approval": "approved",
+        "date_to": "March 25, 2023",
+        "date_from": "March 22, 2023",
+        "reason": "sickleave",
+        "type": "Absent"
       }
     },
     {
       "userName": "mona",
-      "fname": "mona",
-      "mname": "mona",
-      "lname": "mona",
-      "email": "w@w",
-      "number": "mona",
-      "position": "mona",
-      "department": "mona",
+      "fname": "Mona",
+      "mname": "M.",
+      "lname": "Megistus",
+      "email": "monsdtad@gmail.com",
+      "number": "0944865656",
+      "position": "manager",
+      "department": "Saleforce",
       "password": "11111111",
       "attendance": "new Employee",
       "accessType": "employee",
       "id": 8,
       "apply": {
-        "type": "leave",
-        "date_to": "March 19, 2023",
-        "date_from": "March 25, 2023",
-        "reason": "as",
-        "approval": "pending"
+        "approval": "approved",
+        "date_to": "March 27, 2023",
+        "date_from": "March 22, 2023",
+        "reason": "sickleave",
+        "type": "Absent"
       }
     },
     {
@@ -88,28 +95,63 @@
       "fname": "samplefname",
       "mname": "sapmlemname",
       "lname": "samplelname",
-      "number": "samplenmumber",
+      "email": "sample@gmail.com",
+      "number": "097854546",
       "position": "samplepo",
       "department": "sampledep",
-      "email": "2@2",
       "password": "11111111",
       "attendance": "new Employee",
       "accessType": "employee",
-      "id": 9
+      "id": 9,
+      "apply": {
+        "approval": "approved",
+        "date_to": "April 8, 2023",
+        "date_from": "March 25, 2023",
+        "reason": "date",
+        "type": "Absent"
+      }
     },
     {
-      "userName": "1",
-      "fname": "1",
-      "mname": "1",
-      "lname": "1",
-      "number": "1",
-      "position": "1",
-      "department": "1",
-      "email": "2!@1",
+      "userName": "carlo",
+      "fname": "carlo",
+      "mname": "M",
+      "lname": "Delcruz",
+      "email": "carlo@gmail.com",
+      "number": "0945545445",
+      "position": "Backend",
+      "department": "IT",
       "password": "11111111",
       "attendance": "new Employee",
       "accessType": "employee",
-      "id": 10
+      "id": 10,
+      "apply": {
+        "approval": "approved",
+        "date_to": "April 2, 2023",
+        "date_from": "March 25, 2023",
+        "reason": "date",
+        "type": "Absent"
+      }
+    },
+    {
+      "userName": "cj",
+      "fname": "Chris jay",
+      "mname": "Almerino",
+      "lname": "Pedra",
+      "email": "chrisjay00.cjp@gmail.com",
+      "number": "09457313338",
+      "position": "front-end",
+      "department": "IT",
+      "password": "11111111",
+      "attendance": "active",
+      "accessType": "employee",
+      "id": 11,
+      "apply": {
+        "approval": "approved",
+        "date_to": "April 1, 2023",
+        "date_from": "March 25, 2023",
+        "reason": "Vacation leave",
+        "type": "leave"
+      }
     }
   ],
   "individual_attendance": [
@@ -119,7 +161,7 @@
       "up_to": "old",
       "attendees": {
         "userName": "1",
-        "fname": "1",
+        "fname": "Carlo",
         "mname": "1",
         "lname": "1",
         "position": "1",
@@ -130,12 +172,12 @@
       "id": 1
     },
     {
-      "date": "March 21, 2023",
-      "attendance": "present",
+      "date": "March 26, 2023",
+      "attendance": "absent",
       "up_to": "old",
       "attendees": {
         "userName": "mona",
-        "fname": "mona",
+        "fname": "Mona",
         "mname": "mona",
         "lname": "mona",
         "position": "mona",
@@ -147,19 +189,53 @@
     },
     {
       "date": "March 21, 2023",
-      "attendance": "present",
+      "attendance": "late",
       "up_to": "old",
       "attendees": {
-        "userName": "1",
-        "fname": "1",
-        "mname": "1",
-        "lname": "1",
-        "position": "1",
-        "department": "1",
-        "time_in": "4:17 PM",
-        "time_out": "4:19 PM"
+        "userName": "cj",
+        "fname": "Chris jay",
+        "mname": "Almerino",
+        "lname": "Pedra",
+        "position": "front-end",
+        "department": "IT",
+        "time_in": "10:52 PM",
+        "time_out": "10:54 PM"
       },
-      "id": 3
+      "id": 4
+    },
+    {
+      "date": "March 23, 2023",
+      "attendance": "present",
+      "up_to": "latest",
+      "attendees": {
+        "id": 8,
+        "userName": "mona",
+        "fname": "Mona",
+        "mname": "mona",
+        "lname": "mona",
+        "position": "mona",
+        "department": "mona",
+        "time_in": "3:10 PM",
+        "time_out": "-----"
+      },
+      "id": 6
+    },
+    {
+      "date": "March 23, 2023",
+      "attendance": "present",
+      "up_to": "latest",
+      "attendees": {
+        "id": 7,
+        "userName": "user2",
+        "fname": "luigi",
+        "mname": "M",
+        "lname": "Plumpber",
+        "position": "manager",
+        "department": "saleforce",
+        "time_in": "7:01 PM",
+        "time_out": "-----"
+      },
+      "id": 7
     }
   ],
   "attendance_list": [

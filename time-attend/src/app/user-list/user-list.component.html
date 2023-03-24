@@ -1,21 +1,50 @@
 
 <nz-content style="background: transparent">
 
-  <nz-breadcrumb>
+  <!-- <nz-breadcrumb>
     <nz-breadcrumb-item style="font-size:1.3vw">Admin List</nz-breadcrumb-item>
   </nz-breadcrumb>
 
-  <!-- <button nz-button nzType="primary" [nzSize]="size" nzShape="round" [routerLink]="['/home/userlist/adduser']">
+  <button nz-button nzType="primary" [nzSize]="size" nzShape="round" [routerLink]="['/home/userlist/adduser']">
     <span nz-icon  nz-Align="center" nz-icon nzType="user-add" nzTheme="outline"></span>
    Add admin
-  </button> -->
+  </button>
 
   <button (click)="exportTableToExcel()" nz-button nz-Align="right" nzType="primary" [nzSize]="size" nzShape="round">
     <span nz-icon  nz-Align="center" nz-icon nzType="user-add" nzTheme="outline"></span>
   Export Data
   </button>
   <br />
-  <br />
+  <br /> -->
+
+
+
+
+  <nz-page-header>
+    <nz-page-header-title style="font-size:1.3vw">Admin List</nz-page-header-title>
+    <nz-page-header-extra>
+
+      <nz-space style="margin: 0 32px">
+        <button  *nzSpaceItem nz-button nzType="primary" [nzSize]="size" nzShape="round" [routerLink]="['/home/userlist/adduser']">
+          <span nz-icon  nz-Align="center" nz-icon nzType="user-add" nzTheme="outline"></span>
+         Add Admin
+        </button>
+      </nz-space>
+      <nz-space>
+        <button style="background-color:rgb(0, 224, 0); border-color:rgb(0, 224, 0);" *nzSpaceItem (click)="exportTableToExcel()" nz-button nz-Align="right" nzType="primary" [nzSize]="size" nzShape="round">
+          <span nz-icon  nz-Align="center" nz-icon nzType="file-excel" nzTheme="outline"></span>
+
+          Export Data
+        </button>
+      </nz-space>
+
+    </nz-page-header-extra>
+    <nz-page-header-content>
+
+    </nz-page-header-content>
+
+  </nz-page-header>
+
   <div class="inner-content">
                                  <nz-table #smallTable nzSize="middle" #editRowTable nzBordered id="userList_sheet"[nzData]=" data_list" >
                                   <thead >

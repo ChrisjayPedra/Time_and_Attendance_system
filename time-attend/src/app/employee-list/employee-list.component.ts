@@ -83,6 +83,7 @@ exportTableToExcel():void {
   //update User
  startEdit(id: number): void {
     this.editCache[id].edit = true;
+   console.log('edit', this.editCache[id])
   }
 
   cancelEdit(id: number): void {

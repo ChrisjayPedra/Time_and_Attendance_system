@@ -17,6 +17,7 @@ export class FileLeaveAbsentComponent implements OnInit {
   open_result_approved = false;
   open_result_declined = false;
   open_result_ongoing = false;
+  open_result_ended = false;
   validateForm!: FormGroup;
   radioValue = 'A';
   date_to: any | null;
@@ -97,6 +98,54 @@ export class FileLeaveAbsentComponent implements OnInit {
   }
 
 
+
+  declined_ended(){
+
+   const  [{id,userName,password,accessType,fname,mname,lname,email,number,position,department,attendance}] = Object.values(this.user_info_update)
+   console.log('apply id',id,userName,password,accessType,fname,mname,lname,email,number,position,department,attendance)
+
+    // this.date_from = this.datepipe.transform((this.validateForm.value.date_from), 'MMMM d, y');
+    // this.date_to = this.datepipe.transform((this.validateForm.value.date_to), 'MMMM d, y');
+
+   const employee = {
+     userName: userName,
+     fname: fname,
+     mname: mname,
+     lname: lname,
+     email: email,
+     number: number,
+     position: position,
+     department: department,
+     password: password,
+     attendance: attendance,
+     accessType: accessType,
+     id:id,
+     apply:{
+       type:'',
+       date_to:'',
+       date_from:'',
+       reason:'',
+       approval:''
+     }
+   }
+   console.log('apply Employeee',employee)
+
+   this.crudHttpService.updateEmployee(this.user_id,employee).subscribe((response)=> {
+
+     this.open_card = true;
+     this.open_result_pending = false;
+     this.open_result_approved = false;
+     this.open_result_declined = false;
+     this.open_result_ongoing = false;
+     this.open_result_ended = false;
+     }, err=>{
+
+       this.validateForm.reset()
+     });
+
+
+ }
+
   resetForm(e: MouseEvent): void {
     e.preventDefault();
     this.validateForm.reset();
@@ -139,15 +188,44 @@ export class FileLeaveAbsentComponent implements OnInit {
             this.open_card = false;
             this.open_result_approved = true;
             console.log('Apply leave Currently approved');
-            if (employee.apply.date_from < this.date_from && employee.apply.date_to > this.date_to){
+
+            if ( this.date > employee.apply.date_from ){
               this.open_card = false;
+              this.open_result_approved = false;
               this.open_result_ongoing = true;
+              console.log('this date current date',this.date);
+              console.log('this date start',employee.apply.date_from);
               console.log('Apply leave Currently ongoing');
+              if (this.date < employee.apply.date_to){
+                this.open_card = false;
+                this.open_result_ongoing = true;
+                this.open_result_approved = false;
+                console.log('Apply leave Currently ongoing');
+              }else{
+                this.open_result_ended = true;
+                this.open_result_approved = false;
+                this.open_result_ongoing = false;
+                console.log('Apply leave Currently Ended');
+
+              }
+
+            }else{
+              this.open_result_approved = true;
+              console.log('Apply leave Currently not starting');
             }
+
+
+            // else if (employee.apply.date_to === this.date){
+            //   this.open_card = false;
+            //   this.open_result_ongoing = true;
+            //   console.log('Apply leave Currently ongoing');
+
+            // }
           }else if (employee.apply.approval === 'declined'){
             this.open_card = false;
             this.open_result_declined = true;
             console.log('Apply leave Currently declined');
+
 
           }
         }

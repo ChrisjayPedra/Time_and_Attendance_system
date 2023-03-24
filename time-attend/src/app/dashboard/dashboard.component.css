@@ -11,11 +11,67 @@ nz-breadcrumb {
 }
 
 
+.inner-content {
+  padding: 10px;
+  background: #b9ffde41;
+  min-height: auto;
+  border-radius: 5px;
+  padding-bottom: 0;
+}
+
 
 .card{
   justify-content: center;
   background: rgba(210, 255, 221, 0.616);
   border-color: rgb(36, 65, 38);
   border-radius: 25px;
+  width: 40%;
+  height: auto ;
+}
+.date{
+  width: 100%;
+  margin-left: 0;
+  text-align: left;
+}
+
+.events {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.events .ant-badge-status {
+  overflow: hidden;
+  white-space: nowrap;
+  width: 100%;
+  text-overflow: ellipsis;
+  font-size: 12px;
+}
+
+.notes-month {
+  text-align: center;
+  font-size: 20px;
+}
+
+.notes-month section {
+  font-size: 20px;
+}
+::ng-deep .ant-picker-calendar {
+
+    height: 600px !important;
+
+}
+.calendar{
+  height :600px !important;
+}
+
+
+.head-example {
+  width: 42px;
+  height: 42px;
+  border-radius: 4px;
+  background: #eee;
+  display: inline-block;
+  vertical-align: middle;
 }
 

@@ -64,23 +64,37 @@
   </form>
   </nz-card>
 
-  <nz-result  *ngIf="open_result_pending" [nzIcon]="'smile-twotone'" nzTitle="Successfully Purchased Cloud Server ECS!" nzSubTitle="Order number: 2017182818828182881 Cloud server configuration takes 1-5 minutes, please wait.">
+  <nz-result  *ngIf="open_result_pending" [nzIcon]="'smile-twotone'" nzTitle="Apply form currently pending">
     <div nz-result-extra>
       <button nz-button nzType="primary">back to dashboard</button>
 
     </div>
   </nz-result>
 
-  <nz-result  *ngIf="open_result_approved" nzStatus="success" nzTitle="Successfully Purchased Cloud Server ECS!" nzSubTitle="Order number: 2017182818828182881 Cloud server configuration takes 1-5 minutes, please wait.">
+  <nz-result  *ngIf="open_result_approved" nzStatus="success" nzTitle="Apply form Approved" >
     <div nz-result-extra>
       <button nz-button nzType="primary">back to dashboard</button>
 
     </div>
   </nz-result>
 
-  <nz-result  *ngIf="open_result_declined" nzStatus="error" nzTitle="Successfully Purchased Cloud Server ECS!" nzSubTitle="Order number: 2017182818828182881 Cloud server configuration takes 1-5 minutes, please wait.">
+  <nz-result  *ngIf="open_result_ended" nzStatus="warning" nzTitle="Leave ended">
     <div nz-result-extra>
-      <button nz-button nzType="primary">back to dashboard</button>
+      <button nz-button (click)="declined_ended()"  nzType="primary">Apply leave or absent</button>
+
+    </div>
+  </nz-result>
+
+  <nz-result  *ngIf="open_result_declined" nzStatus="error" nzTitle="Apply form declined">
+    <div nz-result-extra>
+      <button nz-button (click)="declined_ended()"  nzType="primary">Apply leave or absent</button>
+
+    </div>
+  </nz-result>
+
+  <nz-result  *ngIf="open_result_ongoing" nzStatus="403" nzTitle="you are currently in leave/absent">
+    <div nz-result-extra>
+      <button nz-button  nzType="primary">back to dashboard</button>
 
     </div>
   </nz-result>

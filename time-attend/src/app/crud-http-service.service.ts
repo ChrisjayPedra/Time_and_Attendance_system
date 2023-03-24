@@ -71,6 +71,14 @@ updateEmployee(id:any, data:any){
   return this.http.put(url, data).pipe( catchError(this.handleError))
 
 }
+
+patchEmployee(id:any, data:any){
+
+  let url = `${this.apiUrlemployee}/${id}`;
+
+  return this.http.patch(url, data).pipe( catchError(this.handleError))
+
+}
 deleteEmployee(id:any): Observable<any>{
 
   let url = `${this.apiUrlemployee}/${id}`;

@@ -1,16 +1,37 @@
 import { HttpClient } from '@angular/common/http';
-import { Component ,OnInit} from '@angular/core';
+import { Component ,OnInit,ChangeDetectionStrategy,ViewChild,TemplateRef,} from '@angular/core';
 import { Router } from '@angular/router';
 import { NzButtonSize } from 'ng-zorro-antd/button';
 import { CrudHttpService } from '../crud-http-service.service';
 import { DatePipe } from '@angular/common';
-
+import { NzModalService } from 'ng-zorro-antd/modal';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms'
+import { registerLocaleData } from '@angular/common';
+import en from '@angular/common/locales/en';
+import {
+  startOfDay,
+  endOfDay,
+  subDays,
+  addDays,
+  endOfMonth,
+  isSameDay,
+  isSameMonth,
+  addHours,
+} from 'date-fns';
+registerLocaleData(en);
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent {
+  eventForm!: FormGroup;
+  inputValue!: string;
+  test1!:'2';
+  Empdate = '24';
+  isVisible = false;
+  editCache:{ [key: number]: { data: employeeList } } = {};
+  selectedDate!: Date;
   size: NzButtonSize = 'large';
   keyCountuser:any;
   date:any;
@@ -22,23 +43,212 @@ export class DashboardComponent {
   myDate = new Date();
   attendance_list:AttendanceList[]=[];
   absent : absent_list[]=[];
+  presentNow : now_present_list[]=[];
+  absentNow : now_absent_list[]=[];
+  lateNow : now_late_list[]=[];
   present : present_list[]=[];
   late : late_list[]=[];
-  leave : leave_list[]=[];
+  employee_list : employeeList[]=[];
+  employee_list_final : employeeListfinal[]=[];
+  approval_list : approval_list[]=[];
+  calapproved : cal_approved[]=[];
+  currentTimee: Date | undefined;
+pending_count!:number;
+caldate:any;
+calmonth: any;
 
 
-  constructor( public datepipe: DatePipe,private _http:HttpClient,  private router:Router, private crudHttpService: CrudHttpService) {
-    let currentDateTime =this.datepipe.transform((new Date), 'MMMM d, y h:mm:ss a');
+
+
+addEvent(){
+  this.isVisible = true;
+}
+
+
+handleOk(): void {
+  console.log('Clicked OK');
+  console.log('eventForm',this.eventForm)
+  this.isVisible = false;
+}
+
+handleCancel(): void {
+  console.log('Clicked Cancel');
+  this.isVisible = false;
+}
+
+  onDateChange(date: Date) {
+    console.log('onDateChange',date)
+    // Handle date change event
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // leave : leave_list[]=[];
+  Approval:'pending' | undefined;
+  apply_date:any;
+  visible = false;
+  open(): void {
+    this.visible = true;
+  }
+
+  close(): void {
+
+    this.visible = false;
+
+
+
+  }
+
+
+
+
+
+
+
+
+  getMonthData(item_date:any,date: any): number | null {
+
+    this.calmonth =this.datepipe.transform((date), 'MMMM d, y');
+    //  console.log('month',this.calmonth)
+      // console.log('month',item_date)
+    if (this.calmonth === item_date) {
+      return 1394;
+    }
+    return null;
+
+
+
+
+  }
+
+  getDateData(item_date:any,date: any): number | null {
+
+    this.calmonth =this.datepipe.transform((date), 'MMMM d, y');
+    //  console.log('Date',this.calmonth)
+      // console.log('date',item_date)
+    if (this.calmonth === item_date) {
+      return 1394;
+    }
+    return null;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  submit(idd: number): void {
+
+    const modal = this.modal.success({
+      nzTitle: 'Leave Approve',
+    });
+
+
+
+    const data =  Object.values(this.employee_list);
+
+    data.forEach((employee) => {
+        if (employee.id === idd) {
+          console.log("employee",employee);
+          this.approval_list.push(employee);
+          console.log("Approval List",this.approval_list);
+        }
+    })
+
+    const  [{id,userName,password,accessType,fname,mname,lname,email,number,position,department,attendance,apply:{approval,date_to,date_from,reason,type}}] = Object.values(this.approval_list)
+    console.log('apply id',id,userName,password,accessType,fname,mname,lname,email,number,position,department,attendance)
+
+    const approvall = {
+        apply:{
+            approval:approval,
+            date_to:date_to,
+            date_from:date_from,
+            reason:reason,
+            type:type,
+        }
+    }
+    this.crudHttpService.patchEmployee(idd,approvall).subscribe((Response)=>{
+          this.approval_list.pop();
+    });
+
+
+  }
+
+
+
+
+
+
+
+  constructor(private fb: FormBuilder,private modal: NzModalService,public datepipe: DatePipe,private _http:HttpClient,  private router:Router, private crudHttpService: CrudHttpService) {
+    let currentDateTime =this.datepipe.transform((new Date), 'MMMM d, y');
     this.date =  currentDateTime;
     console.log(currentDateTime);
+    setInterval(() => {
+      this.currentTimee = new Date();
+    }, 1000);
+    this.eventForm = this.fb.group({
+      title: [''],
+      eventType: [''],
+      datePicker: [''],
+      timePicker: [''],
+      description: [''],
 
-
+    });
   }
 
   userList(){
     this.crudHttpService.userlist().subscribe((Response)=>{
 
       console.log(Response);
+
+        this.employee_list = Object.values(Response);
+
+        const data =  Object.values(this.employee_list);
+
+        data.forEach((employee)=>{
+            if (employee.apply.approval === 'pending'){
+                this.employee_list_final.push(employee);
+                console.log('final---',this.employee_list_final);
+            }
+
+
+        })
+
 
        this.keyCountuser = Object.keys(Response).length;
     },(error=>{
@@ -48,6 +258,14 @@ export class DashboardComponent {
 
   }
 
+  updateEditCache(): void {
+    this.employee_list.forEach(item => {
+      this.editCache[item.id] = {
+        data: { ...item }
+      };
+    });
+  }
+
   employeeList(){
 
 
@@ -55,6 +273,21 @@ export class DashboardComponent {
 
       console.log(Response);
 
+       this.employee_list = Object.values(Response);
+
+       const data =  Object.values(this.employee_list);
+
+       data.forEach((employee)=>{
+           if (employee.apply.approval === 'pending'){
+               this.employee_list_final.push(employee);
+               console.log('final',this.employee_list_final);
+               this.updateEditCache();
+           }else if (employee.apply.approval === 'approved'){
+            this.calapproved.push(employee);
+            console.log('calendar_approved',this.calapproved);
+          }
+       })
+       this.pending_count = Object.keys(this.employee_list_final).length;
        this.keyCountemployee = Object.keys(Response).length;
     },(error=>{
 
@@ -80,32 +313,48 @@ export class DashboardComponent {
           // const [attendance] = data;
 
             data.forEach((attendance) => {
-              if (attendance.attendees.fname === 'present'){
+              // if (attendance.attendees.fname === 'present'){
+              //   console.log('attendancewwwww',attendance);
+              //   this.present.push(attendance);
+              // }
+              if (attendance.attendance === 'present' ){
+                console.log('attendancewwwww',this.date);
                 console.log('attendancewwwww',attendance);
                 this.present.push(attendance);
               }
-              if (attendance.attendance === 'present'){
-                console.log('attendancewwwww',attendance);
-                this.present.push(attendance);
+              if(attendance.attendance === 'present' && attendance.date === this.date){
+                console.log('present now',this.date);
+                console.log('present_now',attendance);
+                this.presentNow.push(attendance);
               }
               if (attendance.attendance === 'absent'){
                 console.log('attendancewwwww',attendance);
                 this.absent.push(attendance);
               }
+              if(attendance.attendance === 'absent' && attendance.date === this.date){
+                console.log('present now',this.date);
+                console.log('present_now',attendance);
+                this.absentNow.push(attendance);
+              }
               if (attendance.attendance === 'late'){
                 console.log('attendancewwwww',attendance);
                 this.late.push(attendance);
               }
-              if (attendance.attendance === 'leave'){
-                console.log('attendancewwwww',attendance);
-                this.leave.push(attendance);
+              if(attendance.attendance === 'late' && attendance.date === this.date){
+                console.log('present now',this.date);
+                console.log('present_now',attendance);
+                this.lateNow.push(attendance);
               }
+              // if (attendance.attendance === 'leave'){
+              //   console.log('attendancewwwww',attendance);
+              //   this.leave.push(attendance);
+              // }
 
             })
-        this.present_count = Object.keys(this.present).length;
-        this.absent_count = Object.keys(this.absent).length;
-        this.late_count = Object.keys(this.late).length;
-        this.leave_count = Object.keys(this.leave).length;
+        this.present_count = Object.keys(this.presentNow).length;
+        this.absent_count = Object.keys(this.absentNow).length;
+        this.late_count = Object.keys(this.lateNow).length;
+        // this.leave_count = Object.keys(this.leave).length;
         console.log('',data.values());
 
        console.log('attendance',this.present_count);
@@ -122,13 +371,118 @@ export class DashboardComponent {
 
 
   ngOnInit(): void {
-    this.userList();
+    // this.userList();
     this.employeeList();
     this.attaendanceCount()
   }
 
 
 }
+
+
+interface employeeList{
+
+  id:number;
+  userName: string;
+  password: string;
+  accessType: string;
+  fname: string;
+  mname: string;
+  lname: string;
+  email: string;
+  number: string;
+  position: string;
+  department: string;
+  attendance: string;
+  apply:{
+    type:string;
+    date_to:string;
+    date_from:string;
+    reason:string;
+    approval:string;
+  }
+
+}
+
+
+interface employeeListfinal{
+
+  id:number;
+  userName: string;
+  password: string;
+  accessType: string;
+  fname: string;
+  mname: string;
+  lname: string;
+  email: string;
+  number: string;
+  position: string;
+  department: string;
+  attendance: string;
+  apply:{
+    type:string;
+    date_to:string;
+    date_from:string;
+    reason:string;
+    approval:string;
+  }
+
+}
+
+
+interface cal_approved{
+
+  id:number;
+  userName: string;
+  password: string;
+  accessType: string;
+  fname: string;
+  mname: string;
+  lname: string;
+  email: string;
+  number: string;
+  position: string;
+  department: string;
+  attendance: string;
+  apply:{
+    type:string;
+    date_to:string;
+    date_from:string;
+    reason:string;
+    approval:string;
+  }
+
+}
+
+
+
+interface approval_list{
+
+  id:number;
+  userName: string;
+  password: string;
+  accessType: string;
+  fname: string;
+  mname: string;
+  lname: string;
+  email: string;
+  number: string;
+  position: string;
+  department: string;
+  attendance: string;
+  apply:{
+    type:string;
+    date_to:string;
+    date_from:string;
+    reason:string;
+    approval:string;
+  }
+
+}
+
+
+
+
 interface AttendanceList {
   currentDateTime: any;
   id:number;
@@ -164,7 +518,55 @@ interface present_list {
   }
 }
 
+interface now_present_list {
+  currentDateTime: any;
+  id:number;
+  date:string;
+  attendance: string;
+  attendees:{
+    id:number;
+    fname: string;
+    mname: string;
+    lname: string;
+    position: string;
+    department: string;
+    time_in:string;
+    time_out:string;
+  }
+}
 interface absent_list {
+  currentDateTime: any;
+  id:number;
+  date:string;
+  attendance: string;
+  attendees:{
+    id:number;
+    fname: string;
+    mname: string;
+    lname: string;
+    position: string;
+    department: string;
+    time_in:string;
+    time_out:string;
+  }
+}
+interface now_absent_list {
+  currentDateTime: any;
+  id:number;
+  date:string;
+  attendance: string;
+  attendees:{
+    id:number;
+    fname: string;
+    mname: string;
+    lname: string;
+    position: string;
+    department: string;
+    time_in:string;
+    time_out:string;
+  }
+}
+interface now_late_list {
   currentDateTime: any;
   id:number;
   date:string;
@@ -196,19 +598,19 @@ interface late_list {
     time_out:string;
   }
 }
-interface leave_list {
-  currentDateTime: any;
-  id:number;
-  date:string;
-  attendance: string;
-  attendees:{
-    id:number;
-    fname: string;
-    mname: string;
-    lname: string;
-    position: string;
-    department: string;
-    time_in:string;
-    time_out:string;
-  }
-}
+// interface leave_list {
+//   currentDateTime: any;
+//   id:number;
+//   date:string;
+//   attendance: string;
+//   attendees:{
+//     id:number;
+//     fname: string;
+//     mname: string;
+//     lname: string;
+//     position: string;
+//     department: string;
+//     time_in:string;
+//     time_out:string;
+//   }
+// }

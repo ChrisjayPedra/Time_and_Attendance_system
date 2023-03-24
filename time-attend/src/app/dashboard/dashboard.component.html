@@ -1,92 +1,141 @@
 
-<nz-content style="background: transparent">
-  <nz-breadcrumb>
-    <nz-breadcrumb-item style="font-size:1.3vw">Dashboard</nz-breadcrumb-item>
-    <nz-breadcrumb-item style="font-size:1.3vw">{{date}}</nz-breadcrumb-item>
-    <h1>{{ currentTimee | date: 'mediumTime' }}</h1>
-    <button class="button_change" (click)="open()">Apply Request</button>
-  </nz-breadcrumb>
-  <br />
-  <div class="inner-content">
-    <div nz-row>
+<nz-content style="background: transparent; margin-top:0%">
 
-      <div class="col" [nzXs]="{ span: 7, offset: 3 }" nz-col>
+  <nz-page-header style="margin:0% ; padding:0%">
+    <nz-page-header-title style="font-size:1.3vw">Dashboard</nz-page-header-title>
+    <nz-page-header-subtitle>Admin dashboard </nz-page-header-subtitle>
+    <nz-page-header-extra>
+      <nz-space>
 
-        <nz-card class="card" style="width:00px;" nzTitle="Total user"  style="font-size: 50px; text-align:center" >
-          <div   nz-icon nzType="user" style="font-size: 200px; text-align:center" nzTheme="outline"></div>
-          <h3   style="font-size: 50px; text-align:center">{{keyCountuser}}</h3>
-        </nz-card>
+        <button   class="button_change"  nzShape="round" (click)="addEvent()" nz-button nzType="primary" style="margin: 0 10px">Add event</button>
+        <nz-badge [nzCount]="pending_count">
+          <button class="button_change"  nzShape="round" (click)="open()" nz-button nzType="primary">Pending leave request</button>
+        </nz-badge>
 
+      </nz-space>
+    </nz-page-header-extra>
+    <nz-page-header-content>
+      <nz-row >
+        <nz-tag [nzColor]="'green'"> <nz-statistic  nzTitle="Present"nzValue="{{present_count}}"> </nz-statistic></nz-tag>
+        <nz-tag [nzColor]="'red'"  style="margin: 0 20px">  <nz-statistic  nzTitle="Absent" nzValue="{{absent_count}}"></nz-statistic></nz-tag>
+        <nz-tag [nzColor]="'orange'"  style="margin: 0 20px">  <nz-statistic  nzTitle="Late" nzValue="{{late_count}}"></nz-statistic></nz-tag>
+        <nz-statistic  nzTitle="Date" nzValue="{{date}}" style="margin: 0 20px"></nz-statistic>
+        <nz-statistic  nzTitle="Time" nzValue="{{currentTimee | date: 'mediumTime' }}"></nz-statistic>
+      </nz-row>
 
+    </nz-page-header-content>
 
-      </div>
-
-      <div class="col" [nzXs]="{ span: 7, offset: 3 }" nz-col>
-
-        <nz-card class="card" style="width:300px;" nzTitle="Total Employee"  style="font-size: 50px; text-align:center" >
-          <div   nz-icon nzType="snippets" style="font-size: 200px; text-align:center" nzTheme="outline"></div>
-          <h3   style="font-size: 50px; text-align:center">{{keyCountemployee}}</h3>
-        </nz-card>
-
-
-
-      </div>
-
-      <div class="col" [nzXs]="{ span: 7, offset: 3 }" nz-col>
-
-        <nz-card class="card" style="width:300px;" nzTitle="present Today"  style="font-size: 50px; text-align:center" >
-          <div   nz-icon nzType="snippets" style="font-size: 200px; text-align:center" nzTheme="outline"></div>
-          <h3   style="font-size: 50px; text-align:center">{{present_count}}</h3>
-        </nz-card>
+  </nz-page-header>
 
 
 
-      </div>
+      <nz-calendar   [(ngModel)]="selectedDate" (ngModelChange)="onDateChange($event)" class="calendar"  nzHeight="600px" [nzFullscreen]="true" >
 
+        <ul *nzDateCell="let date" class="events">
+            <div *ngFor="let item of present" >
+                  <ng-container *ngIf="getMonthData(item.date,date)">
+                    <ng-container *ngIf="getDateData(item.date,date)">
 
-      <div class="col" [nzXs]="{ span: 7, offset: 3 }" nz-col>
+                      <nz-tag [nzColor]="'green'">Present<nz-badge [nzStatus]="'success'" [nzText]="item.attendees.fname"></nz-badge></nz-tag>
 
-        <nz-card class="card" style="width:300px;" nzTitle="absent Today"  style="font-size: 50px; text-align:center" >
-          <div   nz-icon nzType="snippets" style="font-size: 200px; text-align:center" nzTheme="outline"></div>
-          <h3   style="font-size: 50px; text-align:center">{{absent_count}}</h3>
-        </nz-card>
+                    </ng-container>
+                  </ng-container>
+            </div>
+            <div *ngFor="let item of absent" >
+              <ng-container *ngIf="getMonthData(item.date,date)">
+                <ng-container *ngIf="getDateData(item.date,date)">
 
+                  <nz-tag [nzColor]="'red'">Absent<nz-badge [nzStatus]="'error'" [nzText]="item.attendees.fname"></nz-badge></nz-tag>
 
+                </ng-container>
+              </ng-container>
 
-      </div>
+        </div>
 
+        <div *ngFor="let item of late" >
+          <ng-container *ngIf="getMonthData(item.date,date)">
+            <ng-container *ngIf="getDateData(item.date,date)">
 
-      <div class="col" [nzXs]="{ span: 7, offset: 3 }" nz-col>
+              <nz-tag [nzColor]="'yellow'">Late<nz-badge [nzStatus]="'warning'" [nzText]="item.attendees.fname"></nz-badge></nz-tag>
 
-        <nz-card class="card" style="width:100px;" nzTitle="late Today"  style="font-size: 50px; text-align:center" >
-          <div   nz-icon nzType="snippets" style="font-size: 200px; text-align:center" nzTheme="outline"></div>
-          <h3   style="font-size: 50px; text-align:center">{{late_count}}</h3>
-        </nz-card>
-
+            </ng-container>
+          </ng-container>
 
     </div>
 
+            <div *ngFor="let item of calapproved">
+                      <ng-container *ngIf="getMonthData(item.apply.date_from,date)">
+                        <ng-container *ngIf="getDateData(item.apply.date_from,date)">
+                          <nz-tag [nzColor]="'magenta'"> Start  of leave  <nz-badge [nzStatus]="'success'" [nzText]="item.fname"></nz-badge></nz-tag>
 
-    <div class="col" [nzXs]="{ span: 7, offset: 3 }" nz-col>
+                        </ng-container>
+                      </ng-container>
+                      <ng-container *ngIf="getMonthData(item.apply.date_to,date)">
+                        <ng-container *ngIf="getDateData(item.apply.date_to,date)">
+                          <nz-tag [nzColor]="'purple'"> End  of leave  <nz-badge nzColor="#f50" [nzText]="item.fname"></nz-badge></nz-tag>
 
-      <nz-card class="card" style="width:100px;" nzTitle="leave Today"  style="font-size: 50px; text-align:center" >
-        <div   nz-icon nzType="snippets" style="font-size: 200px; text-align:center" nzTheme="outline"></div>
-        <h3   style="font-size: 50px; text-align:center">{{leave_count}}</h3>
-      </nz-card>
+                        </ng-container>
+                      </ng-container>
 
-
-  </div>
-
-
-
-    </div>
+                    </div>
 
 
+        </ul>
 
 
-  </div>
+
+
+        <!-- <ng-container *nzMonthCell="let month"> -->
+          <!-- <div *ngIf="getMonthData(month) as monthData" class="notes-month">
+            <section>{{ monthData }}</section>
+            <span>Backlog number</span>
+          </div> -->
+        <!-- </ng-container> -->
+
+      </nz-calendar>
+
+
 </nz-content>
 
+<nz-modal [(nzVisible)]="isVisible" [nzTitle]="'Add Event'" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+  <div  *nzModalContent nz-form-item>
+    <form [formGroup]="eventForm">
+      <nz-form-item>
+        <nz-form-label>Title Event</nz-form-label>
+        <nz-form-control>
+          <input nz-input formControlName="title">
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label>Event Type</nz-form-label>
+        <nz-form-control>
+          <nz-select nzPlaceHolder="Select Event type" formControlName="eventType">
+            <nz-option nzValue="meeting" nzLabel="Meeting"></nz-option>
+            <nz-option nzValue="activity" nzLabel="Activity"></nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+      <!-- <nz-form-item>
+        <nz-form-label>DatePicker</nz-form-label>
+        <nz-form-control>
+          <nz-date-picker formControlName="datePicker"></nz-date-picker>
+        </nz-form-control>
+      </nz-form-item> -->
+      <nz-form-item>
+        <nz-form-label>TimePicker</nz-form-label>
+        <nz-form-control>
+          <nz-time-picker  [nzUse12Hours]="true" formControlName="timePicker"></nz-time-picker>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label>Description</nz-form-label>
+        <nz-form-control>
+          <textarea nz-input formControlName="description"></textarea>
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+  </div>
+</nz-modal>
 
 <nz-drawer
 [nzBodyStyle]="{ overflow: 'auto' }"
@@ -95,29 +144,39 @@
 [nzVisible]="visible"
 nzTitle="Employee Request list"
 (nzOnClose)="close()"
-
 >
 <ng-container class="container"  *nzDrawerContent>
   <div  *ngFor="let employee of employee_list_final">
     <div class="Employee List">
-      <nz-card class="cart-card" nzHoverable style="width:600px; border-radius:25px;  border-color: black;">
-        <h3 >{{employee.id}}</h3>
-        <h3>{{employee.fname}}</h3>
-        <h3>{{employee.mname}}</h3>
-        <h3>{{employee.lname}}</h3>
-        <p>{{employee.apply.date_from}}</p>
-        <p>{{employee.apply.date_to}}</p>
-        <h3>{{employee.department}}</h3>
-        <h3>{{employee.position}}</h3>
-        <h3>{{employee.apply.reason}}</h3>
-        <nz-select nzPlaceHolder="Select an status type" [(ngModel)]="employee.apply.approval">
-          <nz-option nzValue="approved" nzLabel="Approved"></nz-option>
-          <nz-option nzValue="declined" nzLabel="declined"></nz-option>
-          <nz-option nzValue="pending" nzLabel="Pending"></nz-option>
-        </nz-select>
-        <div style="float: right; height:160px">
-          <button nz-button nzType="primary" (click)="submit(employee.id)">Submit</button>
-        </div>
+      <nz-card class="cart-card" nzHoverable style="width:600px; border-radius:25px; margin:20px;  border-color: black;">
+          <form>
+            <nz-form-item>
+              <nz-form-label>Employee details</nz-form-label>
+              <nz-form-control>
+                <h5>ID no. {{employee.id}}</h5>
+                <h5>Name: {{employee.fname}} {{employee.mname}} {{employee.lname}}</h5>
+                <h5>Department: {{employee.department}}</h5>
+                <h5>Position: {{employee.position}}</h5>
+              </nz-form-control>
+              <nz-form-label>Leave Date</nz-form-label>
+              <nz-form-control>
+                <p>From: {{employee.apply.date_from}}</p>
+                <p>To: {{employee.apply.date_to}}</p>
+              </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+              <nz-form-label>Reason For {{employee.apply.type}}</nz-form-label>
+              <nz-form-control>
+                <textarea disabled="true">{{employee.apply.reason}}</textarea>
+              </nz-form-control>
+            </nz-form-item>
+            <button style="float: right" nz-button nzType="primary" (click)="submit(employee.id)">Submit</button>
+          </form>
+          <nz-select tyle="float: right" nzPlaceHolder="Select status type" [(ngModel)]="employee.apply.approval">
+            <nz-option nzValue="approved" nzLabel="Approved"></nz-option>
+            <nz-option nzValue="declined" nzLabel="declined"></nz-option>
+            <nz-option nzValue="pending" nzLabel="Pending"></nz-option>
+          </nz-select>
       </nz-card>
     </div>
 

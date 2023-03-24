@@ -12,8 +12,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './login/login.component';
 import { DatePipe } from '@angular/common';
 
-
-
 import { NzAffixModule } from 'ng-zorro-antd/affix';
 import { NzAlertModule } from 'ng-zorro-antd/alert';
 import { NzAnchorModule } from 'ng-zorro-antd/anchor';
@@ -98,7 +96,6 @@ import { TimeInOutComponent } from './time-in-out/time-in-out.component';
 import { InOutComponent } from './in-out/in-out.component';
 import { FileLeaveAbsentComponent } from './file-leave-absent/file-leave-absent.component';
 
-
 registerLocaleData(en);
 
 @NgModule({
@@ -124,6 +121,7 @@ registerLocaleData(en);
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
+
 
     NzAffixModule,
     NzAlertModule,
@@ -197,7 +195,9 @@ registerLocaleData(en);
     NzResizableModule,
     NzPipesModule,
     NzCodeEditorModule,
-    NzGraphModule
+    NzGraphModule,
+
+
   ],
   providers: [DatePipe,
     { provide: NZ_I18N, useValue: en_US }
