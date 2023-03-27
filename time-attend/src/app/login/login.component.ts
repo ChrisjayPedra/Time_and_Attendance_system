@@ -44,8 +44,26 @@ LoginComponent {
         this.validateForm.reset();
       }
       else{
-          alert('Please Check your Username and Password');
-         this.validateForm.reset();
+        this._http.get<any>("http://localhost:3000/user")
+        .subscribe(res=>{
+          const admin = res.find((a:any)=>{
+            return a.userName === this.validateForm.value.userName && a.password === this.validateForm.value.password && a.accessType === 'admin'
+
+          });
+          if (admin){
+            alert('you are successfully login');
+            this.router.navigate(['/home/dashboard'])
+            this.validateForm.reset();
+          }
+          else{
+
+              alert('Please Check your Username and Password');
+             this.validateForm.reset();
+          }
+
+        }, err=>{
+          alert('Something was wrong');
+        })
       }
 
     }, err=>{
@@ -55,7 +73,6 @@ LoginComponent {
 
 
   }
-
 
 
 

@@ -34,6 +34,23 @@ nz-breadcrumb {
   text-align: left;
 }
 
+
+.editable-cell {
+  position: relative;
+  padding: 5px 12px;
+  cursor: pointer;
+
+}
+
+.editable-row:hover .editable-cell {
+  color: #1890ff;
+  border: 1px solid #b6b6b6;
+  border-radius: 4px;
+  padding: 4px 11px;
+}
+.save {
+  margin-right: 8px;
+}
 .events {
   list-style: none;
   margin: 0;

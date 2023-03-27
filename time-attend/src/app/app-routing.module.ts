@@ -12,13 +12,14 @@ import { AttendanceComponent } from './attendance/attendance.component';
 import { AddemployeeComponent } from './addemployee/addemployee.component';
 import { TimeInOutComponent } from './time-in-out/time-in-out.component';
 import { RegisterComponent } from './register/register.component';
-
+import { AddattendanceComponent } from './addattendance/addattendance.component';
 const routes: Routes = [
   {path: '', component: LoginComponent},
   {path: 'home', component:HomeComponent,
   children:[
              {path: 'dashboard', component:DashboardComponent},
-             {path: 'attendance', component:AttendanceComponent},
+             {path: 'attendance', component:AttendanceComponent,
+              children: [{path: 'addatendance', component:AddattendanceComponent}]},
              {path: 'userlist', component:UserListComponent,
               children:[{path: 'adduser', component:AdduserComponent}]},
              {path: 'employeelist', component:EmployeeListComponent,

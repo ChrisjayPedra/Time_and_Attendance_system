@@ -32,6 +32,7 @@ export class FileLeaveAbsentComponent implements OnInit {
   user_info_update: userInfo_update[]=[];
   user_name!: any;
 
+
   currentDateTime:any|null;
   date: any | null;
   time: any | null;
@@ -168,18 +169,18 @@ export class FileLeaveAbsentComponent implements OnInit {
 
 
   ngOnInit(): void {
-
     this.crudHttpService.employeelist().subscribe((Response) => {
       this.user_info = Object.values(Response);
 
       console.log('user_info',this.user_info);
-      const [userName] = Object.values(this.user_info);
-      this.user_name = userName;
+
       const data = Object.values(this.user_info)
 
 
       data.forEach((employee) => {
         if (employee.id === this.user_id){
+            this.user_name = employee.userName
+            console.log('sasasassas nameasnamesanme',this.user_name);
           if (employee.apply.approval === 'pending'){
             console.log('Apply leave Currently Pending');
             this.open_card = false;
@@ -235,7 +236,7 @@ export class FileLeaveAbsentComponent implements OnInit {
 
     })
 
-      console.log('username',userName);
+
   });
 
    this.user_id = this.user.getUser()
@@ -249,9 +250,7 @@ export class FileLeaveAbsentComponent implements OnInit {
     this.crudHttpService.employeelist().subscribe((Response) => {
         this.user_info = Object.values(Response);
 
-        console.log('user_info',this.user_info);
-        const [userName] = Object.values(this.user_info);
-        this.user_name = userName;
+
         const data = Object.values(this.user_info)
 
 
@@ -265,7 +264,7 @@ export class FileLeaveAbsentComponent implements OnInit {
 
       })
 
-        console.log('username',userName);
+
     });
   }
 
@@ -273,8 +272,8 @@ export class FileLeaveAbsentComponent implements OnInit {
   apply_leave(){
 
     this.confirmModal = this.modal.confirm({
-      nzTitle: 'Do you Want to delete these items?',
-      nzContent: 'Your Name'+this.user_name,
+      nzTitle: 'Do you Want to apply form?',
+      nzContent: this.user_name,
       nzOnOk: () =>
 
         new Promise((resolve, reject) => {

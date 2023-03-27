@@ -13,11 +13,12 @@
   padding: 1em 1em;
   display: table;
   border-radius: 25px;
-
+  background: transparent;
 
 }
 .login-form {
     max-width: 350px;
+    background: transparent;
   }
 
   .login-form-margin {

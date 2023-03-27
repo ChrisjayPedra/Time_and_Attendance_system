@@ -1,7 +1,7 @@
 
 
-<nz-card class="card"style="background-color:white; opacity:90%; text-align:center;" nzTitle="Login">
-  <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
+<nz-card class="card" style=" background-color: rgba(255,255,255,0.3); text-align:center;" nzTitle="Login">
+  <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()" >
     <nz-form-item>
       <nz-form-control nzErrorTip="Please input your username!">
         <nz-input-group nzPrefixIcon="user" >
@@ -25,14 +25,14 @@
           <span >Remember me</span>
         </label>
       </div>
-      <div nz-col [nzSpan]="12">
+      <!-- <div nz-col [nzSpan]="12">
         <a class="login-form-forgot">Forgot password</a>
-      </div>
+      </div> -->
     </div>
     <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'" nzShape="round">Log in</button>
     Or
   </form>
-  <a  routerLink="/register"> Register now!</a>
+  <a  routerLink="/register"> Register employee</a>
 
 
 </nz-card>

@@ -51,7 +51,7 @@ export class AdduserComponent {
       userName: this.validateForm.value.userName,
       email:this.validateForm.value.email,
       password:this.validateForm.value.password,
-      accessType:this.validateForm.value.accessType,
+      accessType:'admin',
       employeeName:this.validateForm.value.employeeName
     }
     this.crudHttpService.addUser(user).subscribe((response)=> {
@@ -135,7 +135,6 @@ export class AdduserComponent {
       userName: ['', [Validators.required], [this.userNameAsyncValidator]],
       email: ['', [Validators.email, Validators.required]],
       password: ['', [Validators.required,Validators.minLength]],
-      accessType: ['', [Validators.required]],
       employeeName: ['', [Validators.required]],
       confirm: ['', [this.confirmValidator]],
 

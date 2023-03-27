@@ -15,7 +15,7 @@ export class InOutComponent implements OnInit {
   buttonOut=true;
   user_info: userInfo[]=[];
   user_info_final: userInfofinal[]=[];
-
+  isVisiblee = false;
  attendance_info: attendanceinfo[]=[];
  attendance_info_update: attendanceinfo_update[]=[];
   user_id!: any;
@@ -44,6 +44,7 @@ export class InOutComponent implements OnInit {
 
   caldate:any;
   calmonth: any;
+  event_count!: number;
 
 constructor(public datepipe: DatePipe,private modal:NzModalService,private user: UserServiceService,private crudHttpService:CrudHttpService){
 
@@ -69,6 +70,13 @@ onDateChange(date: Date) {
   // Handle date change event
 }
 
+handleCancell(): void {
+  console.log('Clicked Cancel');
+  this.isVisiblee = false;
+}
+Event(){
+  this.isVisiblee = true;
+}
 
 
 
@@ -173,8 +181,8 @@ getDateData(item_date:any,date: any): number | null {
   time_in(): void {
 
     this.confirmModal = this.modal.confirm({
-      nzTitle: 'Do you Want to delete these items?',
-      nzContent: 'Your Name'+this.user_name,
+      nzTitle: 'Good luck on your work',
+      nzContent: this.user_name,
       nzOnOk: () =>
 
         new Promise((resolve, reject) => {
@@ -234,8 +242,8 @@ attendance_present(){
 
   time_out(): void {
     this.confirmModal = this.modal.confirm({
-      nzTitle: 'Do you Want to delete these items?',
-      nzContent: 'Your Name'+this.user_name,
+      nzTitle: 'Thank you for your work!',
+      nzContent: this.user_name,
       nzOnOk: () =>
         new Promise((resolve, reject) => {
         this.attendance_update();
@@ -369,7 +377,7 @@ attendance_present(){
 
       this.eventlist = Object.values(Response)
       console.log('EventList',this.eventlist);
-
+      this.event_count = Object.keys(this.eventlist).length;
     })
 
 

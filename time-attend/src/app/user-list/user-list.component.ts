@@ -16,10 +16,13 @@ export class UserListComponent implements  OnInit{
 
 
   isCollapsed = true;
-  editCache: { [key: number]: { edit: boolean; data: dataList } } = {};
+  editCache: { [key: number]: { edit: boolean; data: adminListFinal } } = {};
   user_list: UsersList[] = [];
   user_list_final: UsersList_final[] = [];
   data_list: dataList[] = [];
+  admin_list: adminList[] = [];
+  admin_list2: adminList2[] = [];
+  admin_list_final: adminListFinal[] = [];
 //export table
 
 exportTableToExcel():void {
@@ -85,20 +88,20 @@ exportTableToExcel():void {
   }
 
   cancelEdit(id: number): void {
-    const index = this.data_list.findIndex(item => item.id === id);
+    const index = this.admin_list_final.findIndex(item => item.id === id);
     this.editCache[id] = {
-      data: { ...this.user_list[index] },
+      data: { ...this.admin_list_final[index] },
       edit: false
     };
   }
 
   saveUser(id: number): void {
-    const index = this.data_list.findIndex(item => item.id === id);
-    Object.assign(this.data_list[index], this.editCache[id].data);
+    const index = this.admin_list_final.findIndex(item => item.id === id);
+    Object.assign(this.admin_list_final[index], this.editCache[id].data);
 
 
 
-        this.crudHttpService.updateEmployee(id,this.editCache[id].data).subscribe((response)=>{
+        this.crudHttpService.updateUser(id,this.editCache[id].data).subscribe((response)=>{
           this.userList();
           this.updateUserNotif();
               },(error=>{
@@ -108,7 +111,7 @@ exportTableToExcel():void {
     this.editCache[id].edit = false;
   }
   updateEditCache(): void {
-    this.data_list.forEach(item => {
+    this.admin_list_final.forEach(item => {
       this.editCache[item.id] = {
         edit: false,
         data: { ...item }
@@ -128,21 +131,21 @@ exportTableToExcel():void {
 
   //get all user
   userList(){
-    this.crudHttpService.employeelist().subscribe((Response)=>{
+    this.crudHttpService.userlist().subscribe((Response)=>{
       console.log('Response');
       console.log(Response);
-      this.user_list = Object.values(Response);
-      const data =  Object.values(this.user_list)
+      this.admin_list = Object.values(Response);
+      const data =  Object.values(this.admin_list)
       data.forEach((data)=>{
           if (data.accessType === 'admin'){
-            this.user_list_final.push(data);
+            this.admin_list2.push(data);
           }
       });
-      console.log('user list',this.user_list_final);
+      console.log('user list',this.admin_list2);
 
-      this.data_list = this.user_list_final;
+      this.admin_list_final = this.admin_list2;;
 
-      console.log('data list',this.data_list);
+      console.log('data list',this.admin_list_final);
 
       this.updateEditCache();
       },(error=>{
@@ -157,7 +160,7 @@ exportTableToExcel():void {
 //delete user
 
   deleteUser(user: any){
-    this.crudHttpService.deleteEmployee(user).subscribe((response)=>{
+    this.crudHttpService.deleteUser(user).subscribe((response)=>{
       this.deleteNotif();
       this.userList();
     },(error=>{
@@ -177,7 +180,7 @@ exportTableToExcel():void {
   search(): void {
 
     this.visible = false;
-    this.data_list = this.data_list.filter((item: dataList) => item.userName.indexOf(this.searchValue) !== -1);
+    this.admin_list_final = this.admin_list_final.filter((item: adminListFinal) => item.userName.indexOf(this.searchValue) !== -1);
     console.log(this.user_list);
     this.searchValue = '';
 
@@ -189,6 +192,32 @@ exportTableToExcel():void {
 
 
 }
+
+interface adminList{
+  id:number;
+  userName: string;
+  email:string;
+  password:string;
+  accessType:string
+  employeeName: string;
+}
+interface adminList2{
+  id:number;
+  userName: string;
+  email:string;
+  password:string;
+  accessType:string
+  employeeName: string;
+}
+interface adminListFinal{
+  id:number;
+  userName: string;
+  email:string;
+  password:string;
+  accessType:string
+  employeeName: string;
+}
+
 
 interface UsersList {
   id:number;

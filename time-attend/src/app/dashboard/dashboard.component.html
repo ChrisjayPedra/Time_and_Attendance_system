@@ -3,14 +3,14 @@
 
   <nz-page-header style="margin:0% ; padding:0%">
     <nz-page-header-title style="font-size:1.3vw">Dashboard</nz-page-header-title>
-    <nz-page-header-subtitle>Admin dashboard </nz-page-header-subtitle>
+    <nz-page-header-subtitle>Today Status</nz-page-header-subtitle>
     <nz-page-header-extra>
       <nz-space>
 
-        <button   class="button_change"  nzShape="round" (click)="addEvent()" nz-button nzType="primary" style="margin: 0 10px">Add event</button>
-        <button   class="button_change"  nzShape="round" (click)="editEvent()" nz-button nzType="primary" style="margin: 0 10px">Edit event</button>
+        <button   class="button_change"  nzShape="round" (click)="addEvent()" nz-button nzType="primary" style="margin: 0 10px"><span nz-icon nzType="schedule" nzTheme="outline"></span>Add event</button>
+        <button   class="button_change"  nzShape="round" (click)="editEvent()" nz-button nzType="primary" style="margin: 0 10px"><span nz-icon nzType="calendar" nzTheme="outline"></span>Edit event</button>
         <nz-badge [nzCount]="pending_count">
-          <button class="button_change"  nzShape="round" (click)="open()" nz-button nzType="primary">Pending leave request</button>
+          <button class="button_change"  nzShape="round" (click)="open()" nz-button nzType="primary"><span nz-icon nzType="audit" nzTheme="outline"></span>Pending leave request</button>
         </nz-badge>
 
       </nz-space>
@@ -39,7 +39,7 @@
                   <ng-container *ngIf="getMonthData(item.date,date)">
                     <ng-container *ngIf="getDateData(item.date,date)">
 
-                      <nz-tag [nzColor]="'green'">Present<nz-badge [nzStatus]="'success'" [nzText]="item.attendees.fname"></nz-badge></nz-tag>
+                      <nz-tag [nzColor]="'green'"><span nz-icon nzType="user" nzTheme="outline"></span>Present<nz-badge [nzStatus]="'success'" [nzText]="item.attendees.fname"></nz-badge></nz-tag>
 
                     </ng-container>
                   </ng-container>
@@ -48,7 +48,7 @@
               <ng-container *ngIf="getMonthData(item.date,date)">
                 <ng-container *ngIf="getDateData(item.date,date)">
 
-                  <nz-tag [nzColor]="'red'">Absent<nz-badge [nzStatus]="'error'" [nzText]="item.attendees.fname"></nz-badge></nz-tag>
+                  <nz-tag [nzColor]="'red'"><span nz-icon nzType="user" nzTheme="outline"></span>Absent<nz-badge [nzStatus]="'error'" [nzText]="item.attendees.fname"></nz-badge></nz-tag>
 
                 </ng-container>
               </ng-container>
@@ -59,7 +59,7 @@
           <ng-container *ngIf="getMonthData(item.date,date)">
             <ng-container *ngIf="getDateData(item.date,date)">
 
-              <nz-tag [nzColor]="'yellow'">Late<nz-badge [nzStatus]="'warning'" [nzText]="item.attendees.fname"></nz-badge></nz-tag>
+              <nz-tag [nzColor]="'yellow'"><span nz-icon nzType="user" nzTheme="outline"></span>Late<nz-badge [nzStatus]="'warning'" [nzText]="item.attendees.fname"></nz-badge></nz-tag>
 
             </ng-container>
           </ng-container>
@@ -69,13 +69,29 @@
             <div *ngFor="let item of calapproved">
                       <ng-container *ngIf="getMonthData(item.apply.date_from,date)">
                         <ng-container *ngIf="getDateData(item.apply.date_from,date)">
-                          <nz-tag [nzColor]="'magenta'"> Start  of leave  <nz-badge [nzStatus]="'success'" [nzText]="item.fname"></nz-badge></nz-tag>
+                          <ng-container *ngIf="item.apply.type === 'Absent' ">
 
+                            <nz-tag [nzColor]="'red'"><span nz-icon nzType="home" nzTheme="outline"></span> Start  of sick leave  <nz-badge [nzStatus]="'success'" [nzText]="item.fname"></nz-badge></nz-tag>
+
+                          </ng-container>
+
+                          <ng-container *ngIf="item.apply.type === 'leave' ">
+
+                            <nz-tag [nzColor]="'magenta'"><span nz-icon nzType="home" nzTheme="outline"></span> Start  of Vacation leave  <nz-badge [nzStatus]="'success'" [nzText]="item.fname"></nz-badge></nz-tag>
+
+                          </ng-container>
                         </ng-container>
                       </ng-container>
                       <ng-container *ngIf="getMonthData(item.apply.date_to,date)">
                         <ng-container *ngIf="getDateData(item.apply.date_to,date)">
-                          <nz-tag [nzColor]="'purple'"> End  of leave  <nz-badge nzColor="#f50" [nzText]="item.fname"></nz-badge></nz-tag>
+                          <ng-container *ngIf="item.apply.type === 'Absent' ">
+                            <nz-tag [nzColor]="'red'"><span nz-icon nzType="home" nzTheme="outline"></span> End  of Sick leave  <nz-badge nzColor="#f50" [nzText]="item.fname"></nz-badge></nz-tag>
+
+                          </ng-container>
+                          <ng-container *ngIf="item.apply.type === 'leave' ">
+                            <nz-tag [nzColor]="'purple'"><span nz-icon nzType="home" nzTheme="outline"></span> End  of Vacation leave  <nz-badge nzColor="#f50" [nzText]="item.fname"></nz-badge></nz-tag>
+
+                          </ng-container>
 
                         </ng-container>
                       </ng-container>
@@ -85,10 +101,10 @@
                       <ng-container *ngIf="getMonthData(item.date,date)">
                         <ng-container *ngIf="getDateData(item.date,date)">
                           <div *ngIf="item.eventtype ==='meeting'">
-                            <nz-tag [nzColor]="'orange'"> Meeting  <nz-badge nzColor="#f50" [nzText]="item.eventtype"> {{item.time}} {{item.description}}</nz-badge></nz-tag>
+                            <nz-tag [nzColor]="'#f50'"><span nz-icon nzType="pushpin" nzTheme="fill"></span> Meeting  <nz-badge nzColor="#f50" [nzText]="item.eventtype"> {{item.time}} {{item.description}}</nz-badge></nz-tag>
                           </div>
                           <div *ngIf="item.eventtype ==='activity'">
-                            <nz-tag [nzColor]="'black'"> Activity  <nz-badge nzColor="#f50" [nzText]="item.eventtype"> {{item.time}} {{item.description}}</nz-badge></nz-tag>
+                            <nz-tag [nzColor]="'#108ee9'"><span nz-icon nzType="pushpin" nzTheme="fill"></span> Activity  <nz-badge nzColor="#f50" [nzText]="item.eventtype"> {{item.time}} {{item.description}}</nz-badge></nz-tag>
                           </div>
                         </ng-container>
                       </ng-container>
@@ -122,7 +138,7 @@
           <nz-date-picker formControlName="date_from" [(ngModel)]="date_from" ></nz-date-picker>
         </nz-form-control>
         <nz-form-control >
-          <nz-time-picker  nzFormat="h:mm a" [nzUse12Hours]="true" formControlName="timePicker"  ></nz-time-picker>
+          <nz-time-picker  nzFormat="h:mm a" [nzUse12Hours]="true" formControlName="timePicker" ></nz-time-picker>
         </nz-form-control>
       </nz-form-item>
 
@@ -207,7 +223,7 @@
 
             <td><input type="text" nz-input [(ngModel)]="editCachee[data.id].data.date" /></td>
             <td><input type="text" nz-input [(ngModel)]="editCachee[data.id].data.time" /></td>
-             <nz-select nzPlaceHolder="Select an status type" [(ngModel)]="editCachee[data.id].data.eventtype">
+             <nz-select nzAlign="center" nzPlaceHolder="Select an status type" [(ngModel)]="editCachee[data.id].data.eventtype">
               <nz-option nzValue="meeting" nzLabel="Meeting"></nz-option>
               <nz-option nzValue="activity" nzLabel="Activity"></nz-option>
             </nz-select>
@@ -264,6 +280,7 @@ nzTitle="Employee Request list"
                 <h5>Name: {{employee.fname}} {{employee.mname}} {{employee.lname}}</h5>
                 <h5>Department: {{employee.department}}</h5>
                 <h5>Position: {{employee.position}}</h5>
+                <h5>Type: {{employee.apply.type}}</h5>
               </nz-form-control>
               <nz-form-label>Leave Date</nz-form-label>
               <nz-form-control>

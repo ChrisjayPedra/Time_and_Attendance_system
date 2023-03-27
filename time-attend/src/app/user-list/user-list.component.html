@@ -1,22 +1,6 @@
 
 <nz-content style="background: transparent">
 
-  <!-- <nz-breadcrumb>
-    <nz-breadcrumb-item style="font-size:1.3vw">Admin List</nz-breadcrumb-item>
-  </nz-breadcrumb>
-
-  <button nz-button nzType="primary" [nzSize]="size" nzShape="round" [routerLink]="['/home/userlist/adduser']">
-    <span nz-icon  nz-Align="center" nz-icon nzType="user-add" nzTheme="outline"></span>
-   Add admin
-  </button>
-
-  <button (click)="exportTableToExcel()" nz-button nz-Align="right" nzType="primary" [nzSize]="size" nzShape="round">
-    <span nz-icon  nz-Align="center" nz-icon nzType="user-add" nzTheme="outline"></span>
-  Export Data
-  </button>
-  <br />
-  <br /> -->
-
 
 
 
@@ -46,7 +30,7 @@
   </nz-page-header>
 
   <div class="inner-content">
-                                 <nz-table #smallTable nzSize="middle" #editRowTable nzBordered id="userList_sheet"[nzData]=" data_list" >
+                                 <nz-table #smallTable nzSize="middle" #editRowTable nzBordered id="userList_sheet"[nzData]="admin_list" >
                                   <thead >
                                     <tr style="height: 20px">
 
@@ -57,11 +41,8 @@
                                         </nz-filter-trigger>
                                       </th>
                                       <th nzAlign="center" nzWidth="15%">Password</th>
-                                      <th nzAlign="center" nzWidth="15%">First name</th>
-                                      <th nzAlign="center" nzWidth="15%">Middle name</th>
-                                      <th nzAlign="center" nzWidth="15%">Last name</th>
-                                      <th nzAlign="center" nzWidth="15%">Department</th>
-                                      <th nzAlign="center" nzWidth="15%">Position</th>
+                                      <th nzAlign="center" nzWidth="15%">Email</th>
+                                      <th nzAlign="center" nzWidth="15%">Employee Name</th>
                                       <th nzAlign="center" nzWidth="9%"> Access Type</th>
                                       <th nzAlign="center" nzWidth="9%"> Action</th>
 
@@ -75,11 +56,8 @@
 
                                         <td nzAlign="center">{{ data.userName}}</td>
                                         <td nzAlign="center">{{ data.password}}</td>
-                                        <td nzAlign="center">{{ data.fname}}</td>
-                                        <td nzAlign="center">{{ data.mname}}</td>
-                                        <td nzAlign="center">{{ data.lname}}</td>
-                                        <td nzAlign="center">{{ data.department}}</td>
-                                        <td nzAlign="center">{{ data.position}}</td>
+                                        <td nzAlign="center">{{ data.email}}</td>
+                                        <td nzAlign="center">{{ data.employeeName}}</td>
                                         <td nzAlign="center">{{ data.accessType}}</td>
                                         <td nzAlign="center" >
                                           <a (click)="startEdit(data.id)" style="padding:10px">
@@ -96,21 +74,15 @@
                                       </ng-container>
                                       <ng-template #editTemplate>
                                         <td><input type="text" nz-input [(ngModel)]="editCache[data.id].data.userName" /></td>
-                                        <td><input type="text" nz-input [(ngModel)]="editCache[data.id].data.fname" /></td>
-                                        <td><input type="text" nz-input [(ngModel)]="editCache[data.id].data.mname" /></td>
-                                        <td><input type="text" nz-input [(ngModel)]="editCache[data.id].data.lname" /></td>
-                                        <td><input type="text" nz-input [(ngModel)]="editCache[data.id].data.department" /></td>
-                                        <td><input type="text" nz-input [(ngModel)]="editCache[data.id].data.position" /></td>
-
-
                                         <td><input type="text" nz-input [(ngModel)]="editCache[data.id].data.password" /></td>
+                                        <td><input type="text" nz-input [(ngModel)]="editCache[data.id].data.email" /></td>
+                                        <td><input type="text" nz-input [(ngModel)]="editCache[data.id].data.employeeName" /></td>
                                         <td nzAlign="center">
 
 
 
                                           <nz-select nzPlaceHolder="Select an Access type" [(ngModel)]="editCache[data.id].data.accessType">
                                             <nz-option nzValue="admin" nzLabel="Admin"></nz-option>
-                                            <nz-option nzValue="user" nzLabel="User"></nz-option>
                                           </nz-select>
 
                                         </td>

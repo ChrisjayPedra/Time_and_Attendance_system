@@ -10,23 +10,43 @@
       <nz-space>
         <nz-row >
           <nz-statistic  nzTitle="Date" nzValue="{{date}}" style="margin: 0 20px"></nz-statistic>
-          <div class="blob">
-            <nz-statistic  nzTitle="Time" nzValue="{{currentTimee | date: 'mediumTime' }}"></nz-statistic>
-          </div>
+
+            <!-- <nz-statistic  nzTitle="Time" nzValue="{{currentTimee | date: 'mediumTime' }}"></nz-statistic> -->
        </nz-row>
         </nz-space>
     </nz-page-header-extra>
     <nz-page-header-content>
-      <button   class="button_change"  [disabled]="buttonIn"  nzShape="round" (click)="time_in()"  nz-button nzType="primary" style="margin: 0 10px">Time In</button>
-      <button   class="button_change"  nzShape="round" (click)="time_out()" [disabled]="buttonOut" nz-button nzType="primary" style="margin: 0 10px">Time Out</button>
-
-
+     <nz-badge [nzCount]="event_count">
+      <button   class="button_change"  nzShape="round" (click)="Event()" nz-button nzType="primary" ><span nz-icon nzType="notification" nzTheme="outline"></span>Announcement</button>
+      </nz-badge>
     </nz-page-header-content>
 
   </nz-page-header>
 
 
 
+
+  <div class="container">
+    <div class="blob">
+      <h5 class="text1">Current Time</h5>
+      <h1 class="text">{{currentTimee | date: 'mediumTime' }}</h1>
+    </div>
+  </div>
+  <div class="button">
+    <button nzSize="large"  class="button_change"  [disabled]="buttonIn"  nzShape="round" (click)="time_in()"  nz-button nzType="primary" style="margin: 0 10px;">Time In</button>
+    <button nzSize="large"  class="button_change"  nzShape="round" (click)="time_out()" [disabled]="buttonOut" nz-button nzType="primary" nzDanger style="margin: 0 10px">Time Out</button>
+  </div>
+
+
+
+
+
+
+
+
+
+
+<!--
 
   <nz-calendar   [(ngModel)]="selectedDate" (ngModelChange)="onDateChange($event)" class="calendar"  nzHeight="600px" [nzFullscreen]="true" >
 
@@ -35,7 +55,7 @@
               <ng-container *ngIf="getMonthData(item.date,date)">
                 <ng-container *ngIf="getDateData(item.date,date)">
 
-                  <nz-tag [nzColor]="'green'">Present<nz-badge [nzStatus]="'success'" [nzText]="item.attendees.fname"></nz-badge></nz-tag>
+                  <nz-tag [nzColor]="'green'"><span nz-icon nzType="user" nzTheme="outline"></span>Present<nz-badge [nzStatus]="'success'" [nzText]="item.attendees.fname"></nz-badge></nz-tag>
 
                 </ng-container>
               </ng-container>
@@ -44,7 +64,7 @@
           <ng-container *ngIf="getMonthData(item.date,date)">
             <ng-container *ngIf="getDateData(item.date,date)">
 
-              <nz-tag [nzColor]="'red'">Absent<nz-badge [nzStatus]="'error'" [nzText]="item.attendees.fname"></nz-badge></nz-tag>
+              <nz-tag [nzColor]="'red'"><span nz-icon nzType="user" nzTheme="outline"></span>Absent<nz-badge [nzStatus]="'error'" [nzText]="item.attendees.fname"></nz-badge></nz-tag>
 
             </ng-container>
           </ng-container>
@@ -55,7 +75,7 @@
       <ng-container *ngIf="getMonthData(item.date,date)">
         <ng-container *ngIf="getDateData(item.date,date)">
 
-          <nz-tag [nzColor]="'yellow'">Late<nz-badge [nzStatus]="'warning'" [nzText]="item.attendees.fname"></nz-badge></nz-tag>
+          <nz-tag [nzColor]="'yellow'"><span nz-icon nzType="user" nzTheme="outline"></span>Late<nz-badge [nzStatus]="'warning'" [nzText]="item.attendees.fname"></nz-badge></nz-tag>
 
         </ng-container>
       </ng-container>
@@ -65,13 +85,13 @@
         <div *ngFor="let item of calapproved">
                   <ng-container *ngIf="getMonthData(item.apply.date_from,date)">
                     <ng-container *ngIf="getDateData(item.apply.date_from,date)">
-                      <nz-tag [nzColor]="'magenta'"> Start  of leave  <nz-badge [nzStatus]="'success'" [nzText]="item.fname"></nz-badge></nz-tag>
+                      <nz-tag [nzColor]="'magenta'"><span nz-icon nzType="user" nzTheme="outline"></span> Start  of leave  <nz-badge [nzStatus]="'success'" [nzText]="item.fname"></nz-badge></nz-tag>
 
                     </ng-container>
                   </ng-container>
                   <ng-container *ngIf="getMonthData(item.apply.date_to,date)">
                     <ng-container *ngIf="getDateData(item.apply.date_to,date)">
-                      <nz-tag [nzColor]="'purple'"> End  of leave  <nz-badge nzColor="#f50" [nzText]="item.fname"></nz-badge></nz-tag>
+                      <nz-tag [nzColor]="'purple'"><span nz-icon nzType="user" nzTheme="outline"></span> End  of leave  <nz-badge nzColor="#f50" [nzText]="item.fname"></nz-badge></nz-tag>
 
                     </ng-container>
                   </ng-container>
@@ -81,10 +101,10 @@
                   <ng-container *ngIf="getMonthData(item.date,date)">
                     <ng-container *ngIf="getDateData(item.date,date)">
                       <div *ngIf="item.eventtype ==='meeting'">
-                        <nz-tag [nzColor]="'orange'"> Meeting  <nz-badge nzColor="#f50" [nzText]="item.eventtype"> {{item.time}} {{item.description}}</nz-badge></nz-tag>
+                        <nz-tag [nzColor]="'#f50'"><span nz-icon nzType="pushpin" nzTheme="fill"></span> Meeting  <nz-badge nzColor="#f50" [nzText]="item.eventtype"> {{item.time}} {{item.description}}</nz-badge></nz-tag>
                       </div>
                       <div *ngIf="item.eventtype ==='activity'">
-                        <nz-tag [nzColor]="'black'"> Activity  <nz-badge nzColor="#f50" [nzText]="item.eventtype"> {{item.time}} {{item.description}}</nz-badge></nz-tag>
+                        <nz-tag [nzColor]="'#108ee9'"><span nz-icon nzType="pushpin" nzTheme="fill"></span> Activity  <nz-badge nzColor="#f50" [nzText]="item.eventtype"> {{item.time}} {{item.description}}</nz-badge></nz-tag>
                       </div>
                     </ng-container>
                   </ng-container>
@@ -92,7 +112,10 @@
 
     </ul>
 
-  </nz-calendar>
+  </nz-calendar> -->
+
+
+
 
 
 
@@ -100,3 +123,51 @@
 
 
 
+
+
+<nz-modal [(nzVisible)]="isVisiblee" [nzTitle]="'Announcement'"  (nzOnCancel)="handleCancell()" [nzFooter]="null" nzWidth="800px">
+  <div  *nzModalContent nz-form-item >
+
+    <nz-table #smallTable nzSize="small" #editRowTable nzBordered [nzData]="eventlist" >
+      <thead  >
+        <tr  style="height: 20px">
+          <th nzAlign="center" nzWidth="3%" >Date</th>
+          <th nzAlign="center" nzWidth="10%">Time</th>
+          <th nzAlign="center" nzWidth="10%">Type</th>
+          <th nzAlign="center" nzWidth="10%">Description</th>
+        </tr>
+      </thead>
+      <tbody >
+
+
+        <tr  *ngFor="let data of  editRowTable.data" class="editable-row">
+
+            <td nzAlign="center">{{ data.date }}</td>
+
+            <td nzAlign="center">{{ data.time}}</td>
+            <td nzAlign="center">
+              <div *ngIf="data.eventtype ==='meeting'">
+                <nz-tag [nzColor]="'red'"  style="margin: 0 20px">{{ data.eventtype}}</nz-tag>
+              </div>
+              <div *ngIf="data.eventtype ==='activity'">
+                <nz-tag [nzColor]="'warning'"  style="margin: 0 20px">{{ data.eventtype}}</nz-tag>
+              </div>
+            </td>
+            <td nzAlign="center">{{ data.description}}</td>
+
+
+
+
+
+
+
+
+
+        </tr>
+
+
+
+      </tbody>
+    </nz-table>
+  </div>
+</nz-modal>

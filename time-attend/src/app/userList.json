@@ -5,7 +5,7 @@
       "userName": "123",
       "name": "123",
       "email": "cjp@gmail.com",
-      "password": "12345678",
+      "password": "11",
       "accessType": "admin",
       "employeeName": "chris jay pedra"
     },
@@ -24,6 +24,14 @@
       "accessType": "admin",
       "employeeName": "sample1name",
       "id": 3
+    },
+    {
+      "userName": "admin",
+      "email": "chris@gmail.com",
+      "password": "12345678",
+      "accessType": "admin",
+      "employeeName": "chris",
+      "id": 4
     }
   ],
   "employee": [
@@ -83,11 +91,11 @@
       "accessType": "employee",
       "id": 8,
       "apply": {
-        "approval": "approved",
-        "date_to": "March 27, 2023",
-        "date_from": "March 22, 2023",
-        "reason": "sickleave",
-        "type": "Absent"
+        "type": "",
+        "date_to": "",
+        "date_from": "",
+        "reason": "",
+        "approval": ""
       }
     },
     {
@@ -158,43 +166,21 @@
       "fname": "Jeremy",
       "mname": "kilem",
       "lname": "Caparas",
+      "email": "jem@gmail.com",
       "number": "0978655443",
       "position": "backend",
       "department": "IT",
-      "email": "jem@gmail.com",
       "password": "22222222",
       "attendance": "new Employee",
       "accessType": "employee",
+      "id": 12,
       "apply": {
-        "type": "",
-        "date_to": "",
-        "date_from": "",
-        "reason": "",
-        "approval": ""
-      },
-      "id": 12
-    },
-    {
-      "userName": "12",
-      "fname": "12",
-      "mname": "12",
-      "lname": "12",
-      "number": "12",
-      "position": "12",
-      "department": "12",
-      "email": "122@1",
-      "password": "1212121212",
-      "attendance": "new Employee",
-      "accessType": "employee",
-      "apply": {
-        "type": "",
-        "date_to": "",
-        "date_from": "",
-        "reason": "",
-        "approval": ""
-      },
-      "profile": "Khaiostomization Expert v3.png",
-      "id": 13
+        "approval": "approved",
+        "date_to": "March 28, 2023",
+        "date_from": "March 27, 2023",
+        "reason": "sick",
+        "type": "Absent"
+      }
     }
   ],
   "individual_attendance": [
@@ -215,41 +201,8 @@
       "id": 1
     },
     {
-      "date": "March 26, 2023",
-      "attendance": "absent",
-      "up_to": "old",
-      "attendees": {
-        "userName": "mona",
-        "fname": "Mona",
-        "mname": "mona",
-        "lname": "mona",
-        "position": "mona",
-        "department": "mona",
-        "time_in": "1:53 PM",
-        "time_out": "4:18 PM"
-      },
-      "id": 2
-    },
-    {
       "date": "March 24, 2023",
-      "attendance": "present",
-      "up_to": "latest",
-      "attendees": {
-        "id": 8,
-        "userName": "mona",
-        "fname": "Mona",
-        "mname": "M.",
-        "lname": "Megistus",
-        "position": "manager",
-        "department": "Saleforce",
-        "time_in": "9:20 PM",
-        "time_out": "-----"
-      },
-      "id": 3
-    },
-    {
-      "date": "March 24, 2023",
-      "attendance": "present",
+      "attendance": "late",
       "up_to": "latest",
       "attendees": {
         "id": 10,
@@ -263,6 +216,124 @@
         "time_out": "-----"
       },
       "id": 4
+    },
+    {
+      "date": "March 25, 2023",
+      "attendance": "present",
+      "up_to": "old",
+      "attendees": {
+        "userName": "mona",
+        "fname": "Mona",
+        "mname": "M.",
+        "lname": "Megistus",
+        "position": "manager",
+        "department": "Saleforce",
+        "time_in": "11:44 PM",
+        "time_out": "1:51 AM"
+      },
+      "id": 5
+    },
+    {
+      "date": "March 27, 2023",
+      "attendance": "present",
+      "up_to": "latest",
+      "attendees": {
+        "id": 8,
+        "userName": "mona",
+        "fname": "Mona",
+        "mname": "M.",
+        "lname": "Megistus",
+        "position": "manager",
+        "department": "Saleforce",
+        "time_in": "5:32 PM",
+        "time_out": "-----"
+      },
+      "id": 6
+    },
+    {
+      "date": "March 27, 2023",
+      "attendance": "present",
+      "up_to": "latest",
+      "attendees": {
+        "id": 7,
+        "userName": "user2",
+        "fname": "luigi",
+        "mname": "M",
+        "lname": "Plumpber",
+        "position": "manager",
+        "department": "saleforce",
+        "time_in": "5:47 PM",
+        "time_out": "-----"
+      },
+      "id": 7
+    },
+    {
+      "date": "March 27, 2023",
+      "attendance": "present",
+      "up_to": "latest",
+      "attendees": {
+        "id": 9,
+        "userName": "user1",
+        "fname": "samplefname",
+        "mname": "sapmlemname",
+        "lname": "samplelname",
+        "position": "samplepo",
+        "department": "sampledep",
+        "time_in": "5:49 PM",
+        "time_out": "-----"
+      },
+      "id": 8
+    },
+    {
+      "date": "March 27, 2023",
+      "attendance": "present",
+      "up_to": "latest",
+      "attendees": {
+        "id": 11,
+        "userName": "cj",
+        "fname": "Chris jay",
+        "mname": "Almerino",
+        "lname": "Pedra",
+        "position": "front-end",
+        "department": "IT",
+        "time_in": "5:51 PM",
+        "time_out": "-----"
+      },
+      "id": 9
+    },
+    {
+      "date": "March 27, 2023",
+      "attendance": "present",
+      "up_to": "latest",
+      "attendees": {
+        "id": 12,
+        "userName": "jem",
+        "fname": "Jeremy",
+        "mname": "kilem",
+        "lname": "Caparas",
+        "position": "backend",
+        "department": "IT",
+        "time_in": "5:53 PM",
+        "time_out": "-----"
+      },
+      "id": 10
+    },
+    {
+      "date": "March 27, 2023",
+      "attendance": "late",
+      "up_to": "latest",
+      "attendees": {
+        "userName": "user2",
+        "id": 7,
+        "fname": "luigi",
+        "mname": "M",
+        "lname": "Plumpber",
+        "position": "manager",
+        "department": "saleforce",
+        "time_in": "9:17 PM",
+        "time_out": "-----"
+      },
+      "id": 11
     }
   ],
   "attendance_list": [
@@ -282,15 +353,22 @@
       "eventtype": "activity",
       "date": "March 24, 2023",
       "time": "5:19: PM",
-      "description": "Meeting with prof",
+      "description": "Client observation",
       "id": 4
     },
     {
-      "eventtype": "activity",
+      "eventtype": "meeting",
       "date": "March 29, 2023",
       "time": "11:06: PM",
       "description": "gathering with co workers",
       "id": 5
+    },
+    {
+      "eventtype": "meeting",
+      "date": "March 28, 2023",
+      "time": "5:57: PM",
+      "description": "General Meeting",
+      "id": 6
     }
   ]
 }

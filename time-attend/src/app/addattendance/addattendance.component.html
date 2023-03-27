@@ -1,0 +1,43 @@
+
+
+<nz-card  class="card" style=" background-color: rgba(255,255,255,0.9); text-align:center;" nzTitle="Add user">
+
+  <form nz-form [formGroup]="validateForm"   class="register-form" (ngSubmit)="submitForm()">
+
+    <nz-form-item>
+      <nz-form-label [nzSpan]="7" nzRequired>Select Employee</nz-form-label>
+      <nz-select formControlName="employee" nzPlaceHolder="Select an Access type">
+        <div *ngFor="let item of employee_list">
+          <nz-option nzValue="{{item.fname}}" nzLabel="{{item.fname}}"></nz-option>
+        </div>
+      </nz-select>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSpan]="7" nzRequired>Select Attendance</nz-form-label>
+      <nz-select formControlName="attendance" nzPlaceHolder="Select an Access type">
+        <nz-option nzValue="present" nzLabel="Present"></nz-option>
+        <nz-option nzValue="absent" nzLabel="Absent"></nz-option>
+        <nz-option nzValue="late" nzLabel="Late"></nz-option>
+     </nz-select>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSpan]="7" nzRequired>Select Time</nz-form-label>
+    <nz-time-picker formControlName="time"  nzFormat="h:mm a" [nzUse12Hours]="true"></nz-time-picker>
+  </nz-form-item>
+  <nz-form-control [nzOffset]="6" [nzSpan]="12">
+    <button nz-button nzType="primary" [disabled]="!validateForm.valid" nzShape="round">Register</button>
+    <button nz-button (click)="resetForm($event)"  nzShape="round">Reset</button>
+    <button nz-button nzType="primary" nzShape="round" [routerLink]="['/home/attendance']">Back</button>
+  </nz-form-control>
+
+
+  </form>
+
+
+
+
+  </nz-card>
+
+

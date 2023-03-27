@@ -18,12 +18,13 @@ export class AddemployeeComponent {
 
   uploading = false;
   selectedFile!: File;
+  imagedata!: any;
 
   validateForm!: FormGroup;
   passwordVisible = false;
   password?: string;
 
-
+  maxFileSize = 100000; // 1kB
 
  addemployeeNotif(): void {
     this.notification.create(
@@ -45,9 +46,65 @@ export class AddemployeeComponent {
     );
   }
 
+  onFileSelected(event:any){
+      console.log('event',event)
+      this.selectedFile = <File> event.target.files[0];
+      console.log('asasasas',this.selectedFile)
+      this.onUpload()
+  }
+  onUpload() {
+    if (this.selectedFile && this.selectedFile.size <= this.maxFileSize) {
+      const reader = new FileReader();
+      reader.onload = (event: any) => {
+        const image = new Image();
+        image.onload = () => {
+          const canvas = document.createElement('canvas');
+          const ctx = canvas.getContext('2d');
+          const maxWidth = 1024;
+          const maxHeight = 1024;
+          let width = image.width;
+          let height = image.height;
+          if (width > height) {
+            if (width > maxWidth) {
+              height *= maxWidth / width;
+              width = maxWidth;
+            }
+          } else {
+            if (height > maxHeight) {
+              width *= maxHeight / height;
+              height = maxHeight;
+            }
+          }
+          canvas.width = width;
+          canvas.height = height;
+          ctx!.drawImage(image, 0, 0, width, height);
+          const compressedImage = canvas.toDataURL('image/jpeg', 0.8);
+          this.uploadImage(compressedImage);
+        };
+        image.src = event.target.result;
+      };
+      reader.readAsDataURL(this.selectedFile);
+    }else{
+      this.message.create('error','File to large');
+    }
+
+  }
+
+
+  uploadImage(dataUrl: string) {
+    const imageData = { data: dataUrl };
+    this.imagedata = imageData
+      console.log(this.imagedata,'imageData');
+  }
+
 
 
  submitForm(){
+
+
+    if (this.imagedata == null || this.imagedata.length == 0 || this.imagedata =='') {
+      this.imagedata = '';
+    }
 
     const employee = {
       userName: this.validateForm.value.userName,
@@ -68,6 +125,7 @@ export class AddemployeeComponent {
         reason:'',
         approval:'',
       },
+      image:this.imagedata
 
     }
     this.crudHttpService.addEmployee(employee).subscribe((response)=> {

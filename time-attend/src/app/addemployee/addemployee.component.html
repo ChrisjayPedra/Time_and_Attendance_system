@@ -1,6 +1,6 @@
 
 
-<nz-card class="card"style="background-color:white; text-align:center" nzTitle="Add Employee">
+<nz-card class="card"style=" background-color: rgba(255,255,255,0.9); text-align:center;" nzTitle="Add Employee">
 
   <form nz-form [formGroup]="validateForm"  class="register-form" (ngSubmit)="submitForm()">
 
@@ -103,6 +103,22 @@
     </nz-form-item>
 
     <nz-form-item>
+
+      <nz-form-label [nzSpan]="7" nzRequired> Profile</nz-form-label>
+      <nz-form-control [nzSpan]="12" nzHasFeedback [nzErrorTip]="userErrorTpl">
+
+
+            <span nz-icon nzType="upload"> <input type="file" (change)="onFileSelected($event)" > </span>
+
+
+        <ng-template #userErrorTpl let-control>
+          <ng-container *ngIf="control.hasError('required')">Please add profile!</ng-container>
+        </ng-template>
+      </nz-form-control>
+    </nz-form-item>
+
+
+    <nz-form-item>
       <nz-form-label [nzSpan]="7" nzRequired>Password</nz-form-label>
       <nz-form-control [nzSpan]="12" nzHasFeedback [nzErrorTip]="passwordErrorTpl">
 
@@ -139,7 +155,7 @@
     </nz-form-item>
     <nz-form-item>
       <nz-form-control [nzOffset]="6" [nzSpan]="12">
-        <button nz-button nzType="primary" [disabled]="!validateForm.valid"    nzShape="round">Register</button>
+        <button nz-button nzType="primary" [disabled]="!validateForm.valid"  [nzLoading]="uploading"   nzShape="round">Register</button>
         <button nz-button (click)="resetForm($event)"  nzShape="round">Reset</button>
         <button nz-button nzType="primary" nzShape="round" [routerLink]="['/home/employeelist']">Back</button>
       </nz-form-control>

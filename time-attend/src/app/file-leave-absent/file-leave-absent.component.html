@@ -8,11 +8,6 @@
 
 
 
-  <!-- <button nz-button (click)="time_out()" [disabled]="buttonOut" nz-button nz-Align="right" nzType="primary" nzShape="round">
-    <span nz-icon  nz-Align="center" nz-icon nzType="user-add" nzTheme="outline"></span>
-    time Out
-  </button> -->
-
 
 
   <br />
@@ -25,22 +20,26 @@
       <nz-form-label [nzSpan]="7" >Type</nz-form-label>
       <nz-form-control [nzSpan]="12" >
         <nz-radio-group formControlName="applyType"[(ngModel)]="radioValue">
-          <label nz-radio nzValue="leave">Leave</label>
-          <label nz-radio nzValue="Absent">Absent</label>
+          <label nz-radio nzValue="leave">Vacation leave</label>
+          <label nz-radio nzValue="Absent">Sick leave</label>
         </nz-radio-group>
       </nz-form-control>
     </nz-form-item>
 
     <nz-form-item>
-      <nz-form-label [nzSpan]="7" >Date From and Date To </nz-form-label>
+      <nz-form-label [nzSpan]="7" >Date From</nz-form-label>
       <nz-form-control [nzSpan]="12" >
         <nz-date-picker formControlName="date_from" [(ngModel)]="date_from" ></nz-date-picker>
       </nz-form-control>
+
+    </nz-form-item>
+
+  <nz-form-item>
+      <nz-form-label [nzSpan]="7" >Date To </nz-form-label>
       <nz-form-control [nzSpan]="12" >
         <nz-date-picker formControlName="date_to" [(ngModel)]="date_to" ></nz-date-picker>
       </nz-form-control>
     </nz-form-item>
-
 
 
     <nz-form-item>
@@ -73,7 +72,7 @@
 
   <nz-result  *ngIf="open_result_approved" nzStatus="success" nzTitle="Apply form Approved" >
     <div nz-result-extra>
-      <button nz-button nzType="primary">back to dashboard</button>
+      <button nz-button [routerLink]="['/time_in_out/in_out']" nzType="primary">back to dashboard</button>
 
     </div>
   </nz-result>
@@ -94,7 +93,7 @@
 
   <nz-result  *ngIf="open_result_ongoing" nzStatus="403" nzTitle="you are currently in leave/absent">
     <div nz-result-extra>
-      <button nz-button  nzType="primary">back to dashboard</button>
+      <button nz-button [routerLink]="['/time_in_out/in_out']" nzType="primary">back to dashboard</button>
 
     </div>
   </nz-result>
