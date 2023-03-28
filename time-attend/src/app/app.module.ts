@@ -97,6 +97,7 @@ import { InOutComponent } from './in-out/in-out.component';
 import { FileLeaveAbsentComponent } from './file-leave-absent/file-leave-absent.component';
 import { RegisterComponent } from './register/register.component';
 import { AddattendanceComponent } from './addattendance/addattendance.component';
+import { EmSettingsComponent } from './em-settings/em-settings.component';
 
 registerLocaleData(en);
 
@@ -116,6 +117,8 @@ registerLocaleData(en);
     FileLeaveAbsentComponent,
     RegisterComponent,
     AddattendanceComponent,
+    SettingsComponent,
+    EmSettingsComponent,
 
   ],
   imports: [
