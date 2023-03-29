@@ -1,6 +1,8 @@
 import { CrudHttpService } from './../crud-http-service.service';
 import { Component, OnInit } from '@angular/core';
 import { UserServiceService } from '../user-service.service';
+import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-time-in-out',
   templateUrl: './time-in-out.component.html',
@@ -11,7 +13,8 @@ export class TimeInOutComponent implements OnInit {
   user_id!: any;
   user_name!: any;
   isCollapsed = true;
-constructor(private user: UserServiceService,private crudHttpService:CrudHttpService){
+  confirmModal?: NzModalRef;
+constructor(private user: UserServiceService,private crudHttpService:CrudHttpService,private modal:NzModalService,private router:Router){
 
 }
   ngOnInit(): void {
@@ -33,6 +36,21 @@ constructor(private user: UserServiceService,private crudHttpService:CrudHttpSer
   time_in(){
 
   }
+
+
+  logout(): void {
+    this.confirmModal = this.modal.confirm({
+      nzTitle: 'Do you want to logout?',
+      nzOnOk: () =>
+        new Promise((resolve, reject) => {
+
+        setTimeout(Math.random() > 0.5 ? resolve : reject, 800);
+        this.router.navigate([''])
+
+        }).catch(() => console.log('Oops errors!'))
+    });
+  }
+
 
 }
 

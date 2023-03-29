@@ -24,19 +24,19 @@
   </nz-page-header>
 
   <div class="inner-content">
-                                 <nz-table #smallTable nzSize="small" #editRowTable nzBordered id="attendance_sheet" [nzData]="attendance_list" >
+                                 <nz-table #smallTable nzSize="small" #editRowTable nzBordered id="attendance_sheet" [nzData]="attendance_list" [nzPageSize]="10">
                                   <thead  >
                                     <tr  style="height: 20px">
                                       <th nzAlign="center" nzWidth="3%" >Date</th>
-                                      <th  nzAlign="center" nzWidth="10%" nzCustomFilter> First name
+                                      <th  nzAlign="center" nzWidth="6%" nzCustomFilter> First name
                                         <!-- <nz-filter-trigger  nzAlign="right" [(nzVisible)]="visible" [nzActive]="searchValue.length > 0" [nzDropdownMenu]="menu">
                                           <span nz-icon nzType="search"></span>
                                         </nz-filter-trigger> -->
                                       </th>
 
-                                      <th nzAlign="center" nzWidth="10%">Middle name</th>
-                                      <th nzAlign="center" nzWidth="10%">Last name</th>
-                                      <th nzAlign="center" nzWidth="10%">Position</th>
+                                      <th nzAlign="center" nzWidth="6%">Middle name</th>
+                                      <th nzAlign="center" nzWidth="6%">Last name</th>
+                                      <th nzAlign="center" nzWidth="6%">Position</th>
                                       <th nzAlign="center" nzWidth="10%">Department</th>
                                       <th nzAlign="center" nzWidth="5%">Time-In</th>
                                       <th nzAlign="center" nzWidth="5%">Time-Out</th>

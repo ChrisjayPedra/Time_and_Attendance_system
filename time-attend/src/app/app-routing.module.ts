@@ -13,6 +13,8 @@ import { AddemployeeComponent } from './addemployee/addemployee.component';
 import { TimeInOutComponent } from './time-in-out/time-in-out.component';
 import { RegisterComponent } from './register/register.component';
 import { AddattendanceComponent } from './addattendance/addattendance.component';
+import { EmSettingsComponent } from './em-settings/em-settings.component';
+
 const routes: Routes = [
   {path: '', component: LoginComponent},
   {path: 'home', component:HomeComponent,
@@ -28,7 +30,8 @@ const routes: Routes = [
 
   {path: 'time_in_out', component: TimeInOutComponent,
   children:[{path: 'in_out', component:InOutComponent},
-            {path: 'file_leave_absent', component:FileLeaveAbsentComponent}]},
+            {path: 'file_leave_absent', component:FileLeaveAbsentComponent},
+            {path: 'profile', component:EmSettingsComponent}]},
   {path: 'register', component: RegisterComponent}
 ];
 

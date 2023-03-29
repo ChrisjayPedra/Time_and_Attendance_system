@@ -63,7 +63,7 @@
       "lname": "Plumpber",
       "email": "user@gmail.com",
       "number": "09424568164",
-      "position": "manager",
+      "position": "assistant Mng",
       "department": "saleforce",
       "password": "1",
       "attendance": "active",
@@ -79,7 +79,7 @@
     },
     {
       "userName": "mona",
-      "fname": "Mona",
+      "fname": "Mona MONA",
       "mname": "M.",
       "lname": "Megistus",
       "email": "monsdtad@gmail.com",
@@ -87,7 +87,7 @@
       "position": "manager",
       "department": "Saleforce",
       "password": "11111111",
-      "attendance": "new Employee",
+      "attendance": "active",
       "accessType": "employee",
       "id": 8,
       "apply": {
@@ -108,7 +108,7 @@
       "position": "samplepo",
       "department": "sampledep",
       "password": "11111111",
-      "attendance": "new Employee",
+      "attendance": "active",
       "accessType": "employee",
       "id": 9,
       "apply": {
@@ -129,7 +129,7 @@
       "position": "Backend",
       "department": "IT",
       "password": "11111111",
-      "attendance": "new Employee",
+      "attendance": "active",
       "accessType": "employee",
       "id": 10,
       "apply": {
@@ -171,7 +171,7 @@
       "position": "backend",
       "department": "IT",
       "password": "22222222",
-      "attendance": "new Employee",
+      "attendance": "active",
       "accessType": "employee",
       "id": 12,
       "apply": {
@@ -234,11 +234,10 @@
       "id": 5
     },
     {
-      "date": "March 27, 2023",
+      "date": "March 28, 2023",
       "attendance": "present",
-      "up_to": "latest",
+      "up_to": "old",
       "attendees": {
-        "id": 8,
         "userName": "mona",
         "fname": "Mona",
         "mname": "M.",
@@ -246,16 +245,15 @@
         "position": "manager",
         "department": "Saleforce",
         "time_in": "5:32 PM",
-        "time_out": "-----"
+        "time_out": "12:31 AM"
       },
       "id": 6
     },
     {
-      "date": "March 27, 2023",
+      "date": "March 28, 2023",
       "attendance": "present",
-      "up_to": "latest",
+      "up_to": "old",
       "attendees": {
-        "id": 7,
         "userName": "user2",
         "fname": "luigi",
         "mname": "M",
@@ -263,7 +261,7 @@
         "position": "manager",
         "department": "saleforce",
         "time_in": "5:47 PM",
-        "time_out": "-----"
+        "time_out": "5:48 PM"
       },
       "id": 7
     },
@@ -319,19 +317,18 @@
       "id": 10
     },
     {
-      "date": "March 27, 2023",
+      "date": "March 28, 2023",
       "attendance": "late",
-      "up_to": "latest",
+      "up_to": "old",
       "attendees": {
         "userName": "user2",
-        "id": 7,
         "fname": "luigi",
         "mname": "M",
         "lname": "Plumpber",
         "position": "manager",
         "department": "saleforce",
         "time_in": "9:17 PM",
-        "time_out": "-----"
+        "time_out": "5:48 PM"
       },
       "id": 11
     }

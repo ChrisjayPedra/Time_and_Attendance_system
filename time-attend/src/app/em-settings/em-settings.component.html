@@ -1,0 +1,113 @@
+
+<nz-content style="background: transparent">
+
+  <div class="profile"  *ngFor="let item of user_info_final">
+    <ng-container *ngIf="!editCache[item.id].edit; else editTemplate">
+    <nz-page-header style="margin:0% ; padding:0%">
+      <nz-page-header-title style="font-size:1.3vw">{{ item.fname}} {{ item.mname}} {{ item.lname}}</nz-page-header-title>
+      <nz-page-header-subtitle>{{  item.userName }}</nz-page-header-subtitle>
+    </nz-page-header>
+
+      <nz-page-header-extra>
+
+        <nz-space>
+
+        </nz-space>
+
+      </nz-page-header-extra>
+      <nz-page-header-content>
+       <p class="username">{{ item.email }}</p>
+       <button nz-button nzType="primary" nzShape="round" (click)="startEdit(item.id)">
+        <span nz-icon nzType="edit" nzTheme="outline"></span>
+      Edit Details
+      </button>
+      </nz-page-header-content>
+
+
+        <div nz-row>
+          <div nz-col nzSpan="5">
+            <ul class="details">
+              <li>
+                <span class="label">First name:</span>
+                <span class="value">{{ item.fname}}</span>
+              </li>
+              <li>
+                <span class="label">Middle name:</span>
+                <span class="value">{{ item.mname}}</span>
+              </li>
+              <li>
+                <span class="label">Last name:</span>
+                <span class="value">{{ item.lname}}</span>
+              </li>
+            </ul>
+          </div>
+          <div nz-col nzSpan="5">
+            <ul class="details">
+              <li>
+                <span class="label">Number:</span>
+                <span class="value">{{ item.number }}</span>
+              </li>
+              <li>
+                <span class="label">Position:</span>
+                <span class="value">{{ item.position }}</span>
+              </li>
+              <li>
+                <span class="label">Department:</span>
+                <span class="value">{{ item.department}}</span>
+              </li>
+            </ul>
+
+          </div>
+        </div>
+
+
+    </ng-container>
+    <ng-template #editTemplate>
+      <nz-page-header style="margin:0% ; padding:0%">
+        <nz-page-header-title style="font-size:1.3vw">Edit Details</nz-page-header-title>
+      </nz-page-header>
+      <div nz-row class="edit" >
+        <div nz-col  [nzLg]="{ span: 6, offset: 0 }">
+          <span class="label">First Name</span>
+          <input type="text" nz-input [(ngModel)]="editCache[item.id].data.fname" />
+          <span class="label">Middle Name</span>
+          <input type="text" nz-input [(ngModel)]="editCache[item.id].data.mname" />
+          <span class="label">Last Name</span>
+          <input type="text" nz-input [(ngModel)]="editCache[item.id].data.lname" />
+
+        </div>
+        <div nz-col [nzLg]="{ span: 6, offset: 2 }">
+
+          <span class="label">Username</span>
+          <input type="text" nz-input [(ngModel)]="editCache[item.id].data.userName" />
+          <span class="label">Password</span>
+          <input type="text" nz-input [(ngModel)]="editCache[item.id].data.password" />
+          <span class="label">Email</span>
+          <input type="text" nz-input [(ngModel)]="editCache[item.id].data.email" />
+
+        </div>
+        <div nz-col  [nzLg]="{ span: 6, offset: 2 }">
+
+          <span class="label">Number</span>
+          <input type="text" nz-input [(ngModel)]="editCache[item.id].data.number" />
+          <span class="label">Position</span>
+          <input type="text" nz-input [(ngModel)]="editCache[item.id].data.position" />
+          <span class="label">Department</span>
+          <input type="text" nz-input [(ngModel)]="editCache[item.id].data.department" />
+
+        </div>
+      </div>
+      <div class="button">
+        <button    (click)="saveUser(item.id)" nzShape="round"   nz-button nzType="primary" style="margin: 0 10px;"> <span nz-icon  nz-Align="center" nz-icon nzType="save" nzTheme="outline"></span>Save</button>
+        <button     nzShape="round"  nz-button nzType="primary" nzDanger style="margin: 0 10px"> <a   nz-popconfirm nzPopconfirmTitle="Sure to cancel?" (nzOnConfirm)="cancelEdit(item.id)"><span nz-icon nzType="close" nzTheme="outline"></span>Cancel</a></button>
+      </div>
+
+    </ng-template>
+
+
+  </div>
+
+
+</nz-content>
+
+

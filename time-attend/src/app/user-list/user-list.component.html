@@ -30,7 +30,7 @@
   </nz-page-header>
 
   <div class="inner-content">
-                                 <nz-table #smallTable nzSize="middle" #editRowTable nzBordered id="userList_sheet"[nzData]="admin_list" >
+                                 <nz-table #smallTable nzSize="middle" #editRowTable nzBordered id="userList_sheet"[nzData]="admin_list" [nzPageSize]="5">
                                   <thead >
                                     <tr style="height: 20px">
 
@@ -40,9 +40,9 @@
                                           <span nz-icon nzType="search"></span>
                                         </nz-filter-trigger>
                                       </th>
-                                      <th nzAlign="center" nzWidth="15%">Password</th>
-                                      <th nzAlign="center" nzWidth="15%">Email</th>
-                                      <th nzAlign="center" nzWidth="15%">Employee Name</th>
+                                      <th nzAlign="center" nzWidth="10%">Password</th>
+                                      <th nzAlign="center" nzWidth="10%">Email</th>
+                                      <th nzAlign="center" nzWidth="10%">Employee Name</th>
                                       <th nzAlign="center" nzWidth="9%"> Access Type</th>
                                       <th nzAlign="center" nzWidth="9%"> Action</th>
 

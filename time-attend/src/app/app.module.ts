@@ -117,7 +117,7 @@ registerLocaleData(en);
     FileLeaveAbsentComponent,
     RegisterComponent,
     AddattendanceComponent,
-    SettingsComponent,
+
     EmSettingsComponent,
 
   ],

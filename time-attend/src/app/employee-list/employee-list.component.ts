@@ -109,6 +109,7 @@ exportTableToExcel():void {
 
     this.editCache[id].edit = false;
   }
+
   updateEditCache(): void {
     this.employee_list.forEach(item => {
       this.editCache[item.id] = {

@@ -28,26 +28,26 @@
   </nz-page-header>
 
   <div class="inner-content">
-                                 <nz-table #smallTable nzSize="small" #editRowTable nzBordered id="employeeList_sheet" [nzData]="employee_list" >
+                                 <nz-table #smallTable nzSize="small" #editRowTable nzBordered id="employeeList_sheet" [nzData]="employee_list" [nzPageSize]="10">
                                   <thead >
                                     <tr style="height: 20px">
 
                                       <th nzAlign="center" nzWidth="3%" >ID</th>
-                                      <th  nzAlign="center" nzWidth="10%" nzCustomFilter> First name
+                                      <th  nzAlign="center" nzWidth="6%" nzCustomFilter> First name
                                         <nz-filter-trigger  nzAlign="right" [(nzVisible)]="visible" [nzActive]="searchValue.length > 0" [nzDropdownMenu]="menu">
                                           <span nz-icon nzType="search"></span>
                                         </nz-filter-trigger>
                                       </th>
-                                      <th nzAlign="center" nzWidth="10%">Middle name</th>
-                                      <th nzAlign="center" nzWidth="10%">Last name</th>
-                                      <th nzAlign="center" nzWidth="10%">Username</th>
-                                      <th nzAlign="center" nzWidth="10%">Password</th>
-                                      <th nzAlign="center" nzWidth="10%">Email</th>
-                                      <th nzAlign="center" nzWidth="10%">Number</th>
-                                      <th nzAlign="center" nzWidth="10%">Position</th>
-                                      <th nzAlign="center" nzWidth="10%">Department</th>
+                                      <th nzAlign="center" nzWidth="6%">Middle name</th>
+                                      <th nzAlign="center" nzWidth="6%">Last name</th>
+                                      <th nzAlign="center" nzWidth="6%">Username</th>
+                                      <th nzAlign="center" nzWidth="8%">Password</th>
+                                      <th nzAlign="center" nzWidth="8%">Email</th>
+                                      <th nzAlign="center" nzWidth="8%">Number</th>
+                                      <th nzAlign="center" nzWidth="8%">Position</th>
+                                      <th nzAlign="center" nzWidth="8%">Department</th>
                                       <th nzAlign="center" nzWidth="5%">Status</th>
-                                      <th nzAlign="center" nzWidth="10%">Access type</th>
+                                      <th nzAlign="center" nzWidth="8%">Access type</th>
                                       <th nzAlign="center" nzWidth="10%">Action</th>
 
                                     </tr>
