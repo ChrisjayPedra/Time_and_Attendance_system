@@ -515,6 +515,7 @@ interface employeeList{
   position: string;
   department: string;
   attendance: string;
+  image:string;
   apply:{
     type:string;
     date_to:string;
@@ -565,6 +566,7 @@ interface cal_approved{
   position: string;
   department: string;
   attendance: string;
+  image: string;
   apply:{
     type:string;
     date_to:string;

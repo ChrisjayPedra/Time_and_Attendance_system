@@ -93,7 +93,7 @@ export class AddemployeeComponent {
 
   uploadImage(dataUrl: string) {
     const imageData = { data: dataUrl };
-    this.imagedata = imageData
+    this.imagedata = dataUrl
       console.log(this.imagedata,'imageData');
   }
 

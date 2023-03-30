@@ -250,6 +250,7 @@ interface AttendanceList {
       date:string;
       attendance: string;
       attendees:{
+        image:string;
         id:number;
         fname: string;
         mname: string;
@@ -280,6 +281,7 @@ interface EmployeeList {
   position: string;
   department: string;
   attendance: string;
+  image:string;
   apply:{
     type:string;
     date_to:string;
@@ -296,6 +298,7 @@ interface AttendanceList_add {
   date:string;
   attendance: string;
   attendees:{
+    image:string;
     id:number;
     fname: string;
     mname: string;

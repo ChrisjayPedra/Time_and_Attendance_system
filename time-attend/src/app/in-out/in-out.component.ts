@@ -209,7 +209,7 @@ attendance_present(){
 
     console.log('time_status',);
 
-    const  [{id,userName,password,accessType,fname,mname,lname,email,number,position,department,attendance}] = Object.values(this.user_info_final)
+    const  [{id,userName,password,accessType,fname,mname,lname,email,number,position,department,image,attendance}] = Object.values(this.user_info_final)
 
 
     let employee_attendance = {
@@ -217,6 +217,7 @@ attendance_present(){
     attendance: this.status,
     up_to:"latest",
     attendees: {
+      image:image,
       id:id,
       userName:userName,
       fname: fname,
@@ -277,7 +278,7 @@ attendance_present(){
       })
 
 
-      const [{id,attendance,attendees:{userName,fname,mname,lname,position,department,time_in}}] = Object.values(this.attendance_info_update);
+      const [{id,attendance,attendees:{userName,fname,mname,lname,image,position,department,time_in}}] = Object.values(this.attendance_info_update);
 
       // console.log('id',id);
       console.log('attendeess',fname,"",mname);
@@ -287,6 +288,7 @@ attendance_present(){
           attendance: attendance,
           up_to: 'old',
           attendees: {
+            image:image,
             userName:userName,
             fname: fname,
             mname: mname,
@@ -435,6 +437,7 @@ interface userInfo{
       position: string;
       department: string;
       attendance: string;
+      image:string;
       apply:{
         type:string;
         date_to:string;
@@ -460,6 +463,7 @@ interface userInfofinal{
   position: string;
   department: string;
   attendance: string;
+  image:string;
   apply:{
     type:string;
     date_to:string;
@@ -479,6 +483,7 @@ interface attendanceinfo {
   attendance: string;
   up_to:string;
   attendees:{
+    image:string;
     userName:string;
     id:number;
     fname: string;
@@ -500,6 +505,7 @@ interface attendanceinfo_update {
   attendance: string;
   up_to:string;
   attendees:{
+    image:string;
     userName:string;
     id:number;
     fname: string;
@@ -540,6 +546,7 @@ interface employeeList{
   position: string;
   department: string;
   attendance: string;
+  image:string;
   apply:{
     type:string;
     date_to:string;
@@ -565,6 +572,7 @@ interface employeeListfinal{
   position: string;
   department: string;
   attendance: string;
+  image:string;
   apply:{
     type:string;
     date_to:string;
@@ -590,6 +598,7 @@ interface cal_approved{
   position: string;
   department: string;
   attendance: string;
+  image:string;
   apply:{
     type:string;
     date_to:string;
@@ -616,6 +625,7 @@ interface approval_list{
   position: string;
   department: string;
   attendance: string;
+  image:string;
   apply:{
     type:string;
     date_to:string;
@@ -635,6 +645,7 @@ interface AttendanceList {
   date:string;
   attendance: string;
   attendees:{
+    image:string;
     id:number;
     fname: string;
     mname: string;
@@ -653,6 +664,7 @@ interface present_list {
   date:string;
   attendance: string;
   attendees:{
+    image:string;
     id:number;
     fname: string;
     mname: string;
@@ -670,6 +682,7 @@ interface now_present_list {
   date:string;
   attendance: string;
   attendees:{
+    image:string;
     id:number;
     fname: string;
     mname: string;
@@ -686,6 +699,7 @@ interface absent_list {
   date:string;
   attendance: string;
   attendees:{
+    image:string;
     id:number;
     fname: string;
     mname: string;
@@ -702,6 +716,7 @@ interface now_absent_list {
   date:string;
   attendance: string;
   attendees:{
+    image:string;
     id:number;
     fname: string;
     mname: string;
@@ -718,6 +733,7 @@ interface now_late_list {
   date:string;
   attendance: string;
   attendees:{
+    image:string;
     id:number;
     fname: string;
     mname: string;
@@ -734,6 +750,7 @@ interface late_list {
   date:string;
   attendance: string;
   attendees:{
+    image:string;
     id:number;
     fname: string;
     mname: string;

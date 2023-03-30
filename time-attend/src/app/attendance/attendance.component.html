@@ -28,6 +28,7 @@
                                   <thead  >
                                     <tr  style="height: 20px">
                                       <th nzAlign="center" nzWidth="3%" >Date</th>
+                                      <th nzAlign="center" nzWidth="3%" >Profile</th>
                                       <th  nzAlign="center" nzWidth="6%" nzCustomFilter> First name
                                         <!-- <nz-filter-trigger  nzAlign="right" [(nzVisible)]="visible" [nzActive]="searchValue.length > 0" [nzDropdownMenu]="menu">
                                           <span nz-icon nzType="search"></span>
@@ -37,7 +38,7 @@
                                       <th nzAlign="center" nzWidth="6%">Middle name</th>
                                       <th nzAlign="center" nzWidth="6%">Last name</th>
                                       <th nzAlign="center" nzWidth="6%">Position</th>
-                                      <th nzAlign="center" nzWidth="10%">Department</th>
+                                      <th nzAlign="center" nzWidth="5%">Department</th>
                                       <th nzAlign="center" nzWidth="5%">Time-In</th>
                                       <th nzAlign="center" nzWidth="5%">Time-Out</th>
                                       <th nzAlign="center" nzWidth="5%">Status</th>
@@ -51,10 +52,10 @@
                                     <tr  *ngFor="let data of  editRowTable.data" class="editable-row">
 
                                         <td nzAlign="center">{{ data.date }}</td>
-
+                                        <td nzAlign="center"><nz-avatar nzIcon="user" nzSrc="{{data.attendees.image}}"></nz-avatar></td>
                                         <ng-container *ngIf="!editCache[data.id].edit; else editTemplate">
 
-                                        <td nzAlign="center">{{ data.attendees.fname}}</td>
+                                        <td nzAlign="center">  {{ data.attendees.fname}}</td>
                                         <td nzAlign="center">{{ data.attendees.mname}}</td>
                                         <td nzAlign="center">{{ data.attendees.lname}}</td>
                                         <td nzAlign="center">{{ data.attendees.position}}</td>

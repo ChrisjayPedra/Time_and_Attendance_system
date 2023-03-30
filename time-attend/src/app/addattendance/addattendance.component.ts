@@ -279,6 +279,7 @@ this.searchDate = this.datepipe.transform((result), 'MMMM d, y');
                   attendance:this.validateForm.value.attendance,
                   up_to: this.status,
                   attendees:{
+                    image:employee.image,
                     userName:employee.userName,
                     id:employee.id,
                     fname:employee.fname,
@@ -360,6 +361,7 @@ interface EmployeeList {
   position: string;
   department: string;
   attendance: string;
+  image:string;
   apply:{
     type:string;
     date_to:string;
@@ -382,6 +384,7 @@ interface EmployeeList_add {
   position: string;
   department: string;
   attendance: string;
+  image:string;
   apply:{
     type:string;
     date_to:string;
@@ -398,6 +401,7 @@ interface AttendanceList {
   date:string;
   attendance: string;
   attendees:{
+    image:string;
     id:number;
     fname: string;
     mname: string;
@@ -417,6 +421,7 @@ interface AttendanceList_add {
   date:string;
   attendance: string;
   attendees:{
+    image:string;
     id:number;
     fname: string;
     mname: string;

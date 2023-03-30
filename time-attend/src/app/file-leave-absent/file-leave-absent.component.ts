@@ -57,7 +57,7 @@ export class FileLeaveAbsentComponent implements OnInit {
   submitForm(){
     console.log('asasasasas',Object.values(this.validateForm))
 
-     const  [{id,userName,password,accessType,fname,mname,lname,email,number,position,department,attendance}] = Object.values(this.user_info_update)
+     const  [{id,userName,password,accessType,fname,mname,lname,email,number,image,position,department,attendance}] = Object.values(this.user_info_update)
     console.log('apply id',id,userName,password,accessType,fname,mname,lname,email,number,position,department,attendance)
 
      this.date_from = this.datepipe.transform((this.validateForm.value.date_from), 'MMMM d, y');
@@ -76,6 +76,7 @@ export class FileLeaveAbsentComponent implements OnInit {
       attendance: attendance,
       accessType: accessType,
       id:id,
+      image:image,
       apply:{
         type:this.validateForm.value.applyType,
         date_to:this.date_to,
@@ -103,7 +104,7 @@ export class FileLeaveAbsentComponent implements OnInit {
 
   declined_ended(){
 
-   const  [{id,userName,password,accessType,fname,mname,lname,email,number,position,department,attendance}] = Object.values(this.user_info_update)
+   const  [{id,userName,password,accessType,fname,mname,lname,email,number,position,department,attendance,image}] = Object.values(this.user_info_update)
    console.log('apply id',id,userName,password,accessType,fname,mname,lname,email,number,position,department,attendance)
 
     // this.date_from = this.datepipe.transform((this.validateForm.value.date_from), 'MMMM d, y');
@@ -122,6 +123,7 @@ export class FileLeaveAbsentComponent implements OnInit {
      attendance: attendance,
      accessType: accessType,
      id:id,
+     image:image,
      apply:{
        type:'',
        date_to:'',
@@ -309,6 +311,7 @@ interface userInfo{
   position: string;
   department: string;
   attendance: string;
+  image:string;
   apply:{
     type:string;
     date_to:string;
@@ -333,6 +336,7 @@ interface userInfo_update{
   position: string;
   department: string;
   attendance: string;
+  image:string;
   apply:{
     type:string;
     date_to:string;

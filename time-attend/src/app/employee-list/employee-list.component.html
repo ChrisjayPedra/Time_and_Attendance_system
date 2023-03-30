@@ -57,7 +57,11 @@
 
                                     <tr  *ngFor="let data of  editRowTable.data" class="editable-row">
 
-                                        <td nzAlign="center">{{ data.id }}</td>
+                                        <td nzAlign="center">
+                                          <nz-avatar nzIcon="user" nzSrc="{{data.image}}"></nz-avatar>
+
+
+                                        </td>
 
                                         <ng-container *ngIf="!editCache[data.id].edit; else editTemplate">
 

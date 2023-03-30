@@ -1,106 +1,263 @@
 
-<nz-content style="background: transparent">
+ <nz-content style="background: transparent">
 
-  <div class="profile"  *ngFor="let item of user_info_final">
+  <div   *ngFor="let item of user_info_final">
     <ng-container *ngIf="!editCache[item.id].edit; else editTemplate">
-    <nz-page-header style="margin:0% ; padding:0%">
-      <nz-page-header-title style="font-size:1.3vw">{{ item.fname}} {{ item.mname}} {{ item.lname}}</nz-page-header-title>
-      <nz-page-header-subtitle>{{  item.userName }}</nz-page-header-subtitle>
-    </nz-page-header>
 
-      <nz-page-header-extra>
+      <nz-page-header style="margin:0% ; padding:0%">
+      <nz-page-header-title style="font-size:1.3vw">  <h1 nz-typography>{{ item.fname}} {{ item.mname}} {{ item.lname}}</h1></nz-page-header-title>
+      <nz-page-header-tags>
+        <nz-tag [nzColor]="'blue'">{{item.userName}}</nz-tag>
+      </nz-page-header-tags>
+        <nz-page-header-extra>
+          <nz-space>
 
-        <nz-space>
-
-        </nz-space>
-
-      </nz-page-header-extra>
-      <nz-page-header-content>
-       <p class="username">{{ item.email }}</p>
-       <button nz-button nzType="primary" nzShape="round" (click)="startEdit(item.id)">
-        <span nz-icon nzType="edit" nzTheme="outline"></span>
-      Edit Details
-      </button>
-      </nz-page-header-content>
+            <button   class="button_change"  nzShape="round"  (click)="startEdit(item.id)" nz-button nzType="primary" style="margin: 0 10px"><span nz-icon nzType="edit" nzTheme="outline"></span>Edit Details</button>
 
 
-        <div nz-row>
-          <div nz-col nzSpan="5">
-            <ul class="details">
-              <li>
-                <span class="label">First name:</span>
-                <span class="value">{{ item.fname}}</span>
-              </li>
-              <li>
-                <span class="label">Middle name:</span>
-                <span class="value">{{ item.mname}}</span>
-              </li>
-              <li>
-                <span class="label">Last name:</span>
-                <span class="value">{{ item.lname}}</span>
-              </li>
-            </ul>
-          </div>
-          <div nz-col nzSpan="5">
-            <ul class="details">
-              <li>
-                <span class="label">Number:</span>
-                <span class="value">{{ item.number }}</span>
-              </li>
-              <li>
-                <span class="label">Position:</span>
-                <span class="value">{{ item.position }}</span>
-              </li>
-              <li>
-                <span class="label">Department:</span>
-                <span class="value">{{ item.department}}</span>
-              </li>
-            </ul>
+          </nz-space>
+        </nz-page-header-extra>
+        <nz-page-header-content>
+          <nz-row >
+            <nz-statistic  nzTitle="Email" nzValue="{{item.email}}"></nz-statistic>
+          </nz-row>
 
-          </div>
-        </div>
+        </nz-page-header-content>
+
+      </nz-page-header>
+
+      <nz-content class="content">
+        <nz-card style="background: transparent; border:0px; ">
+              <nz-card  class="card2" style=" background-color: rgba(255,255,255); text-align:center;" nzTitle="Employee Name">
+                <div nz-row >
+                  <div nz-col class="emp" >
+                    <form>
+                      <nz-form-item>
+                          <nz-form-label>
+                            <span class="label">First Name</span>
+                          </nz-form-label>
+                           <h2><u>{{item.fname}}</u></h2>
+                      </nz-form-item>
+                    </form>
+                  </div>
+                  <div nz-col class="emp" >
+                    <form>
+                      <nz-form-item>
+                          <nz-form-label>
+                          <span class="label">Middle Name</span>
+                          </nz-form-label>
+                           <h2><u>{{item.mname}}</u></h2>
+                      </nz-form-item>
+                    </form>
+                  </div>
+                  <div nz-col class="emp" >
+                    <form>
+                      <nz-form-item>
+                          <nz-form-label>
+                          <span class="label">Last Name</span>
+                          </nz-form-label>
+                           <h2><u>{{item.lname}}</u></h2>
+                      </nz-form-item>
+                    </form>
+                  </div>
+                </div>
+
+              </nz-card>
+              <nz-card  class="card3" style=" background-color: rgba(255,255,255); text-align:center;" nzTitle="Employee Account">
+                <div nz-row >
+                  <div nz-col class="emp" >
+                    <form>
+                      <nz-form-item>
+                          <nz-form-label>
+                            <span class="label">Username</span>
+                          </nz-form-label>
+                           <h2><u>{{item.userName}}</u></h2>
+                      </nz-form-item>
+                    </form>
+                  </div>
+                  <div nz-col class="emp" >
+                    <form>
+                      <nz-form-item>
+                          <nz-form-label>
+                          <span class="label">Email</span>
+                          </nz-form-label>
+                           <h2><u>{{item.email}}</u></h2>
+                      </nz-form-item>
+                    </form>
+                  </div>
+                  <div nz-col class="emp" >
+                    <form>
+                      <nz-form-item>
+                          <nz-form-label>
+                          <span class="label">Mobile Number</span>
+                          </nz-form-label>
+                           <h2><u>{{item.number}}</u></h2>
+                      </nz-form-item>
+                    </form>
+                  </div>
+                  <div nz-col class="emp" >
+                    <form>
+                      <nz-form-item>
+                          <nz-form-label>
+                          <span class="label">password</span>
+                          </nz-form-label>
+                           <h2>********</h2>
+                      </nz-form-item>
+                    </form>
+                  </div>
+                </div>
+
+              </nz-card>
+              <nz-card  class="card1" style=" background-color: rgba(255,255,255); text-align:center;" nzTitle="Employee Position">
+              <div nz-row >
+                <div nz-col class="emp" >
+                  <form>
+                    <nz-form-item>
+                        <nz-form-label>
+                          <span class="label">Position</span>
+                        </nz-form-label>
+                         <h2><u>{{item.position}}</u></h2>
+                    </nz-form-item>
+                  </form>
+                </div>
+                <div nz-col class="emp" >
+                  <form>
+                    <nz-form-item>
+                        <nz-form-label>
+                        <span class="label">Department</span>
+                        </nz-form-label>
+                         <h2><u>{{item.department}}</u></h2>
+                    </nz-form-item>
+                  </form>
+                </div>
+              </div>
+              </nz-card>
+
+              <nz-card  class="card4" style=" background-color: rgba(255,255,255); text-align:center;" nzTitle="Apply Leave">
+                <nz-badge>
+                  <nz-content *ngIf="item.apply.approval ==='approved'">
+                    <nz-tag [nzColor]="'green'">{{item.apply.approval}}</nz-tag>
+                  </nz-content>
+                  <nz-content *ngIf="item.apply.approval ==='pending'">
+                    <nz-tag [nzColor]="'blue'">{{item.apply.approval}}</nz-tag>
+                  </nz-content>
+                <nz-content *ngIf="item.apply.approval ==='approved' || item.apply.approval === 'pending'">
+                  <div nz-row>
+                    <div nz-col class="emp">
+                      <form>
+                        <nz-form-item>
+                            <nz-form-label>
+                              <span class="label">Date from</span>
+                            </nz-form-label>
+                             <h2><u>{{item.apply.date_from}}</u></h2>
+                        </nz-form-item>
+                        <nz-form-item>
+                          <nz-form-label>
+                            <span class="label">Date to</span>
+                          </nz-form-label>
+                           <h2><u>{{item.apply.date_to}}</u></h2>
+                      </nz-form-item>
+                      <nz-form-item>
+                        <nz-form-label>
+                          <span class="label">Type</span>
+                        </nz-form-label>
+                         <h2><u>{{item.apply.type}}</u></h2>
+                    </nz-form-item>
+                    <nz-form-item>
+                      <nz-form-label>
+                        <span class="label">Reason</span>
+                      </nz-form-label>
+                       <h2><u>{{item.apply.reason}}</u></h2>
+                  </nz-form-item>
+                      </form>
+                    </div>
+
+                  </div>
+                </nz-content>
+              </nz-badge>
+                </nz-card>
+
+        </nz-card>
+      </nz-content>
+
+
 
 
     </ng-container>
     <ng-template #editTemplate>
-      <nz-page-header style="margin:0% ; padding:0%">
-        <nz-page-header-title style="font-size:1.3vw">Edit Details</nz-page-header-title>
-      </nz-page-header>
-      <div nz-row class="edit" >
-        <div nz-col  [nzLg]="{ span: 6, offset: 0 }">
-          <span class="label">First Name</span>
-          <input type="text" nz-input [(ngModel)]="editCache[item.id].data.fname" />
-          <span class="label">Middle Name</span>
-          <input type="text" nz-input [(ngModel)]="editCache[item.id].data.mname" />
-          <span class="label">Last Name</span>
-          <input type="text" nz-input [(ngModel)]="editCache[item.id].data.lname" />
 
+
+
+
+
+      <nz-card  class="cardq" style=" background-color: rgba(255,255,255); border-color:black; text-align:center;" nzTitle="Edit Details">
+
+        <div class="edit-form">
+
+          <nz-form-item>
+            <nz-form-label [nzSpan]="7" >First name</nz-form-label>
+            <nz-form-control [nzSpan]="12" >
+              <input  nz-input [(ngModel)]="editCache[item.id].data.fname" />
+            </nz-form-control>
+          </nz-form-item>
+          <nz-form-item>
+            <nz-form-label [nzSpan]="7" >Middle Name</nz-form-label>
+            <nz-form-control [nzSpan]="12" > <input nz-input [(ngModel)]="editCache[item.id].data.mname" /></nz-form-control>
+
+          </nz-form-item>
+          <nz-form-item>
+            <nz-form-label [nzSpan]="7" >Last Name</nz-form-label>
+            <nz-form-control [nzSpan]="12" >
+            <input  nz-input [(ngModel)]="editCache[item.id].data.lname" />
+            </nz-form-control>
+          </nz-form-item>
+          <nz-form-item>
+            <nz-form-label [nzSpan]="7">Username</nz-form-label>
+            <nz-form-control [nzSpan]="12" >
+            <input  nz-input [(ngModel)]="editCache[item.id].data.userName" />
+            </nz-form-control>
+          </nz-form-item>
+
+          <nz-form-item>
+            <nz-form-label [nzSpan]="7" >Password</nz-form-label>
+            <nz-form-control [nzSpan]="12" >
+            <input  nz-input [(ngModel)]="editCache[item.id].data.password" />
+            </nz-form-control>
+          </nz-form-item>
+          <nz-form-item>
+            <nz-form-label [nzSpan]="7" >Email</nz-form-label>
+            <nz-form-control [nzSpan]="12" >
+            <input  nz-input [(ngModel)]="editCache[item.id].data.email" />
+            </nz-form-control>
+          </nz-form-item>
+          <nz-form-item>
+            <nz-form-label [nzSpan]="7" >Number</nz-form-label>
+            <nz-form-control [nzSpan]="12" >
+            <input  nz-input [(ngModel)]="editCache[item.id].data.number" />
+            </nz-form-control>
+          </nz-form-item>
+          <nz-form-item>
+            <nz-form-label [nzSpan]="7" >Position</nz-form-label>
+            <nz-form-control [nzSpan]="12" >
+            <input  nz-input [(ngModel)]="editCache[item.id].data.position" />
+            </nz-form-control>
+          </nz-form-item>
+          <nz-form-item>
+            <nz-form-label [nzSpan]="7" >Department</nz-form-label>
+            <nz-form-control [nzSpan]="12" >
+            <input  nz-input [(ngModel)]="editCache[item.id].data.department" />
+            </nz-form-control>
+          </nz-form-item>
         </div>
-        <div nz-col [nzLg]="{ span: 6, offset: 2 }">
+        <nz-form-item>
+          <nz-form-control [nzOffset]="6" [nzSpan]="12">
+            <button    (click)="saveUser(item.id)" nzShape="round"   nz-button nzType="primary" style="margin: 0 10px;"> <span nz-icon  nz-Align="center" nz-icon nzType="save" nzTheme="outline"></span>Save</button>
+            <button     nzShape="round"  nz-button nzType="primary" nzDanger style="margin: 0 10px"> <a   nz-popconfirm nzPopconfirmTitle="Sure to cancel?" (nzOnConfirm)="cancelEdit(item.id)"><span nz-icon nzType="close" nzTheme="outline"></span>Cancel</a></button>
+          </nz-form-control>
+        </nz-form-item>
+      </nz-card>
 
-          <span class="label">Username</span>
-          <input type="text" nz-input [(ngModel)]="editCache[item.id].data.userName" />
-          <span class="label">Password</span>
-          <input type="text" nz-input [(ngModel)]="editCache[item.id].data.password" />
-          <span class="label">Email</span>
-          <input type="text" nz-input [(ngModel)]="editCache[item.id].data.email" />
 
-        </div>
-        <div nz-col  [nzLg]="{ span: 6, offset: 2 }">
-
-          <span class="label">Number</span>
-          <input type="text" nz-input [(ngModel)]="editCache[item.id].data.number" />
-          <span class="label">Position</span>
-          <input type="text" nz-input [(ngModel)]="editCache[item.id].data.position" />
-          <span class="label">Department</span>
-          <input type="text" nz-input [(ngModel)]="editCache[item.id].data.department" />
-
-        </div>
-      </div>
-      <div class="button">
-        <button    (click)="saveUser(item.id)" nzShape="round"   nz-button nzType="primary" style="margin: 0 10px;"> <span nz-icon  nz-Align="center" nz-icon nzType="save" nzTheme="outline"></span>Save</button>
-        <button     nzShape="round"  nz-button nzType="primary" nzDanger style="margin: 0 10px"> <a   nz-popconfirm nzPopconfirmTitle="Sure to cancel?" (nzOnConfirm)="cancelEdit(item.id)"><span nz-icon nzType="close" nzTheme="outline"></span>Cancel</a></button>
-      </div>
 
     </ng-template>
 
@@ -109,5 +266,6 @@
 
 
 </nz-content>
+
 
 

@@ -82,11 +82,12 @@ editCache: { [key: number]: { edit: boolean; data: userInfo_final } } = {};
 
 
         this.crudHttpService.updateEmployee(id,this.editCache[id].data).subscribe((response)=>{
-          // this.updateNotif();
+           this.updateNotif();
           // this.employeeList();
               },(error=>{
 
         }));
+
 
     this.editCache[id].edit = false;
   }
@@ -150,6 +151,7 @@ interface userInfo{
     date_to:string;
     date_from:string;
     reason:string;
+    approval:string;
   }
 
 
@@ -174,6 +176,7 @@ interface userInfo_final{
     date_to:string;
     date_from:string;
     reason:string;
+    approval:string;
   }
 
 
