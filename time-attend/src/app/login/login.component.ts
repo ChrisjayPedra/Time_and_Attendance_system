@@ -29,6 +29,7 @@ LoginComponent {
       });
       const user = res.find((a:any)=>{
         this.User.setUserid(a.id);
+        this.User.setImage(a.image);
         return a.userName === this.validateForm.value.userName && a.password === this.validateForm.value.password && a.accessType === 'employee'
 
       });

@@ -98,6 +98,7 @@ import { FileLeaveAbsentComponent } from './file-leave-absent/file-leave-absent.
 import { RegisterComponent } from './register/register.component';
 import { AddattendanceComponent } from './addattendance/addattendance.component';
 import { EmSettingsComponent } from './em-settings/em-settings.component';
+import { EmployeeDetailsComponent } from './employee-details/employee-details.component';
 
 registerLocaleData(en);
 
@@ -119,6 +120,7 @@ registerLocaleData(en);
     AddattendanceComponent,
 
     EmSettingsComponent,
+     EmployeeDetailsComponent,
 
   ],
   imports: [

@@ -1,10 +1,12 @@
 
- <nz-content style="background: transparent">
+<nz-content style="background: transparent">
 
-  <div   *ngFor="let item of user_info_final">
-    <ng-container *ngIf="!editCache[item.id].edit; else editTemplate">
-
-      <nz-page-header style="margin:0% ; padding:0%">
+  <div   *ngFor="let item of employee_details">
+      <!-- <div class="cardI" >
+        <img src="{{item.image}}">
+      </div> -->
+      <nz-avatar class="cardI" [nzSize]="200" nzIcon="user" nz-page-header-avatar nzSrc="{{item.image}}"></nz-avatar>
+      <nz-page-header style="margin-left:240px; margin-top: 20px ; padding:0%">
       <nz-page-header-title style="font-size:1.3vw">  <h1 nz-typography>{{ item.fname}} {{ item.mname}} {{ item.lname}}</h1></nz-page-header-title>
       <nz-page-header-tags>
         <nz-tag [nzColor]="'blue'">{{item.userName}}</nz-tag>
@@ -12,8 +14,8 @@
         <nz-page-header-extra>
           <nz-space>
 
-            <button   class="button_change"  nzShape="round"  (click)="changeProfile()" nz-button nzType="primary" style="margin: 0 10px"><span nz-icon nzType="picture" nzTheme="outline"></span>Change Profile</button>
-            <button   class="button_change"  nzShape="round"  (click)="startEdit(item.id)" nz-button nzType="primary" style="margin: 0 10px"><span nz-icon nzType="edit" nzTheme="outline"></span>Edit Details</button>
+            <button   class="button_change"  nzShape="round"  (click)="back()" nz-button nzType="primary" style="margin: 0 10px"><span nz-icon nzType="arrow-left" nzTheme="outline"></span>back</button>
+            <!-- <button   class="button_change"  nzShape="round"  (click)="startEdit(item.id)" nz-button nzType="primary" style="margin: 0 10px"><span nz-icon nzType="edit" nzTheme="outline"></span>Edit Details</button> -->
 
 
           </nz-space>
@@ -179,122 +181,6 @@
                 </nz-card>
 
         </nz-card>
-      </nz-content>
 
 
-
-
-    </ng-container>
-    <ng-template #editTemplate>
-
-
-
-
-
-      <nz-card  class="cardq" style=" background-color: rgba(255,255,255); border-color:black; text-align:center;" nzTitle="Edit Details">
-
-        <div class="edit-form">
-
-          <nz-form-item>
-            <nz-form-label [nzSpan]="7" >First name</nz-form-label>
-            <nz-form-control [nzSpan]="12" >
-              <input  nz-input [(ngModel)]="editCache[item.id].data.fname" />
-            </nz-form-control>
-          </nz-form-item>
-          <nz-form-item>
-            <nz-form-label [nzSpan]="7" >Middle Name</nz-form-label>
-            <nz-form-control [nzSpan]="12" > <input nz-input [(ngModel)]="editCache[item.id].data.mname" /></nz-form-control>
-
-          </nz-form-item>
-          <nz-form-item>
-            <nz-form-label [nzSpan]="7" >Last Name</nz-form-label>
-            <nz-form-control [nzSpan]="12" >
-            <input  nz-input [(ngModel)]="editCache[item.id].data.lname" />
-            </nz-form-control>
-          </nz-form-item>
-          <nz-form-item>
-            <nz-form-label [nzSpan]="7">Username</nz-form-label>
-            <nz-form-control [nzSpan]="12" >
-            <input  nz-input [(ngModel)]="editCache[item.id].data.userName" />
-            </nz-form-control>
-          </nz-form-item>
-
-          <nz-form-item>
-            <nz-form-label [nzSpan]="7" >Password</nz-form-label>
-            <nz-form-control [nzSpan]="12" >
-            <input  nz-input [(ngModel)]="editCache[item.id].data.password" />
-            </nz-form-control>
-          </nz-form-item>
-          <nz-form-item>
-            <nz-form-label [nzSpan]="7" >Email</nz-form-label>
-            <nz-form-control [nzSpan]="12" >
-            <input  nz-input [(ngModel)]="editCache[item.id].data.email" />
-            </nz-form-control>
-          </nz-form-item>
-          <nz-form-item>
-            <nz-form-label [nzSpan]="7" >Contact Number</nz-form-label>
-            <nz-form-control [nzSpan]="12" >
-            <input  nz-input [(ngModel)]="editCache[item.id].data.number" />
-            </nz-form-control>
-          </nz-form-item>
-
-
-          <nz-form-item>
-            <nz-form-label [nzSpan]="7" >Position</nz-form-label>
-            <nz-form-control [nzSpan]="12" >
-            <input  nz-input [(ngModel)]="editCache[item.id].data.position" />
-            </nz-form-control>
-          </nz-form-item>
-          <nz-form-item>
-            <nz-form-label [nzSpan]="7" >Department</nz-form-label>
-            <nz-form-control [nzSpan]="12" >
-            <input  nz-input [(ngModel)]="editCache[item.id].data.department" />
-            </nz-form-control>
-          </nz-form-item>
-        </div>
-        <nz-form-item>
-          <nz-form-control [nzOffset]="6" [nzSpan]="12">
-            <button    (click)="saveUser(item.id)" nzShape="round"   nz-button nzType="primary" style="margin: 0 10px;"> <span nz-icon  nz-Align="center" nz-icon nzType="save" nzTheme="outline"></span>Save</button>
-            <button     nzShape="round"  nz-button nzType="primary" nzDanger style="margin: 0 10px"> <a   nz-popconfirm nzPopconfirmTitle="Sure to cancel?" (nzOnConfirm)="cancelEdit(item.id)"><span nz-icon nzType="close" nzTheme="outline"></span>Cancel</a></button>
-          </nz-form-control>
-        </nz-form-item>
-      </nz-card>
-
-
-
-    </ng-template>
-
-
-  </div>
-
-
-</nz-content>
-
-
-<nz-modal [(nzVisible)]="isVisiblee" [nzTitle]="'Edit Event'"  (nzOnCancel)="handleCancell()" [nzFooter]="null" nzWidth="600px">
-  <div  *nzModalContent nz-form-item >
-
-    <nz-form-item>
-
-      <nz-form-label [nzSpan]="8" nzRequired> Profile</nz-form-label>
-      <nz-form-control [nzSpan]="14" nzHasFeedback [nzErrorTip]="userErrorTpl">
-
-
-            <span><input type="file" (change)="onFileSelected($event)" ></span>
-
-        <ng-template #userErrorTpl let-control>
-          <ng-container *ngIf="control.hasError('required')">Please add profile!</ng-container>
-        </ng-template>
-      </nz-form-control>
-    </nz-form-item>
-
-    <nz-form-item>
-      <nz-form-control [nzOffset]="7" [nzSpan]="14">
-        <button    (click)="submit()" nzShape="round"   nz-button nzType="primary" style="margin: 0 10px;"> <span nz-icon  nz-Align="center" nz-icon nzType="save" nzTheme="outline"></span>Save</button>
-        <button     nzShape="round"  nz-button nzType="primary" nzDanger style="margin: 0 10px"> <a   nz-popconfirm nzPopconfirmTitle="Sure to cancel?" (nzOnConfirm)="handleCancell()"><span nz-icon nzType="close" nzTheme="outline"></span>Cancel</a></button>
-      </nz-form-control>
-    </nz-form-item>
-
-  </div>
-
-</nz-modal>
+ </nz-content>

@@ -4,6 +4,7 @@ import { CrudHttpService } from '../crud-http-service.service';
 import { NzButtonSize } from 'ng-zorro-antd/button';
 import { Router } from '@angular/router';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
+import { UserServiceService } from '../user-service.service';
 
 @Component({
   selector: 'app-employee-list',
@@ -21,6 +22,7 @@ export class EmployeeListComponent implements OnInit {
   isCollapsed = true;
   editCache: { [key: number]: { edit: boolean; data: EmployeeList } } = {};
   employee_list: EmployeeList[] = [];
+  employee_details: Employeedetails[] = [];
 
 //export table
 
@@ -77,6 +79,21 @@ exportTableToExcel():void {
       }
 
     );
+  }
+
+
+
+
+  getemployee(id: number){
+    // this.editCache[id].edit = true;
+    console.log('edit', this.editCache[id])
+    this.user.employee_details.pop();
+    this.user.setdetails(this.editCache[id].data)
+      // this.employee_details.push(this.editCache[id].data)
+      // console.log('employee', this.employee_details);
+
+      console.log('data userserveice',this.user.getdetails());
+      this.router.navigate(['/home/emdetails/'])
   }
 
 
@@ -177,7 +194,7 @@ exportTableToExcel():void {
 
   }
 
-  constructor(private notification:NzNotificationService,private _http:HttpClient, private crudHttpService: CrudHttpService, private router:Router) {}
+  constructor(private user:UserServiceService,private notification:NzNotificationService,private _http:HttpClient, private crudHttpService: CrudHttpService, private router:Router) {}
 
 
 
@@ -209,5 +226,28 @@ interface EmployeeList {
 
 }
 
+interface Employeedetails{
+  id:number;
+  userName: string;
+  password: string;
+  accessType: string;
+  fname: string;
+  mname: string;
+  lname: string;
+  email: string;
+  number: string;
+  position: string;
+  department: string;
+  attendance: string;
+  image:string;
+  apply:{
+    type:string;
+    date_to:string;
+    date_from:string;
+    reason:string;
+    approval:string;
+  },
 
+
+}
 

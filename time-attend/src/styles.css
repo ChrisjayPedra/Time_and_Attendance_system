@@ -1,5 +1,8 @@
 .bg{
 
-  background: rgb(91,110,254);
-  background: linear-gradient(242deg, rgba(91,110,254,0.3) 9%, rgba(147,127,253,0.3) 48%, rgba(166,133,253,0.3) 65%, rgba(205,195,255,0.3) 96%);
+  background-image: url('src/assets/Activity 1.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  /* background: rgb(91,110,254);
+  background: linear-gradient(242deg, rgba(91,110,254,0.3) 9%, rgba(147,127,253,0.3) 48%, rgba(166,133,253,0.3) 65%, rgba(205,195,255,0.3) 96%); */
 }

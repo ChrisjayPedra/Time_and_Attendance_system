@@ -1,9 +1,12 @@
 
 <nz-layout class="layout" style="background:transparent">
   <nz-sider style="border-radius:5px; background:transparent" nzCollapsible [(nzCollapsed)]="isCollapsed"   [nzTrigger]="null">
-    <div class="logo">
-
+    <div   [ngClass]="{'nz-collapsed': isCollapsed}" >
+        <div class="image-container" >
+          <img src="{{image}}" [ngClass]="{'collapsed': isCollapsed}">
+        </div>
     </div>
+
 
 
     <ul nz-menu nzTheme="light"  style="border-radius:5px; background:transparent" nzMode="inline">

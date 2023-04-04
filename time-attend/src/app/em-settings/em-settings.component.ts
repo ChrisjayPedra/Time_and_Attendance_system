@@ -4,6 +4,9 @@ import { UserServiceService } from '../user-service.service';
 import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import { DatePipe } from '@angular/common';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
+import { NzMessageService } from 'ng-zorro-antd/message';
+import { TimeInOutComponent } from '../time-in-out/time-in-out.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-em-settings',
@@ -17,11 +20,127 @@ export class EmSettingsComponent {
 user_info: userInfo[]=[];
 user_info_final: userInfo_final[]=[];
 editCache: { [key: number]: { edit: boolean; data: userInfo_final } } = {};
+isVisiblee = false;
+
+
+uploading = false;
+  selectedFile!: File;
+  imagedata!: any;
+
+
+  maxFileSize = 1000000; // 1kB
 
 
 
+  onFileSelected(event:any){
+    console.log('event',event)
+    this.selectedFile = <File> event.target.files[0];
+    console.log('asasasas',this.selectedFile)
+    this.onUpload()
+}
+onUpload() {
+  if (this.selectedFile && this.selectedFile.size <= this.maxFileSize) {
+    const reader = new FileReader();
+    reader.onload = (event: any) => {
+      const image = new Image();
+      image.onload = () => {
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        const maxWidth = 1024;
+        const maxHeight = 1024;
+        let width = image.width;
+        let height = image.height;
+        if (width > height) {
+          if (width > maxWidth) {
+            height *= maxWidth / width;
+            width = maxWidth;
+          }
+        } else {
+          if (height > maxHeight) {
+            width *= maxHeight / height;
+            height = maxHeight;
+          }
+        }
+        canvas.width = width;
+        canvas.height = height;
+        ctx!.drawImage(image, 0, 0, width, height);
+        const compressedImage = canvas.toDataURL('image/jpeg', 0.8);
+        this.uploadImage(compressedImage);
+      };
+      image.src = event.target.result;
+    };
+    reader.readAsDataURL(this.selectedFile);
+  }else{
+    this.message.create('error','File to large');
+  }
 
-  constructor(private notification:NzNotificationService,public datepipe: DatePipe,private modal:NzModalService,private user: UserServiceService,private crudHttpService:CrudHttpService){
+}
+
+uploadImage(dataUrl: string) {
+  const imageData = { data: dataUrl };
+  this.imagedata = dataUrl
+    console.log(this.imagedata,'imageData');
+}
+
+
+submit(){
+  const  [{id,userName,password,accessType,fname,mname,lname,email,number,position,department,image,attendance,apply:{type,date_to,date_from,reason,approval}}] = Object.values(this.user_info_final)
+  console.log('userinfor',this.user_info_final)
+
+  if (this.imagedata == null || this.imagedata.length == 0 || this.imagedata =='') {
+    this.imagedata = image;
+  }
+  console.log('theimage data',this.imagedata)
+
+    let employee = {
+      userName: userName,
+      fname:fname,
+      mname:mname,
+      lname:lname,
+      number:number,
+      position:position,
+      department:department,
+      email:email,
+      password:password,
+      attendance:attendance,
+      accessType:accessType,
+      image:this.imagedata,
+      apply:{
+        type:type,
+        date_to:date_to,
+        date_from:date_from,
+        reason:reason,
+        approval:approval,
+      }
+    }
+    console.log('employee',employee)
+    this.crudHttpService.updateEmployee(id,employee).subscribe((response)=> {
+      this.time_in_out.ngOnInit();
+      this.updateNotif();
+      this.router.navigate(['/time_in_out/in_out'])
+      }, err=>{
+
+        this.message.create('error','Something went wrong');
+
+      });
+
+
+  }
+
+
+changeProfile(){
+  this.isVisiblee = true;
+}
+
+
+
+handleCancell(): void {
+  console.log('Clicked Cancel');
+  this.isVisiblee = false;
+}
+
+
+  constructor(private router:Router,private time_in_out:TimeInOutComponent,private message:NzMessageService,private notification:NzNotificationService,public datepipe: DatePipe,private modal:NzModalService,private user: UserServiceService,private crudHttpService:CrudHttpService){
 
     let currentDateTime =this.datepipe.transform((new Date), 'MMMM d, y');
     console.log(currentDateTime);
@@ -146,6 +265,7 @@ interface userInfo{
   position: string;
   department: string;
   attendance: string;
+  image:string;
   apply:{
     type:string;
     date_to:string;
@@ -171,6 +291,7 @@ interface userInfo_final{
   position: string;
   department: string;
   attendance: string;
+  image:string;
   apply:{
     type:string;
     date_to:string;

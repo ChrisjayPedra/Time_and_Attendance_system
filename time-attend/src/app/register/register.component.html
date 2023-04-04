@@ -43,6 +43,22 @@
       </nz-form-control>
     </nz-form-item>
 
+
+    <nz-form-item>
+
+      <nz-form-label [nzSpan]="7" nzRequired> Profile</nz-form-label>
+      <nz-form-control [nzSpan]="12" nzHasFeedback [nzErrorTip]="userErrorTpl">
+
+
+            <span nz-icon nzType="upload"> <input type="file" (change)="onFileSelected($event)" > </span>
+
+
+        <ng-template #userErrorTpl let-control>
+          <ng-container *ngIf="control.hasError('required')">Please add profile!</ng-container>
+        </ng-template>
+      </nz-form-control>
+    </nz-form-item>
+
     <nz-form-item>
       <nz-form-label [nzSpan]="7" nzRequired>Department</nz-form-label>
       <nz-form-control [nzSpan]="12" nzHasFeedback [nzErrorTip]="userErrorTpl">

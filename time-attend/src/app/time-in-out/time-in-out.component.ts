@@ -10,8 +10,10 @@ import { Router } from '@angular/router';
 })
 export class TimeInOutComponent implements OnInit {
   user_info: userInfo[]=[];
+  user_info_data: userInfo_data[]=[];
   user_id!: any;
   user_name!: any;
+  image!:any;
   isCollapsed = true;
   confirmModal?: NzModalRef;
 constructor(private user: UserServiceService,private crudHttpService:CrudHttpService,private modal:NzModalService,private router:Router){
@@ -20,16 +22,29 @@ constructor(private user: UserServiceService,private crudHttpService:CrudHttpSer
   ngOnInit(): void {
    this.user_id = this.user.getUser()
    this.User_();
+   this.image = this.user.getImage();
    console.log('id',this.user_id);
+   console.log('image',this.image);
   }
   User_() {
     this.crudHttpService.getEmployeeID(this.user_id).subscribe((Response) => {
 
         this.user_info = Object.values(Response);
-        console.log('user_info',this.user_info);
+        // console.log('user_info datadatadtda',this.user_info);
         const [userName] = Object.values(this.user_info);
+
+        this.user_info_data = Object.values(this.user_info);
+
+        const data = Object.values(this.user_info_data);
+        data.forEach((item) => {
+          if (item.id === this.user_id){
+            this.user_info_data.push(item);
+            console.log(this.user_info_data,'datdatdatda');
+          }
+        })
+
         this.user_name = userName;
-        console.log('username',userName);
+
     });
   }
 
@@ -56,18 +71,50 @@ constructor(private user: UserServiceService,private crudHttpService:CrudHttpSer
 
 interface userInfo{
 
-      id:number;
-      userName: string;
-      password: string;
-      accessType: string;
-      fname: string;
-      mname: string;
-      lname: string;
-      email: string;
-      number: string;
-      position: string;
-      department: string;
-      attendance: string;
+  id:number;
+  userName: string;
+  password: string;
+  accessType: string;
+  fname: string;
+  mname: string;
+  lname: string;
+  email: string;
+  number: string;
+  position: string;
+  department: string;
+  attendance: string;
+  image:string;
+  apply:{
+    type:string;
+    date_to:string;
+    date_from:string;
+    reason:string;
+    approval:string;
+  },
 
+}
+
+interface userInfo_data{
+
+  id:number;
+  userName: string;
+  password: string;
+  accessType: string;
+  fname: string;
+  mname: string;
+  lname: string;
+  email: string;
+  number: string;
+  position: string;
+  department: string;
+  attendance: string;
+  image:string;
+  apply:{
+    type:string;
+    date_to:string;
+    date_from:string;
+    reason:string;
+    approval:string;
+  },
 
 }
