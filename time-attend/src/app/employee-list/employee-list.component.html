@@ -13,7 +13,24 @@
          Add employee
         </button>
       </nz-space>
-      <nz-space>
+      <nz-space >
+        <button style="background-color:rgb(209, 67, 41); border-color:rgb(209, 67, 41);" *nzSpaceItem (click)="generatePDF()" nz-button nz-Align="right" nzType="primary" [nzSize]="size" nzShape="round">
+          <span nz-icon  nz-Align="center" nz-icon nzType="file-excel" nzTheme="outline"></span>
+
+          Export PDF
+        </button>
+
+      </nz-space >
+
+      <nz-space style="margin: 0 32px">
+        <button style="background-color:rgb(139, 255, 187); border-color:rgb(139, 255, 187);" *nzSpaceItem (click)="generateCSV()" nz-button nz-Align="right" nzType="primary" [nzSize]="size" nzShape="round">
+          <span nz-icon  nz-Align="center" nz-icon nzType="file-excel" nzTheme="outline"></span>
+
+          Export CSV
+        </button>
+      </nz-space >
+
+      <nz-space >
         <button style="background-color:rgb(0, 224, 0); border-color:rgb(0, 224, 0);" *nzSpaceItem (click)="exportTableToExcel()" nz-button nz-Align="right" nzType="primary" [nzSize]="size" nzShape="round">
           <span nz-icon  nz-Align="center" nz-icon nzType="file-excel" nzTheme="outline"></span>
           Export Data
@@ -28,11 +45,12 @@
   </nz-page-header>
 
   <div class="inner-content">
-                                 <nz-table #smallTable nzSize="small" #editRowTable nzBordered id="employeeList_sheet" [nzData]="employee_list" [nzPageSize]="10">
+                                 <nz-table  [nzScroll]="{ x: '1200px', y: '700px' }" #smallTable nzSize="small"  id="employeeList_sheet" #editRowTable nzBordered  [nzData]="employee_list"  nzFrontPagination="false" [nzPageSize]="10">
+
                                   <thead >
                                     <tr style="height: 20px">
 
-                                      <th nzAlign="center" nzWidth="3%" >Profile</th>
+                                      <th nzAlign="center" nzWidth="4%" >Profile</th>
                                       <th  nzAlign="center" nzWidth="6%" nzCustomFilter> First name
                                         <nz-filter-trigger  nzAlign="right" [(nzVisible)]="visible" [nzActive]="searchValue.length > 0" [nzDropdownMenu]="menu">
                                           <span nz-icon nzType="search"></span>
@@ -42,20 +60,22 @@
                                       <th nzAlign="center" nzWidth="6%">Last name</th>
                                       <th nzAlign="center" nzWidth="6%">Username</th>
                                       <th nzAlign="center" nzWidth="6%">Password</th>
-                                      <th nzAlign="center" nzWidth="8%">Email</th>
+                                      <th nzAlign="center" nzWidth="10%">Email</th>
                                       <th nzAlign="center" nzWidth="8%">Number</th>
                                       <th nzAlign="center" nzWidth="6%">Position</th>
                                       <th nzAlign="center" nzWidth="6%">Department</th>
                                       <th nzAlign="center" nzWidth="5%">Status</th>
-                                      <th nzAlign="center" nzWidth="8%">Access type</th>
+                                      <th nzAlign="center" nzWidth="8%">Role</th>
+                                      <th nzAlign="center" nzWidth="6%">Leave</th>
                                       <th nzAlign="center" nzWidth="10%">Action</th>
 
                                     </tr>
                                   </thead>
                                   <tbody >
 
+                                    <ng-container *ngFor="let data of  editRowTable.data">
 
-                                    <tr  *ngFor="let data of  editRowTable.data" class="editable-row">
+                                    <tr   class="editable-row">
 
                                         <td nzAlign="center">
                                         <a (click)="getemployee(data.id)"> <nz-avatar nzIcon="user" nzSrc="{{data.image}}"></nz-avatar></a>
@@ -74,6 +94,12 @@
                                         <td nzAlign="center">{{ data.department}}</td>
                                         <td nzAlign="center">{{ data.attendance}}</td>
                                         <td nzAlign="center">{{ data.accessType}}</td>
+                                        <!-- [nzExpand]="expandSet.has(data.id)" (nzExpandChange)="onExpandChange(data.id, $event)" -->
+                                        <td nzAlign="center">
+                                          <div *ngIf="data.apply.approval === '' ">
+                                           ----
+                                          </div>
+                                          {{ data.apply.approval}}</td>
                                         <td nzAlign="center">
 
                                           <a (click)="startEdit(data.id)" style="padding:10px">
@@ -110,6 +136,8 @@
 
                                         </td>
 
+
+
                                         <td nzAlign="center">
 
 
@@ -121,6 +149,13 @@
 
                                         </td>
 
+                                        <td nzAlign="center">
+                                          <nz-select nzPlaceHolder="Leave Status" [(ngModel)]="editCache[data.id].data.apply.approval">
+                                            <nz-option nzValue="approved" nzLabel="approved"></nz-option>
+                                            <nz-option nzValue="pending" nzLabel="pending"></nz-option>
+                                            <nz-option nzValue="declined" nzLabel="declined"></nz-option>
+                                          </nz-select>
+                                        </td>
 
                                         <td nzAlign="center">
                                           <a (click)="saveUser(data.id)" class="save">Save</a>
@@ -131,8 +166,47 @@
 
 
                                     </tr>
+                                      <!-- <tr [nzExpand]="expandSet.has(data.id)">
+                                        <nz-table #innerTable nzSize="small" [nzShowPagination]="false">
+                                          <thead>
+
+                                              <th nzAlign="center"></th>
+                                              <th nzAlign="center">Apply type</th>
+                                              <th nzAlign="center">Reason</th>
+                                              <th nzAlign="center">Date to</th>
+                                              <th nzAlign="center">Date from</th>
+                                              <th nzAlign="center">Approval</th>
 
 
+                                          </thead>
+
+
+                                              <td nzAlign="center"></td>
+                                              <td nzAlign="center">{{ data.apply.type}}</td>
+                                              <td nzAlign="center">{{ data.apply.reason}}</td>
+                                              <td nzAlign="center">{{ data.apply.date_to}}</td>
+                                              <td nzAlign="center">{{ data.apply.date_from}}</td>
+                                              <td nzAlign="center" >
+                                                <ng-container *ngIf="data.apply.approval === 'approved'">
+                                                  <nz-badge [nzStatus]="'success'" [nzText]="data.apply.approval"></nz-badge>
+                                                </ng-container>
+                                                <ng-container *ngIf="data.apply.approval === 'pending'">
+                                                  <nz-badge [nzStatus]="'warning'" [nzText]="data.apply.approval"></nz-badge>
+                                                </ng-container>
+                                                <ng-container *ngIf="data.apply.approval === 'declined'">
+                                                  <nz-badge [nzStatus]="'error'" [nzText]="data.apply.approval"></nz-badge>
+                                                </ng-container>
+                                              </td>
+
+
+
+                                        </nz-table>
+                                      </tr> -->
+
+
+
+
+                                  </ng-container>
 
                                   </tbody>
                                 </nz-table>
