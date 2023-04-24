@@ -32,7 +32,7 @@ export class FileLeaveAbsentComponent implements OnInit {
   user_info_update: userInfo_update[]=[];
   user_name!: any;
 
-
+  decidate:any;
   currentDateTime:any|null;
   date: any | null;
   time: any | null;
@@ -62,7 +62,7 @@ export class FileLeaveAbsentComponent implements OnInit {
 
      this.date_from = this.datepipe.transform((this.validateForm.value.date_from), 'MMMM d, y');
      this.date_to = this.datepipe.transform((this.validateForm.value.date_to), 'MMMM d, y');
-
+     this.decidate = this.datepipe.transform((new Date), 'MMMM d, y');
     const employee = {
       userName: userName,
       fname: fname,
@@ -82,7 +82,8 @@ export class FileLeaveAbsentComponent implements OnInit {
         date_to:this.date_to,
         date_from:this.date_from,
         reason:this.validateForm.value.reason,
-        approval:'pending'
+        approval:'pending',
+        date_approval:this.decidate,
       }
     }
     console.log('apply Employeee',employee)
@@ -104,7 +105,7 @@ export class FileLeaveAbsentComponent implements OnInit {
 
   declined_ended(){
 
-   const  [{id,userName,password,accessType,fname,mname,lname,email,number,position,department,attendance,image}] = Object.values(this.user_info_update)
+   const  [{id,userName,password,accessType,fname,mname,lname,email,number,position,department,attendance,image,date_join}] = Object.values(this.user_info_update)
    console.log('apply id',id,userName,password,accessType,fname,mname,lname,email,number,position,department,attendance)
 
     // this.date_from = this.datepipe.transform((this.validateForm.value.date_from), 'MMMM d, y');
@@ -124,6 +125,7 @@ export class FileLeaveAbsentComponent implements OnInit {
      accessType: accessType,
      id:id,
      image:image,
+     date_join:date_join,
      apply:{
        type:'',
        date_to:'',
@@ -312,12 +314,14 @@ interface userInfo{
   department: string;
   attendance: string;
   image:string;
+  date_join:string;
   apply:{
     type:string;
     date_to:string;
     date_from:string;
     reason:string;
     approval:string;
+    date_approval:string;
   }
 
 }
@@ -337,12 +341,14 @@ interface userInfo_update{
   department: string;
   attendance: string;
   image:string;
+  date_join:string;
   apply:{
     type:string;
     date_to:string;
     date_from:string;
     reason:string;
     approval:string;
+    date_approval:string;
   }
 
 }

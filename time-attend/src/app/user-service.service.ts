@@ -8,6 +8,7 @@ export class UserServiceService {
   message!: any;
   data_data: any[] = [];
 image_data!:any;
+username!: string
 
 employee_details: Employeedetails[] = [];
 
@@ -23,6 +24,10 @@ employee_details: Employeedetails[] = [];
   setImage(image: any) {
     this.image_data = image;
   }
+  setUserName(data: any) {
+    console.log(data,"datdatdatda");
+    this.username = data;
+    }
   getImage(){
     return this.image_data
   }
@@ -33,6 +38,11 @@ employee_details: Employeedetails[] = [];
     console.log(data,"datdatdatda");
     this.employee_details.push(data);
   }
+
+
+  getUserName() {
+    return this.username;
+   }
 }
 
 interface Employeedetails{
@@ -49,6 +59,7 @@ interface Employeedetails{
   department: string;
   attendance: string;
   image:string;
+  date_join:string;
   apply:{
     type:string;
     date_to:string;

@@ -1,3 +1,4 @@
+import { EmployeeDetailsComponent } from './../employee-details/employee-details.component';
 import { Component, OnInit  } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import { CrudHttpService } from '../crud-http-service.service';
@@ -9,6 +10,9 @@ import 'jspdf-autotable';
 import { Papa } from 'ngx-papaparse'
 import * as XLSX from 'xlsx';
 import { saveAs } from 'file-saver';
+import { UserServiceService } from '../user-service.service';
+import { DatePipe } from '@angular/common';
+
 @Component({
   selector: 'app-apply-list',
   templateUrl: './apply-list.component.html',
@@ -18,7 +22,7 @@ export class ApplyListComponent  implements  OnInit{
   size: NzButtonSize = 'large';
   searchValue = '';
   visible = false;
-
+  date:any;
 
   isCollapsed = true;
   editCache: { [key: number]: { edit: boolean; data: applyrecords } } = {};
@@ -32,6 +36,8 @@ export class ApplyListComponent  implements  OnInit{
   approved_list : approvedlist[]=[];
   pending_list : pendinglist[]=[];
   declined_list : declinedlist[]=[];
+  dateEx: any;
+  timeEx: any;
 
 //export table
 
@@ -135,66 +141,66 @@ exportTableToExcel():void {
 
 
 
-generateXLSX() {
-  // Get the table element
-  const table = document.getElementById('userList_sheet');
+// generateXLSX() {
+//   // Get the table element
+//   const table = document.getElementById('userList_sheet');
 
-  // Get all rows from table
-  const rows = table!.querySelectorAll('tr');
+//   // Get all rows from table
+//   const rows = table!.querySelectorAll('tr');
   // rows.forEach(cell => {
-  //   // cell.style.color = 'red';
+    // cell.style.color = 'red';
   //   cell.style.backgroundColor = 'rgb(197, 255, 205)';
   // });
 
-  // Set the table headers
-  // const title =['Employee List']
-  const headers = ['No.','FIRST NAME','MIDDLE NAME','LAST NAME', 'POSITION', 'DEPARTMENT', 'APPLY TYPE', 'DATE TO', 'DATE FROM','REASON','APPROVAL','DATE OF APPROVAL','DATE ACCEPTED'];
+//   // Set the table headers
+//   // const title =['Employee List']
+//   const headers = ['No.','FIRST NAME','MIDDLE NAME','LAST NAME', 'POSITION', 'DEPARTMENT', 'APPLY TYPE', 'DATE TO', 'DATE FROM','REASON','APPROVAL','DATE OF APPROVAL','DATE ACCEPTED'];
 
-  // Create a new array to hold the table data
-  const data = [];
-
-
-  // rows[0].setAttribute('style','color:red;');
-
-  // Loop through each row and extract the cell data
-  for (let i = 1; i < rows.length; i++) {
-    const row = [];
-    const cells = rows[i].querySelectorAll('td');
-    for (let j = 0; j < cells.length; j++) {
-      row.push(cells[j].textContent);
-    }
-    data.push(row);
-  }
+//   // Create a new array to hold the table data
+//   const data = [];
 
 
+//   // rows[0].setAttribute('style','color:red;');
 
- const sanitizedData = data.map(row => row.map(val => val === null ? '' : val));
+//   // Loop through each row and extract the cell data
+//   for (let i = 1; i < rows.length; i++) {
+//     const row = [];
+//     const cells = rows[i].querySelectorAll('td');
+//     for (let j = 0; j < cells.length; j++) {
+//       row.push(cells[j].textContent);
+//     }
+//     data.push(row);
+//   }
 
 
-  const csvString = this.papa.unparse(
 
-    {
+//  const sanitizedData = data.map(row => row.map(val => val === null ? '' : val));
 
-    fields: headers,
-    data: sanitizedData,
 
-  });
+//   const csvString = this.papa.unparse(
 
-  // Create a new blob with the CSV string and set the content type to CSV
-  const blob = new Blob([csvString], {type: 'application/vnd.ms-excel'});
+//     {
 
-  // Create a link element to download the CSV file
-  const link = document.createElement('a');
-  link.href = URL.createObjectURL(blob);
-  link.download = 'Leave Record.xls';
-  document.body.appendChild(link);
+//     fields: headers,
+//     data: sanitizedData,
 
-  // Click the link element to download the CSV file
-  link.click();
+//   });
 
-  // Remove the link element from the DOM
-  document.body.removeChild(link);
-}
+//   // Create a new blob with the CSV string and set the content type to CSV
+//   const blob = new Blob([csvString], {type: 'application/vnd.ms-excel'});
+
+//   // Create a link element to download the CSV file
+//   const link = document.createElement('a');
+//   link.href = URL.createObjectURL(blob);
+//   link.download = 'Leave Record.xls';
+//   document.body.appendChild(link);
+
+//   // Click the link element to download the CSV file
+//   link.click();
+
+//   // Remove the link element from the DOM
+//   document.body.removeChild(link);
+// }
 
 
 
@@ -215,9 +221,8 @@ generateCSV() {
 
   // Loop through each row and extract the cell data
   for (let i = 1; i < rows.length; i++) {
-    const row = [];
-    rows[0].setAttribute('style', 'color: red;');
-    const cells = rows[i].querySelectorAll('td');
+   const row = [];
+   const cells = rows[i].querySelectorAll('td');
     for (let j = 0; j < cells.length; j++) {
       row.push(cells[j].textContent);
     }
@@ -225,22 +230,55 @@ generateCSV() {
   }
 
 
+
+
+
   const sanitizedData = data.map(row => row.map(val => val === null ? '' : val));
 
 
 
   // Convert the data array to a CSV string using Papa Parse
+
   const csvString = this.papa.unparse(
 
-    {
+
+
+  {
 
     fields: headers,
     data: sanitizedData,
 
+    }
+
+
+
+  );
+  this.dateEx =this.datepipe.transform((new Date), 'MMMM d, y');
+  this.timeEx =this.datepipe.transform((new Date), 'hh:mm a');
+
+  var export_date = this.papa.unparse({
+    "fields": ["Export Date and Time : ",this.dateEx ,this.timeEx],
+    "data": [
+
+    ]
+  });
+
+  var title = this.papa.unparse({
+    "fields": ["Apply Leave Record List"],
+    "data": [
+
+    ]
+  });
+
+  var admin_name = this.papa.unparse({
+    "fields": ["Generated by : ", this.user.getUserName()],
+    "data": [
+
+    ]
   });
 
   // Create a new blob with the CSV string and set the content type to CSV
-  const blob = new Blob([csvString], {type: 'text/csv'});
+  const blob = new Blob([export_date,'\n',title,'\n',csvString,'\n\n\n',admin_name], {type: 'text/csv'});
 
   // Create a link element to download the CSV file
   const link = document.createElement('a');
@@ -258,8 +296,13 @@ generateCSV() {
 
 
 generatePDF() {
+
+
+
+  // Create a new jsPDF document with landscape orientation and millimeters as units
   const doc = new jsPDF('l', 'mm', [330, 210]);
 
+  // Add a title to the document
   doc.text("Employee Leave Record",10,10)
   // Get the table element
   const table = document.getElementById('userList_sheet');
@@ -277,30 +320,54 @@ generatePDF() {
   for (let i = 1; i < rows.length; i++) {
     const row = [];
     const cells = rows[i].querySelectorAll('td');
-
     for (let j = 0; j < cells.length; j++) {
       row.push(cells[j].textContent);
     }
-
     data.push(row);
   }
 
+
+
   // Set the table width and column widths
   const tableWidth = 300;
-  const columnWidths = [60, 30, 90];
+  const columnWidths = [10, 30, 30, 30, 25, 25, 40, 25, 25, 30, 20, 25];
 
   // Calculate the table height based on the number of rows
   const tableHeight = data.length * 10;
 
   // Add the table to the PDF using the autoTable plugin
   (doc as any).autoTable({
-    title: 'data',
     head: [headers],
     body: data,
     startY: 20,
     tableWidth: tableWidth,
     columnWidth: columnWidths,
     height: tableHeight
+  });
+
+  const table2Data = [
+    []
+
+  ];
+  this.dateEx =this.datepipe.transform((new Date), 'MMMM d, y');
+  this.timeEx =this.datepipe.transform((new Date), 'hh:mm a');
+
+  const headers2 = ['Generated by :', this.user.getUserName()];
+  const date = ["Export Date and Time : ",this.dateEx ,this.timeEx];
+
+
+  const tableWidth2 = 100;
+  const columnWidths2 = [20, 20, 20];
+  const tableHeight2 = table2Data.length * 10;
+
+
+  (doc as any).autoTable({
+    head: '',
+    body: [headers2,date],
+    startY: tableHeight + 30,
+    tableWidth: tableWidth2,
+    columnWidth: columnWidths2,
+    height: tableHeight2
   });
 
   // Save the PDF
@@ -453,7 +520,7 @@ generatePDF() {
 
   }
 
-  constructor(private papa:Papa,private notification:NzNotificationService,private _http:HttpClient, private crudHttpService: CrudHttpService, private router:Router) {}
+  constructor(private datepipe: DatePipe,private user: UserServiceService,private papa:Papa,private notification:NzNotificationService,private _http:HttpClient, private crudHttpService: CrudHttpService, private router:Router) {}
 
 
 

@@ -4,6 +4,9 @@ import { CrudHttpService } from '../crud-http-service.service';
 import { NzButtonSize } from 'ng-zorro-antd/button';
 import { Router } from '@angular/router';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
+import jsPDF from 'jspdf';
+import 'jspdf-autotable';
+
 @Component({
   selector: 'app-user-list',
   templateUrl: './user-list.component.html',
@@ -41,6 +44,61 @@ exportTableToExcel():void {
 }
 
 
+generatePDF() {
+
+  const doc = new jsPDF('l', 'mm', [330, 210]);
+
+  doc.text("Admin List",10,10)
+  // Get the table element
+  // const table = document.getElementById('employeeList_sheet');
+const table = document.getElementById('userList_sheet');
+
+  // Get all rows from table
+
+  const rows = table!.querySelectorAll('tr');
+
+  // Set the table headers
+  const headers = ['ID', 'Username', 'Password', 'Email','Employee Name','Access Type'];
+
+  // Create a new array to hold the table data
+  const data = [];
+
+
+  // Loop through each row and extract the cell data
+  for (let i = 1; i < rows.length; i++) {
+
+    const row = [];
+    const cells = rows[i].querySelectorAll('td');
+
+
+    for (let j = 0; j < cells.length; j++) {
+      row.push(cells[j].textContent);
+    }
+
+    data.push(row);
+  }
+
+  // Set the table width and column widths
+  const tableWidth = 300;
+  const columnWidths = [60, 60, 90];
+
+  // Calculate the table height based on the number of rows
+  const tableHeight = data.length * 10;
+
+  // Add the table to the PDF using the autoTable plugin
+  (doc as any).autoTable({
+    title: 'data',
+    head: [headers],
+    body: data,
+    startY: 20,
+    tableWidth: tableWidth,
+    columnWidth: columnWidths,
+    height: tableHeight
+  });
+
+  // Save the PDF
+  doc.save('Admin List.pdf');
+}
 
   //notification
   deleteNotif(): void {
@@ -180,7 +238,7 @@ exportTableToExcel():void {
   search(): void {
 
     this.visible = false;
-    this.admin_list_final = this.admin_list_final.filter((item: adminListFinal) => item.userName.indexOf(this.searchValue) !== -1);
+    this.admin_list = this.admin_list.filter((item: adminList) => item.userName.indexOf(this.searchValue) !== -1);
     console.log(this.user_list);
     this.searchValue = '';
 

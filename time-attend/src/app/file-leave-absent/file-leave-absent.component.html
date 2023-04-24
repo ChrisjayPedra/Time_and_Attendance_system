@@ -20,8 +20,8 @@
       <nz-form-label [nzSpan]="7" >Type</nz-form-label>
       <nz-form-control [nzSpan]="12" >
         <nz-radio-group formControlName="applyType"[(ngModel)]="radioValue">
-          <label nz-radio nzValue="leave">Vacation leave</label>
-          <label nz-radio nzValue="Absent">Sick leave</label>
+          <label nz-radio nzValue="vacation leave">Vacation leave</label>
+          <label nz-radio nzValue="sick leave">Sick leave</label>
         </nz-radio-group>
       </nz-form-control>
     </nz-form-item>
@@ -65,7 +65,7 @@
 
   <nz-result  *ngIf="open_result_pending" [nzIcon]="'smile-twotone'" nzTitle="Apply form currently pending">
     <div nz-result-extra>
-      <button nz-button nzType="primary">back to dashboard</button>
+      <button [routerLink]="['/time_in_out/in_out']" nz-button nzType="primary">back to dashboard</button>
 
     </div>
   </nz-result>

@@ -234,9 +234,18 @@ attendance_present(){
     this.buttonIn = true;
     this.buttonOut = false;
     this.status = '';
-    this.attaendanceCount();
+    // this.attaendanceCount();
+
     // disable the button after time-in
     });
+    console.log('prog-flow');
+    let emp_status={
+      attendance:'active'
+    }
+    this.crudHttpService.patchEmployee(id,emp_status).subscribe((Response)=>{
+      // this.attaendanceCount();
+      console.log(Response,'result updated');
+        });
 
 }
 
@@ -299,6 +308,8 @@ attendance_present(){
             time_out: this.time,
             }
       }
+
+
 
           this.crudHttpService.updateattendance(id,employee_attendance).subscribe((Response)=>{
               console.log('submit',employee_attendance);
@@ -438,6 +449,7 @@ interface userInfo{
       department: string;
       attendance: string;
       image:string;
+      date_join:string;
       apply:{
         type:string;
         date_to:string;
@@ -464,6 +476,7 @@ interface userInfofinal{
   department: string;
   attendance: string;
   image:string;
+  date_join:string;
   apply:{
     type:string;
     date_to:string;
@@ -547,6 +560,7 @@ interface employeeList{
   department: string;
   attendance: string;
   image:string;
+  date_join:string;
   apply:{
     type:string;
     date_to:string;
@@ -573,6 +587,7 @@ interface employeeListfinal{
   department: string;
   attendance: string;
   image:string;
+  date_join:string;
   apply:{
     type:string;
     date_to:string;
@@ -599,6 +614,7 @@ interface cal_approved{
   department: string;
   attendance: string;
   image:string;
+  date_join:string;
   apply:{
     type:string;
     date_to:string;
@@ -626,6 +642,7 @@ interface approval_list{
   department: string;
   attendance: string;
   image:string;
+  date_join:string;
   apply:{
     type:string;
     date_to:string;

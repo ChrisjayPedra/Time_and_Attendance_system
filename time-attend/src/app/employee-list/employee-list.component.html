@@ -1,20 +1,18 @@
 
 <nz-content style="background: transparent">
 
-
-
-  <nz-page-header>
+  <nz-page-header style="margin:0% ; padding:0%">
     <nz-page-header-title style="font-size:1.3vw">Employee List</nz-page-header-title>
     <nz-page-header-extra>
 
-      <nz-space style="margin: 0 32px">
-        <button   *nzSpaceItem nz-button nzType="primary" [nzSize]="size" nzShape="round" [routerLink]="['/home/employeelist/addemployee']">
+      <nz-space style="margin: 0 10px">
+        <button   *nzSpaceItem nz-button nzType="primary"  nzShape="round" [routerLink]="['/home/employeelist/addemployee']">
           <span nz-icon   nz-Align="center" nz-icon nzType="user-add" nzTheme="outline"></span>
          Add employee
         </button>
       </nz-space>
       <nz-space >
-        <button style="background-color:rgb(209, 67, 41); border-color:rgb(209, 67, 41);" *nzSpaceItem (click)="generatePDF()" nz-button nz-Align="right" nzType="primary" [nzSize]="size" nzShape="round">
+        <button style="background-color:rgb(209, 67, 41); border-color:rgb(209, 67, 41);" *nzSpaceItem (click)="generatePDF()" nz-button nz-Align="right" nzType="primary"  nzShape="round">
           <span nz-icon  nz-Align="center" nz-icon nzType="file-excel" nzTheme="outline"></span>
 
           Export PDF
@@ -22,23 +20,26 @@
 
       </nz-space >
 
-      <nz-space style="margin: 0 32px">
-        <button style="background-color:rgb(139, 255, 187); border-color:rgb(139, 255, 187);" *nzSpaceItem (click)="generateCSV()" nz-button nz-Align="right" nzType="primary" [nzSize]="size" nzShape="round">
+      <nz-space style="margin: 0 10px">
+        <button style="background-color:rgb(139, 255, 187); border-color:rgb(139, 255, 187);" *nzSpaceItem (click)="generateCSV()" nz-button nz-Align="right" nzType="primary"  nzShape="round">
           <span nz-icon  nz-Align="center" nz-icon nzType="file-excel" nzTheme="outline"></span>
 
           Export CSV
         </button>
       </nz-space >
 
-      <nz-space >
-        <button style="background-color:rgb(0, 224, 0); border-color:rgb(0, 224, 0);" *nzSpaceItem (click)="exportTableToExcel()" nz-button nz-Align="right" nzType="primary" [nzSize]="size" nzShape="round">
+      <!-- <nz-space >
+        <button style="background-color:rgb(0, 224, 0); border-color:rgb(0, 224, 0);" *nzSpaceItem (click)="exportTableToExcel()" nz-button nz-Align="right" nzType="primary"  nzShape="round">
           <span nz-icon  nz-Align="center" nz-icon nzType="file-excel" nzTheme="outline"></span>
           Export Data
         </button>
-      </nz-space>
+      </nz-space> -->
 
     </nz-page-header-extra>
-    <nz-page-header-content>
+    <nz-page-header-content style="margin-left: 40px;">
+        <nz-row nzType="flex">
+          <nz-statistic nzTitle="Total Current Employee" nzValue="{{employee_count}}"></nz-statistic>
+        </nz-row>
 
     </nz-page-header-content>
 
@@ -51,6 +52,8 @@
                                     <tr style="height: 20px">
 
                                       <th nzAlign="center" nzWidth="4%" >Profile</th>
+                                      <th nzAlign="center" nzWidth="6%">Date Employment</th>
+
                                       <th  nzAlign="center" nzWidth="6%" nzCustomFilter> First name
                                         <nz-filter-trigger  nzAlign="right" [(nzVisible)]="visible" [nzActive]="searchValue.length > 0" [nzDropdownMenu]="menu">
                                           <span nz-icon nzType="search"></span>
@@ -64,10 +67,11 @@
                                       <th nzAlign="center" nzWidth="8%">Number</th>
                                       <th nzAlign="center" nzWidth="6%">Position</th>
                                       <th nzAlign="center" nzWidth="6%">Department</th>
-                                      <th nzAlign="center" nzWidth="5%">Status</th>
-                                      <th nzAlign="center" nzWidth="8%">Role</th>
+                                      <th nzAlign="center" nzWidth="8%">Status</th>
+                                      <th nzAlign="center" nzWidth="6%">Role</th>
                                       <th nzAlign="center" nzWidth="6%">Leave</th>
-                                      <th nzAlign="center" nzWidth="10%">Action</th>
+
+                                      <th nzAlign="center" nzWidth="7%">Action</th>
 
                                     </tr>
                                   </thead>
@@ -80,6 +84,7 @@
                                         <td nzAlign="center">
                                         <a (click)="getemployee(data.id)"> <nz-avatar nzIcon="user" nzSrc="{{data.image}}"></nz-avatar></a>
                                         </td>
+                                        <td nzAlign="center">{{ data.date_join}}</td>
 
                                         <ng-container *ngIf="!editCache[data.id].edit; else editTemplate">
 
@@ -125,16 +130,29 @@
                                         <td><input type="text" nz-input [(ngModel)]="editCache[data.id].data.number" /></td>
                                         <td><input type="text" nz-input [(ngModel)]="editCache[data.id].data.position" /></td>
                                         <td><input type="text" nz-input [(ngModel)]="editCache[data.id].data.department" /></td>
+                                        <!-- <td><input type="text" nz-input [(ngModel)]="editCache[data.id].data.date_join" /></td> -->
+
+
                                         <td nzAlign="center">
 
-                                          <!-- attendance -->
+
+
+                                          <nz-select nzPlaceHolder="Select Status" [(ngModel)]="editCache[data.id].data.attendance">
+                                            <nz-option nzValue="active" nzLabel="Active"></nz-option>
+                                            <nz-option nzValue="leave" nzLabel="Leave"></nz-option>
+                                          </nz-select>
+
+                                        </td>
+
+                                        <!-- <td nzAlign="center">
+
                                           <nz-select nzPlaceHolder="Select an Access type" [(ngModel)]="editCache[data.id].data.attendance">
                                             <nz-option nzValue="active" nzLabel="Active"></nz-option>
                                             <nz-option nzValue="leave" nzLabel="Leave"></nz-option>
                                           </nz-select>
-                                          <!-- attendance -->
 
-                                        </td>
+
+                                        </td> -->
 
 
 

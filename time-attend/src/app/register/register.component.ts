@@ -7,7 +7,7 @@ import { Observable, Observer } from 'rxjs';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { CrudHttpService } from '../crud-http-service.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
-
+import { DatePipe } from '@angular/common';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -26,6 +26,8 @@ export class RegisterComponent {
 
 
   maxFileSize = 100000; // 1kB
+  dateEx: any;
+
 
  addemployeeNotif(): void {
     this.notification.create(
@@ -106,6 +108,8 @@ uploadImage(dataUrl: string) {
   if (this.imagedata == null || this.imagedata.length == 0 || this.imagedata =='') {
     this.imagedata = '';
   }
+  this.dateEx =this.datepipe.transform((new Date), 'MMMM d, y');
+
 
     let employee = {
       userName: this.validateForm.value.userName,
@@ -120,6 +124,7 @@ uploadImage(dataUrl: string) {
       attendance:'new Employee',
       accessType:'employee',
       image:this.imagedata,
+      date_join:this.dateEx,
       apply:{
         type:'',
         date_to:'',
@@ -202,7 +207,7 @@ uploadImage(dataUrl: string) {
 
 
 
-  constructor(private message:NzMessageService ,private notification: NzNotificationService, private crudHttpService: CrudHttpService, private fb: FormBuilder, private _http:HttpClient, private router:Router) {
+  constructor(private datepipe:DatePipe,private message:NzMessageService ,private notification: NzNotificationService, private crudHttpService: CrudHttpService, private fb: FormBuilder, private _http:HttpClient, private router:Router) {
 
     this.validateForm = this.fb.group({
       userName: ['', [Validators.required], [this.userNameAsyncValidator]],

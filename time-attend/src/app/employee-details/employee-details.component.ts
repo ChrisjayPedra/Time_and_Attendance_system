@@ -45,6 +45,7 @@ interface Employeedetails{
   department: string;
   attendance: string;
   image:string;
+  date_join:string;
   apply:{
     type:string;
     date_to:string;

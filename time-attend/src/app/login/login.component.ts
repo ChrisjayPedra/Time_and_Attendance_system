@@ -24,6 +24,7 @@ LoginComponent {
     this._http.get<any>("http://localhost:3000/employee")
     .subscribe(res=>{
       const admin = res.find((a:any)=>{
+        this.User.setUserName(a.userName);
         return a.userName === this.validateForm.value.userName && a.password === this.validateForm.value.password && a.accessType === 'admin'
 
       });

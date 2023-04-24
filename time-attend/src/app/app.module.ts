@@ -11,6 +11,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './login/login.component';
 import { DatePipe } from '@angular/common';
+import { NgxCsvParserModule } from 'ngx-csv-parser';
+
 
 import { NzAffixModule } from 'ng-zorro-antd/affix';
 import { NzAlertModule } from 'ng-zorro-antd/alert';
@@ -99,6 +101,7 @@ import { RegisterComponent } from './register/register.component';
 import { AddattendanceComponent } from './addattendance/addattendance.component';
 import { EmSettingsComponent } from './em-settings/em-settings.component';
 import { EmployeeDetailsComponent } from './employee-details/employee-details.component';
+import { ApplyListComponent } from './apply-list/apply-list.component';
 
 registerLocaleData(en);
 
@@ -121,6 +124,7 @@ registerLocaleData(en);
 
     EmSettingsComponent,
      EmployeeDetailsComponent,
+     ApplyListComponent,
 
   ],
   imports: [
@@ -131,7 +135,7 @@ registerLocaleData(en);
     HttpClientModule,
     BrowserAnimationsModule,
 
-
+    NgxCsvParserModule,
     NzAffixModule,
     NzAlertModule,
     NzAnchorModule,

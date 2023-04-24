@@ -11,6 +11,8 @@ export class CrudHttpService {
   apiUrlemployee: string = 'http://localhost:3000/employee';
   apiUrlattendace: string = 'http://localhost:3000/individual_attendance';
   apiUrlevents: string = 'http://localhost:3000/events';
+  apiUrlapplyrecords: string = 'http://localhost:3000/apply_leave_records';
+
 
 
   headers = new HttpHeaders().set('Content-type', 'application/json');
@@ -18,6 +20,34 @@ export class CrudHttpService {
 
 
   constructor(private http:HttpClient) { }
+
+// applyleave_records
+
+ recordlist():  Observable<any>  {
+    return this.http.get(this.apiUrlapplyrecords);
+  }
+
+  addrecord(data:any): Observable<any> {
+
+    let url = this.apiUrlapplyrecords;
+
+    return this.http.post(url, data).pipe( catchError(this.handleError) );
+  }
+
+  updaterecord(id:any, data:any){
+
+    let url = `${this.apiUrlapplyrecords}/${id}`;
+
+    return this.http.put(url, data).pipe( catchError(this.handleError))
+
+  }
+  deleterecord(id:any): Observable<any>{
+
+    let url = `${this.apiUrlapplyrecords}/${id}`;
+
+    return this.http.delete(url).pipe( catchError(this.handleError))
+
+  }
 
 
 //user list

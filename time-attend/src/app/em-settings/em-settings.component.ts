@@ -84,7 +84,7 @@ uploadImage(dataUrl: string) {
 
 
 submit(){
-  const  [{id,userName,password,accessType,fname,mname,lname,email,number,position,department,image,attendance,apply:{type,date_to,date_from,reason,approval}}] = Object.values(this.user_info_final)
+  const  [{id,userName,password,accessType,fname,mname,lname,email,number,position,department,image,attendance,date_join,apply:{type,date_to,date_from,reason,approval}}] = Object.values(this.user_info_final)
   console.log('userinfor',this.user_info_final)
 
   if (this.imagedata == null || this.imagedata.length == 0 || this.imagedata =='') {
@@ -105,6 +105,7 @@ submit(){
       attendance:attendance,
       accessType:accessType,
       image:this.imagedata,
+      date_join:date_join,
       apply:{
         type:type,
         date_to:date_to,
@@ -266,6 +267,7 @@ interface userInfo{
   department: string;
   attendance: string;
   image:string;
+  date_join:string;
   apply:{
     type:string;
     date_to:string;
@@ -292,6 +294,7 @@ interface userInfo_final{
   department: string;
   attendance: string;
   image:string;
+  date_join:string;
   apply:{
     type:string;
     date_to:string;

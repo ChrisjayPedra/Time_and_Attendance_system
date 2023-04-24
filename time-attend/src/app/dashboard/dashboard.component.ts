@@ -9,6 +9,9 @@ import { NzModalService } from 'ng-zorro-antd/modal';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms'
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
+import lottie from 'lottie-web';
+import { defineElement } from 'lord-icon-element';
+
 import {
   startOfDay,
   endOfDay,
@@ -54,9 +57,11 @@ export class DashboardComponent {
   employee_list : employeeList[]=[];
   employee_list_final : employeeListfinal[]=[];
   approval_list : approval_list[]=[];
+  apply_records : applyrecords[]=[];
   calapproved : cal_approved[]=[];
   eventlist : event_list[]=[];
   currentTimee: Date | undefined;
+  decidate:any;
 pending_count!:number;
 caldate:any;
 calmonth: any;
@@ -243,7 +248,7 @@ handleCancell(): void {
   submit(idd: number): void {
 
     const modal = this.modal.success({
-      nzTitle: 'Leave Approve',
+      nzTitle: 'Leave Decided',
     });
 
 
@@ -258,8 +263,30 @@ handleCancell(): void {
         }
     })
 
-    const  [{id,userName,password,accessType,fname,mname,lname,email,number,position,department,attendance,apply:{approval,date_to,date_from,reason,type}}] = Object.values(this.approval_list)
+    const  [{id,userName,password,accessType,fname,mname,lname,email,number,position,department,attendance,apply:{approval,date_to,date_from,reason,type,date_approval}}] = Object.values(this.approval_list)
     console.log('apply id',id,userName,password,accessType,fname,mname,lname,email,number,position,department,attendance)
+      this.decidate = this.datepipe.transform((new Date), 'MMMM d, y');
+    const applyrecords ={
+      id:id,
+      fname: fname,
+      mname: mname,
+      lname: lname,
+      position: position,
+      department: department,
+      apply:{
+        type:type,
+        date_to:date_to,
+        date_from:date_from,
+        reason:reason,
+        approval:approval,
+        date_accepted:this.decidate,
+        date_approval:date_approval,
+  }
+    }
+    console.log(applyrecords,'apply records');
+    this.crudHttpService.addrecord(applyrecords).subscribe((Response)=>{
+      console.log(Response,'records added');
+    });
 
     const approvall = {
         apply:{
@@ -272,6 +299,7 @@ handleCancell(): void {
     }
     this.crudHttpService.patchEmployee(idd,approvall).subscribe((Response)=>{
           this.approval_list.pop();
+          console.log(Response,'result updated');
     });
 
 
@@ -516,12 +544,15 @@ interface employeeList{
   department: string;
   attendance: string;
   image:string;
+  date_join:string;
   apply:{
     type:string;
     date_to:string;
     date_from:string;
     reason:string;
     approval:string;
+    date_approval:string;
+
   }
 
 }
@@ -541,12 +572,15 @@ interface employeeListfinal{
   position: string;
   department: string;
   attendance: string;
+  date_join:string;
   apply:{
     type:string;
     date_to:string;
     date_from:string;
     reason:string;
     approval:string;
+    date_approval:string;
+
   }
 
 }
@@ -567,12 +601,15 @@ interface cal_approved{
   department: string;
   attendance: string;
   image: string;
+  date_join:string;
   apply:{
     type:string;
     date_to:string;
     date_from:string;
     reason:string;
     approval:string;
+    date_approval:string;
+
   }
 
 }
@@ -593,16 +630,37 @@ interface approval_list{
   position: string;
   department: string;
   attendance: string;
+  date_join:string;
   apply:{
     type:string;
     date_to:string;
     date_from:string;
     reason:string;
     approval:string;
+    date_approval:string;
+
   }
 
 }
 
+
+interface applyrecords{
+  id:number;
+  fname: string;
+  mname: string;
+  lname: string;
+  position: string;
+  department: string;
+  apply:{
+    type:string;
+    date_to:string;
+    date_from:string;
+    reason:string;
+    approval:string;
+    date_approval:string;
+
+  }
+}
 
 
 
@@ -620,6 +678,8 @@ interface AttendanceList {
     department: string;
     time_in:string;
     time_out:string;
+    date_approval:string;
+
   }
 
 

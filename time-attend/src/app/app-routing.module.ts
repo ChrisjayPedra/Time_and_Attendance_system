@@ -15,11 +15,14 @@ import { RegisterComponent } from './register/register.component';
 import { AddattendanceComponent } from './addattendance/addattendance.component';
 import { EmSettingsComponent } from './em-settings/em-settings.component';
 import { EmployeeDetailsComponent } from './employee-details/employee-details.component';
+import { ApplyListComponent } from './apply-list/apply-list.component';
 const routes: Routes = [
   {path: '', component: LoginComponent},
   {path: 'home', component:HomeComponent,
   children:[
+
              {path: 'dashboard', component:DashboardComponent},
+             {path: 'applyrecord', component:ApplyListComponent},
              {path: 'emdetails', component:EmployeeDetailsComponent},
              {path: 'attendance', component:AttendanceComponent,
               children: [{path: 'addatendance', component:AddattendanceComponent}]},
@@ -27,6 +30,7 @@ const routes: Routes = [
               children:[{path: 'adduser', component:AdduserComponent}]},
              {path: 'employeelist', component:EmployeeListComponent,
               children:[{path: 'addemployee', component:AddemployeeComponent}]}]},
+
 
 
   {path: 'time_in_out', component: TimeInOutComponent,

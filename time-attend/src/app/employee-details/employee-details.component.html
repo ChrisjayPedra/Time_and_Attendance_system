@@ -104,12 +104,21 @@
                           <nz-form-label>
                           <span class="label">password</span>
                           </nz-form-label>
-                           <h2>********</h2>
+                           <h2>{{item.password}}</h2>
                       </nz-form-item>
                     </form>
                   </div>
                 </div>
-
+                <div nz-col class="emp" >
+                  <form>
+                    <nz-form-item>
+                        <nz-form-label>
+                        <span class="label">Date of Employment</span>
+                        </nz-form-label>
+                         <h2><u>{{item.date_join}}</u></h2>
+                    </nz-form-item>
+                  </form>
+                </div>
               </nz-card>
               <nz-card  class="card1" style=" background-color: rgba(255,255,255); text-align:center;" nzTitle="Employee Position">
               <div nz-row >
