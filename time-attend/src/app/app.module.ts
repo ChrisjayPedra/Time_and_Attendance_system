@@ -122,7 +122,7 @@ registerLocaleData(en);
     RegisterComponent,
     AddattendanceComponent,
 
-    EmSettingsComponent,
+     EmSettingsComponent,
      EmployeeDetailsComponent,
      ApplyListComponent,
 
