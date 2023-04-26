@@ -38,7 +38,8 @@
     </nz-page-header-extra>
     <nz-page-header-content style="margin-left: 40px;">
         <nz-row nzType="flex">
-          <nz-statistic nzTitle="Total Current Employee" nzValue="{{employee_count}}"></nz-statistic>
+          <nz-statistic style="margin: 0 10px" nzTitle="Total Current Employee" nzValue="{{employee_count}}"></nz-statistic>
+          <nz-statistic nzTitle="New Employee" nzValue="{{new_employee_count}}"></nz-statistic>
         </nz-row>
 
     </nz-page-header-content>
@@ -46,7 +47,7 @@
   </nz-page-header>
 
   <div class="inner-content">
-                                 <nz-table  [nzScroll]="{ x: '1200px', y: '700px' }" #smallTable nzSize="small"  id="employeeList_sheet" #editRowTable nzBordered  [nzData]="employee_list"  nzFrontPagination="false" [nzPageSize]="10">
+                                 <nz-table  [nzScroll]="{ x: '1200px', y: '690px' }" #smallTable nzSize="small"  id="employeeList_sheet" #editRowTable nzBordered  [nzData]="employee_list"  nzFrontPagination="false" [nzPageSize]="10">
 
                                   <thead >
                                     <tr style="height: 20px">

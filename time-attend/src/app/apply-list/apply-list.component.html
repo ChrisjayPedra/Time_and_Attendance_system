@@ -6,7 +6,7 @@
     <nz-page-header-extra>
 
       <nz-space style="margin: 0 10px">
-        <button style="background-color:rgb(209, 67, 41); border-color:rgb(209, 67, 41);" *nzSpaceItem (click)="generatePDF()" nz-button nz-Align="right" nzType="primary" [nzSize]="size" nzShape="round">
+        <button style="background-color:rgb(209, 67, 41); border-color:rgb(209, 67, 41);" *nzSpaceItem (click)="generatePDF()" nz-button nz-Align="right" nzType="primary"  nzShape="round">
           <span nz-icon nzType="file-pdf" nzTheme="outline"></span>
 
           Export PDF
@@ -14,7 +14,7 @@
       </nz-space>
 
       <nz-space >
-        <button style="background-color:rgb(139, 255, 187); border-color:rgb(139, 255, 187);" *nzSpaceItem (click)="generateCSV()" nz-button nz-Align="right" nzType="primary" [nzSize]="size" nzShape="round">
+        <button style="background-color:rgb(139, 255, 187); border-color:rgb(139, 255, 187);" *nzSpaceItem (click)="generateCSV()" nz-button nz-Align="right" nzType="primary"  nzShape="round">
           <span nz-icon  nz-Align="center" nz-icon nzType="file-excel" nzTheme="outline"></span>
 
           Export CSV
@@ -37,7 +37,7 @@
   </nz-page-header>
 
   <div class="inner-content">
-                                 <nz-table  nzFrontPagination="false" [nzScroll]="{ x: '1200px', y: '700px' }" #smallTable nzSize="middle" #editRowTable nzBordered id="userList_sheet"[nzData]="apply_records" [nzPageSize]="5">
+                                 <nz-table  nzFrontPagination="false" [nzScroll]="{ x: '1200px', y: '690px' }" #smallTable nzSize="middle" #editRowTable nzBordered id="userList_sheet"[nzData]="apply_records" [nzPageSize]="5">
                                   <thead >
                                     <tr style="height: 20px">
 

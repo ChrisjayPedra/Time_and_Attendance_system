@@ -57,7 +57,7 @@ export class FileLeaveAbsentComponent implements OnInit {
   submitForm(){
     console.log('asasasasas',Object.values(this.validateForm))
 
-     const  [{id,userName,password,accessType,fname,mname,lname,email,number,image,position,department,attendance}] = Object.values(this.user_info_update)
+     const  [{id,userName,password,accessType,fname,mname,lname,email,number,image,position,department,attendance,date_join}] = Object.values(this.user_info_update)
     console.log('apply id',id,userName,password,accessType,fname,mname,lname,email,number,position,department,attendance)
 
      this.date_from = this.datepipe.transform((this.validateForm.value.date_from), 'MMMM d, y');
@@ -75,8 +75,10 @@ export class FileLeaveAbsentComponent implements OnInit {
       password: password,
       attendance: attendance,
       accessType: accessType,
+      date_join:date_join,
       id:id,
       image:image,
+
       apply:{
         type:this.validateForm.value.applyType,
         date_to:this.date_to,

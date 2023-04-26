@@ -25,7 +25,7 @@ export class RegisterComponent {
   imagedata!: any;
 
 
-  maxFileSize = 100000; // 1kB
+  maxFileSize = 1000000; // 1kB
   dateEx: any;
 
 

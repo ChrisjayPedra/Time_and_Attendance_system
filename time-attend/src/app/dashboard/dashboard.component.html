@@ -8,7 +8,7 @@
       <nz-space>
 
         <button   class="button_change"  nzShape="round" (click)="addEvent()" nz-button nzType="primary" style="margin: 0 10px"><span nz-icon nzType="schedule" nzTheme="outline"></span>Add event</button>
-        <button   class="button_change"  nzShape="round" (click)="editEvent()" nz-button nzType="primary" style="margin: 0 10px"><span nz-icon nzType="calendar" nzTheme="outline"></span>Edit event</button>
+        <button   class="button_change"  nzShape="round" (click)="editEvent()" nz-button nzType="primary" style="margin: 0 10px"><span nz-icon nzType="calendar" nzTheme="outline"></span>View event list</button>
         <nz-badge [nzCount]="pending_count">
           <button class="button_change"  nzShape="round" (click)="open()" nz-button nzType="primary"><span nz-icon nzType="audit" nzTheme="outline"></span>Pending leave request</button>
 
@@ -31,89 +31,126 @@
 
   </nz-page-header>
 
-<ng-container style="height: 200px ; width: 1400px;">
+<ng-container >
 
-  <nz-calendar   [(ngModel)]="selectedDate" (ngModelChange)="onDateChange($event)" class="calendar"  nzHeight="600px" [nzFullscreen]="true" >
+  <nz-layout style="background: transparent; margin:0%">
 
-    <ul *nzDateCell="let date" class="events">
-        <div *ngFor="let item of present" >
-              <ng-container *ngIf="getMonthData(item.date,date)">
-                <ng-container *ngIf="getDateData(item.date,date)">
+    <nz-content>
+      <ng-container style="height: 200px ; width: 700px;">
+        <nz-calendar   [(ngModel)]="selectedDate" (ngModelChange)="onDateChange($event)" class="calendar"  nzHeight="600px" [nzFullscreen]="true" >
 
-                  <nz-tag [nzColor]="'green'"><span nz-icon nzType="user" nzTheme="outline"></span>Present<nz-badge [nzStatus]="'success'" [nzText]="item.attendees.fname"></nz-badge></nz-tag>
+          <ul *nzDateCell="let date" class="events">
+              <div *ngFor="let item of present" >
+                    <ng-container *ngIf="getMonthData(item.date,date)">
+                      <ng-container *ngIf="getDateData(item.date,date)">
 
+                        <nz-tag  [nzColor]="'green'"><span nz-icon nzType="user" nzTheme="outline"></span>Present<nz-badge [nzStatus]="'success'" [nzText]="item.attendees.fname"> </nz-badge></nz-tag>
+
+                      </ng-container>
+                    </ng-container>
+              </div>
+              <div *ngFor="let item of absent" >
+                <ng-container *ngIf="getMonthData(item.date,date)">
+                  <ng-container *ngIf="getDateData(item.date,date)">
+
+                    <nz-tag [nzColor]="'red'"><span nz-icon nzType="user" nzTheme="outline"></span>Absent<nz-badge [nzStatus]="'error'" [nzText]="item.attendees.fname"></nz-badge></nz-tag>
+
+                  </ng-container>
                 </ng-container>
+
+          </div>
+
+          <div *ngFor="let item of late" >
+            <ng-container *ngIf="getMonthData(item.date,date)">
+              <ng-container *ngIf="getDateData(item.date,date)">
+
+                <nz-tag [nzColor]="'yellow'"><span nz-icon nzType="user" nzTheme="outline"></span>Late<nz-badge [nzStatus]="'warning'" [nzText]="item.attendees.fname"></nz-badge></nz-tag>
+
               </ng-container>
-        </div>
-        <div *ngFor="let item of absent" >
-          <ng-container *ngIf="getMonthData(item.date,date)">
-            <ng-container *ngIf="getDateData(item.date,date)">
-
-              <nz-tag [nzColor]="'red'"><span nz-icon nzType="user" nzTheme="outline"></span>Absent<nz-badge [nzStatus]="'error'" [nzText]="item.attendees.fname"></nz-badge></nz-tag>
-
             </ng-container>
-          </ng-container>
 
-    </div>
+      </div>
 
-    <div *ngFor="let item of late" >
-      <ng-container *ngIf="getMonthData(item.date,date)">
-        <ng-container *ngIf="getDateData(item.date,date)">
+              <div *ngFor="let item of calapproved">
+                        <ng-container *ngIf="getMonthData(item.apply.date_from,date)">
+                          <ng-container *ngIf="getDateData(item.apply.date_from,date)">
+                            <ng-container *ngIf="item.apply.type === 'sick leave' ">
 
-          <nz-tag [nzColor]="'yellow'"><span nz-icon nzType="user" nzTheme="outline"></span>Late<nz-badge [nzStatus]="'warning'" [nzText]="item.attendees.fname"></nz-badge></nz-tag>
+                              <nz-tag [nzColor]="'red'"><span nz-icon nzType="home" nzTheme="outline"> </span> Start  of sick leave  <nz-badge [nzStatus]="'success'" [nzText]="item.fname"> <nz-avatar [nzSize]="15" nzIcon="user" nzSrc="{{item.image}}"></nz-avatar></nz-badge></nz-tag>
 
-        </ng-container>
-      </ng-container>
+                            </ng-container>
 
-</div>
+                            <ng-container *ngIf="item.apply.type === 'vacation leave' ">
 
-        <div *ngFor="let item of calapproved">
-                  <ng-container *ngIf="getMonthData(item.apply.date_from,date)">
-                    <ng-container *ngIf="getDateData(item.apply.date_from,date)">
-                      <ng-container *ngIf="item.apply.type === 'sick leave' ">
+                              <nz-tag [nzColor]="'magenta'"><span nz-icon nzType="home" nzTheme="outline"></span> Start  of Vacation leave  <nz-badge [nzStatus]="'success'" [nzText]="item.fname"> </nz-badge></nz-tag>
 
-                        <nz-tag [nzColor]="'red'"><span nz-icon nzType="home" nzTheme="outline"> </span> Start  of sick leave  <nz-badge [nzStatus]="'success'" [nzText]="item.fname"></nz-badge></nz-tag>
+                            </ng-container>
+                          </ng-container>
+                        </ng-container>
+                        <ng-container *ngIf="getMonthData(item.apply.date_to,date)">
+                          <ng-container *ngIf="getDateData(item.apply.date_to,date)">
+                            <ng-container *ngIf="item.apply.type === 'sick leave' ">
+                              <nz-tag [nzColor]="'red'"><span nz-icon nzType="home" nzTheme="outline"></span> End  of Sick leave  <nz-badge nzColor="#f50" [nzText]="item.fname"> <nz-avatar [nzSize]="15" nzIcon="user" nzSrc="{{item.image}}"></nz-avatar></nz-badge></nz-tag>
 
-                      </ng-container>
+                            </ng-container>
+                            <ng-container *ngIf="item.apply.type === 'vacation leave' ">
+                              <nz-tag [nzColor]="'purple'"><span nz-icon nzType="home" nzTheme="outline"></span> End  of Vacation leave  <nz-badge nzColor="#f50" [nzText]="item.fname"></nz-badge></nz-tag>
 
-                      <ng-container *ngIf="item.apply.type === 'vacation leave' ">
+                            </ng-container>
 
-                        <nz-tag [nzColor]="'magenta'"><span nz-icon nzType="home" nzTheme="outline"></span> Start  of Vacation leave  <nz-badge [nzStatus]="'success'" [nzText]="item.fname"></nz-badge></nz-tag>
+                          </ng-container>
+                        </ng-container>
 
-                      </ng-container>
-                    </ng-container>
-                  </ng-container>
-                  <ng-container *ngIf="getMonthData(item.apply.date_to,date)">
-                    <ng-container *ngIf="getDateData(item.apply.date_to,date)">
-                      <ng-container *ngIf="item.apply.type === 'sick leave' ">
-                        <nz-tag [nzColor]="'red'"><span nz-icon nzType="home" nzTheme="outline"></span> End  of Sick leave  <nz-badge nzColor="#f50" [nzText]="item.fname"></nz-badge></nz-tag>
-
-                      </ng-container>
-                      <ng-container *ngIf="item.apply.type === 'vacation leave' ">
-                        <nz-tag [nzColor]="'purple'"><span nz-icon nzType="home" nzTheme="outline"></span> End  of Vacation leave  <nz-badge nzColor="#f50" [nzText]="item.fname"></nz-badge></nz-tag>
-
-                      </ng-container>
-
-                    </ng-container>
-                  </ng-container>
-
-                </div>
-                <div *ngFor="let item of eventlist">
-                  <ng-container *ngIf="getMonthData(item.date,date)">
-                    <ng-container *ngIf="getDateData(item.date,date)">
-                      <div *ngIf="item.eventtype ==='meeting'">
-                        <nz-tag [nzColor]="'#f50'"><span nz-icon nzType="pushpin" nzTheme="fill"></span> Meeting  <nz-badge nzColor="#f50" [nzText]="item.eventtype"> {{item.time}} {{item.description}}</nz-badge></nz-tag>
                       </div>
-                      <div *ngIf="item.eventtype ==='activity'">
-                        <nz-tag [nzColor]="'#108ee9'"><span nz-icon nzType="pushpin" nzTheme="fill"></span> Activity  <nz-badge nzColor="#f50" [nzText]="item.eventtype"> {{item.time}} {{item.description}}</nz-badge></nz-tag>
+                      <div *ngFor="let item of eventlist">
+                        <ng-container *ngIf="getMonthData(item.date,date)">
+                          <ng-container *ngIf="getDateData(item.date,date)">
+                            <div *ngIf="item.eventtype ==='meeting'">
+                              <nz-tag [nzColor]="'#f50'"><span nz-icon nzType="pushpin" nzTheme="fill"></span> Meeting  <nz-badge nzColor="#f50" [nzText]="item.eventtype"> {{item.time}} {{item.description}}</nz-badge></nz-tag>
+                            </div>
+                            <div *ngIf="item.eventtype ==='activity'">
+                              <nz-tag [nzColor]="'#108ee9'"><span nz-icon nzType="pushpin" nzTheme="fill"></span> Activity  <nz-badge nzColor="#f50" [nzText]="item.eventtype"> {{item.time}} {{item.description}}</nz-badge></nz-tag>
+                            </div>
+                          </ng-container>
+                        </ng-container>
                       </div>
-                    </ng-container>
-                  </ng-container>
-                </div>
 
-    </ul>
+          </ul>
 
-  </nz-calendar>
+        </nz-calendar>
+       </ng-container>
+
+    </nz-content>
+    <nz-sider style="background-color: rgba(236, 255, 246, 0.678); border-radius: 15px;">
+    <nz-content style="height: 180px; margin-top: 10%;">
+      <nz-timeline  *ngFor="let item of timeline_item " style="background: transparent;">
+
+            <nz-timeline-item nzColor="red" *ngIf="item.name === 'meeting'" >
+              {{item.time}} {{item.name}}  {{item.description}}
+             </nz-timeline-item >
+            <nz-timeline-item [nzDot]="dotTemplate" style="background:transparent" *ngIf="item.description === 'time in'">
+
+              {{item.time}} {{item.name}}  {{item.description}}
+             </nz-timeline-item>
+      </nz-timeline>
+
+      <ng-template #dotTemplate style="background: transparent;" >
+        <span nz-icon nzType="clock-circle-o" style=" border-radius: 100px; font-size: 16px;"></span>
+      </ng-template>
+
+    </nz-content>
+
+
+    </nz-sider>
+
+
+  </nz-layout>
+
+
+
+
+
+
 
 </ng-container>
 

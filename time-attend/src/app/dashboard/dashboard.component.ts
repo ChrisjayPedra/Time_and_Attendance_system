@@ -54,12 +54,14 @@ export class DashboardComponent {
   lateNow : now_late_list[]=[];
   present : present_list[]=[];
   late : late_list[]=[];
+  list_nowpresent:presentNow_list[]=[];
   employee_list : employeeList[]=[];
   employee_list_final : employeeListfinal[]=[];
   approval_list : approval_list[]=[];
   apply_records : applyrecords[]=[];
   calapproved : cal_approved[]=[];
   eventlist : event_list[]=[];
+  timeline_item : timeline[]=[];
   currentTimee: Date | undefined;
   decidate:any;
 pending_count!:number;
@@ -263,7 +265,7 @@ handleCancell(): void {
         }
     })
 
-    const  [{id,userName,password,accessType,fname,mname,lname,email,number,position,department,attendance,apply:{approval,date_to,date_from,reason,type,date_approval}}] = Object.values(this.approval_list)
+    const  [{id,userName,password,accessType,fname,mname,lname,email,number,position,department,attendance,date_join,apply:{approval,date_to,date_from,reason,type,date_approval}}] = Object.values(this.approval_list)
     console.log('apply id',id,userName,password,accessType,fname,mname,lname,email,number,position,department,attendance)
       this.decidate = this.datepipe.transform((new Date), 'MMMM d, y');
     const applyrecords ={
@@ -455,7 +457,10 @@ createEvent(){
               if(attendance.attendance === 'present' && attendance.date === this.date){
                 console.log('present now',this.date);
                 console.log('present_now',attendance);
+                this.list_nowpresent.push(attendance);
                 this.presentNow.push(attendance);
+
+
               }
               if (attendance.attendance === 'absent'){
                 console.log('attendancewwwww',attendance);
@@ -473,14 +478,49 @@ createEvent(){
               if(attendance.attendance === 'late' && attendance.date === this.date){
                 console.log('present now',this.date);
                 console.log('present_now',attendance);
+                this.list_nowpresent.push(attendance);
                 this.lateNow.push(attendance);
+
               }
               // if (attendance.attendance === 'leave'){
               //   console.log('attendancewwwww',attendance);
               //   this.leave.push(attendance);
               // }
 
-            })
+            });
+
+
+            // let [{currentDateTime,id,date,attendees:{fname,time_in}}] = Object.values(this.list_nowpresent)
+            // const item =
+            // {
+            //     name:fname,
+            //     time:time_in,
+            //     description:'time in'
+
+
+            // }
+
+            let q = this.list_nowpresent
+              q.forEach((data) => {
+                    console.log('00000000000000000000000',data);
+                    // let [{currentDateTime,id,date,attendees:{fname,time_in}}] = Object.values(data);
+                      const item =
+                      {
+                      name:data.attendees.fname,
+                      time:data.attendees.time_in,
+                      description:'time in'
+                      }
+                      this.timeline_item.push(item);
+              });
+
+
+          // this.timeline_item.push(item);
+
+            console.log('00000000000000000000000',this.list_nowpresent);
+
+        // console.log('item',item)
+        console.log('Timeline item',this.timeline_item)
+
         this.present_count = Object.keys(this.presentNow).length;
         this.absent_count = Object.keys(this.absentNow).length;
         this.late_count = Object.keys(this.lateNow).length;
@@ -489,6 +529,7 @@ createEvent(){
 
        console.log('attendance',this.present_count);
 
+
       //  console.log('data',data);
 
 
@@ -496,6 +537,7 @@ createEvent(){
 
 
     }));
+
 
   }
 
@@ -512,12 +554,39 @@ createEvent(){
 
       this.eventlist = Object.values(Response)
       console.log('EventList',this.eventlist);
+      let q = this.eventlist
+      q.forEach((data) => {
+        if (data.date === this.date){
+          const item =
+          {
+          name:data.eventtype,
+          time:data.time,
+          description:data.description,
+          }
+          this.timeline_item.push(item);
+        }
+
+      });
+      console.log('Timeline item',)
+      this.sortAscending()
       this.updateEditCachee();
     })
 
 
 
   }
+
+  // sortAscending(array: timeline[]): timeline[] {
+  //   return array.sort((a, b) => a.time.getTime() - b.date.getTime());
+  // }
+  // sortAscending(array: timeline[], property: string): timeline[] {
+  //   return array.sort((a, b) => a.time.localeCompare(b.time));
+  // }
+  sortAscending(){
+    this.timeline_item.sort((a, b) => a.time.localeCompare(b.time));
+    console.log(this.timeline_item,"===================");
+  }
+  // const item =this.timeline_item
 
 
 }
@@ -797,3 +866,32 @@ interface late_list {
 //     time_out:string;
 //   }
 // }
+
+interface timeline{
+  // currentDateTime:string
+  // id:number;
+  // date:string;
+  // attendees:
+  // {
+    name:string;
+    time:string;
+    description:string;
+  // }
+
+}
+interface presentNow_list {
+  currentDateTime: any;
+  id:number;
+  date:string;
+  attendance: string;
+  attendees:{
+    id:number;
+    fname: string;
+    mname: string;
+    lname: string;
+    position: string;
+    department: string;
+    time_in:string;
+    time_out:string;
+  }
+}

@@ -24,7 +24,7 @@ export class AddemployeeComponent {
   passwordVisible = false;
   password?: string;
 
-  maxFileSize = 100000; // 1kB
+  maxFileSize = 1000000; // 1kB
   dateEx: any;
 
  addemployeeNotif(): void {
