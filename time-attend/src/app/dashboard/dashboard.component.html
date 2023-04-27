@@ -25,17 +25,19 @@
         <div class="blob">
           <nz-statistic  nzTitle="Time" nzValue="{{currentTimee | date: 'mediumTime' }}"></nz-statistic>
         </div>
+        <nz-statistic  nzTitle="New Employee" nzValue="{{new_employee_count}}" style="margin: 0 20px;"></nz-statistic>
+
       </nz-row>
 
     </nz-page-header-content>
 
   </nz-page-header>
 
-<ng-container >
+<ng-container style="background: transparent; margin:0%" >
 
   <nz-layout style="background: transparent; margin:0%">
 
-    <nz-content>
+    <nz-content style="background: transparent; margin-left:0%">
       <ng-container style="height: 200px ; width: 700px;">
         <nz-calendar   [(ngModel)]="selectedDate" (ngModelChange)="onDateChange($event)" class="calendar"  nzHeight="600px" [nzFullscreen]="true" >
 

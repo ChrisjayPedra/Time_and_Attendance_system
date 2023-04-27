@@ -67,7 +67,8 @@ export class DashboardComponent {
 pending_count!:number;
 caldate:any;
 calmonth: any;
-
+employee_list_new: EmployeeList_new[] = [];
+new_employee_count:any;
 validateForm!: FormGroup;
 radioValue = 'A';
 time_sta= new Date();
@@ -75,6 +76,7 @@ date_from: any | null;
 
 dateEv:any|null
 timeEv:any|null;
+dateEq:any;
 
 
 editCachee: { [key: number]: { edit: boolean; data: event_list } } = {};
@@ -331,11 +333,13 @@ createEvent(){
 
 
   constructor(private fb: FormBuilder,private modal: NzModalService,public datepipe: DatePipe,private _http:HttpClient,  private router:Router, private crudHttpService: CrudHttpService) {
+    defineElement(lottie.loadAnimation)
     this.validateForm = this.fb.group({
       eventType: ['', [Validators.required]],
       date_from: ['', [Validators.required]],
       timePicker: [null],
       description: ['', [Validators.required]]
+
     });
 
     let currentDateTime =this.datepipe.transform((new Date), 'MMMM d, y');
@@ -418,8 +422,12 @@ createEvent(){
            }else if (employee.apply.approval === 'approved'){
             this.calapproved.push(employee);
             console.log('calendar_approved',this.calapproved);
-          }
+           }
+           if (employee.attendance === 'new Employee'){
+            this.employee_list_new.push(employee)
+           }
        })
+       this.new_employee_count =  Object.keys(this.employee_list_new).length;
        this.pending_count = Object.keys(this.employee_list_final).length;
        this.keyCountemployee = Object.keys(Response).length;
     },(error=>{
@@ -499,11 +507,12 @@ createEvent(){
 
 
             // }
-
+            this.dateEq = this.datepipe.transform((new Date), 'MMMM d, y');
             let q = this.list_nowpresent
               q.forEach((data) => {
                     console.log('00000000000000000000000',data);
                     // let [{currentDateTime,id,date,attendees:{fname,time_in}}] = Object.values(data);
+                    if (data.date === this.dateEq){
                       const item =
                       {
                       name:data.attendees.fname,
@@ -511,6 +520,10 @@ createEvent(){
                       description:'time in'
                       }
                       this.timeline_item.push(item);
+                    }
+
+
+
               });
 
 
@@ -554,9 +567,11 @@ createEvent(){
 
       this.eventlist = Object.values(Response)
       console.log('EventList',this.eventlist);
+      this.dateEq = this.datepipe.transform((new Date), 'MMMM d, y');
+
       let q = this.eventlist
       q.forEach((data) => {
-        if (data.date === this.date){
+        if (data.date === this.dateEq){
           const item =
           {
           name:data.eventtype,
@@ -894,4 +909,33 @@ interface presentNow_list {
     time_in:string;
     time_out:string;
   }
+}
+
+
+interface EmployeeList_new {
+  id:number;
+  userName: string;
+  password: string;
+  accessType: string;
+  fname: string;
+  mname: string;
+  lname: string;
+  email: string;
+  number: string;
+  position: string;
+  department: string;
+  attendance: string;
+  image:string;
+  date_join:string;
+  apply:{
+    type:string;
+    date_to:string;
+    date_from:string;
+    reason:string;
+    approval:string;
+    date_approval:string;
+
+  },
+
+
 }
