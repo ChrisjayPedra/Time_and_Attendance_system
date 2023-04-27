@@ -836,6 +836,13 @@
       "time": "2:54: PM",
       "description": "Traning camp",
       "id": 15
+    },
+    {
+      "eventtype": "meeting",
+      "date": "April 28, 2023",
+      "time": "12:44: AM",
+      "description": "General meeting",
+      "id": 16
     }
   ],
   "apply_leave_records": [

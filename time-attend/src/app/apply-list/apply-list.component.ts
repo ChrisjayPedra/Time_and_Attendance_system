@@ -8,7 +8,7 @@ import { NzNotificationService } from 'ng-zorro-antd/notification';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import { Papa } from 'ngx-papaparse'
-import * as XLSX from 'xlsx';
+
 import { saveAs } from 'file-saver';
 import { UserServiceService } from '../user-service.service';
 import { DatePipe } from '@angular/common';
