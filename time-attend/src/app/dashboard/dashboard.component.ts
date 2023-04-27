@@ -499,7 +499,7 @@ createEvent(){
             this.dateEq = this.datepipe.transform((new Date), 'MMMM d, y');
             let q = this.list_nowpresent
               q.forEach((data) => {
-                     if (data.date === this.dateEq){
+                     if (data.date === this.date){
                       const item =
                       {
                       name:data.attendees.fname,
