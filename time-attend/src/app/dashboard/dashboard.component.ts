@@ -490,29 +490,16 @@ createEvent(){
                 this.lateNow.push(attendance);
 
               }
-              // if (attendance.attendance === 'leave'){
-              //   console.log('attendancewwwww',attendance);
-              //   this.leave.push(attendance);
-              // }
+
 
             });
 
 
-            // let [{currentDateTime,id,date,attendees:{fname,time_in}}] = Object.values(this.list_nowpresent)
-            // const item =
-            // {
-            //     name:fname,
-            //     time:time_in,
-            //     description:'time in'
 
-
-            // }
             this.dateEq = this.datepipe.transform((new Date), 'MMMM d, y');
             let q = this.list_nowpresent
               q.forEach((data) => {
-                    console.log('00000000000000000000000',data);
-                    // let [{currentDateTime,id,date,attendees:{fname,time_in}}] = Object.values(data);
-                    if (data.date === this.dateEq){
+                     if (data.date === this.dateEq){
                       const item =
                       {
                       name:data.attendees.fname,
