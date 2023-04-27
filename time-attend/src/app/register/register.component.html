@@ -15,9 +15,9 @@
 
     <nz-form-item>
       <nz-form-label [nzSpan]="7" nzRequired>Middle name</nz-form-label>
-      <nz-form-control [nzSpan]="12" nzHasFeedback [nzErrorTip]="userErrorTpl">
+      <nz-form-control [nzSpan]="12" nzHasFeedback [nzErrorTip]="userErrorTpl1">
         <input nz-input formControlName="mname" placeholder="Enter Middle name" />
-        <ng-template #userErrorTpl let-control>
+        <ng-template #userErrorTpl1 let-control>
           <ng-container *ngIf="control.hasError('required')">Please input your Middle name!</ng-container>
         </ng-template>
       </nz-form-control>
@@ -25,9 +25,9 @@
 
     <nz-form-item>
       <nz-form-label [nzSpan]="7" nzRequired>Last name</nz-form-label>
-      <nz-form-control [nzSpan]="12" nzHasFeedback [nzErrorTip]="userErrorTpl">
+      <nz-form-control [nzSpan]="12" nzHasFeedback [nzErrorTip]="userErrorTpl2">
         <input nz-input formControlName="lname" placeholder="Enter Last name" />
-        <ng-template #userErrorTpl let-control>
+        <ng-template #userErrorTpl2 let-control>
           <ng-container *ngIf="control.hasError('required')">Please input your Last name!</ng-container>
         </ng-template>
       </nz-form-control>
@@ -35,9 +35,9 @@
 
     <nz-form-item>
       <nz-form-label [nzSpan]="7" nzRequired>Contact Number</nz-form-label>
-      <nz-form-control [nzSpan]="12" nzHasFeedback [nzErrorTip]="userErrorTpl">
+      <nz-form-control [nzSpan]="12" nzHasFeedback [nzErrorTip]="userErrorTpl3">
         <input nz-input formControlName="number" placeholder="Enter Contact number" />
-        <ng-template #userErrorTpl let-control>
+        <ng-template #userErrorTpl3 let-control>
           <ng-container *ngIf="control.hasError('required')">Please input your Contact Number!</ng-container>
         </ng-template>
       </nz-form-control>
@@ -47,13 +47,13 @@
     <nz-form-item>
 
       <nz-form-label [nzSpan]="7" nzRequired> Profile</nz-form-label>
-      <nz-form-control [nzSpan]="12" nzHasFeedback [nzErrorTip]="userErrorTpl">
+      <nz-form-control [nzSpan]="12" nzHasFeedback [nzErrorTip]="userErrorTpl4">
 
 
             <span nz-icon nzType="upload"> <input type="file" (change)="onFileSelected($event)" > </span>
 
 
-        <ng-template #userErrorTpl let-control>
+        <ng-template #userErrorTpl4 let-control>
           <ng-container *ngIf="control.hasError('required')">Please add profile!</ng-container>
         </ng-template>
       </nz-form-control>
@@ -61,9 +61,9 @@
 
     <nz-form-item>
       <nz-form-label [nzSpan]="7" nzRequired>Department</nz-form-label>
-      <nz-form-control [nzSpan]="12" nzHasFeedback [nzErrorTip]="userErrorTpl">
+      <nz-form-control [nzSpan]="12" nzHasFeedback [nzErrorTip]="userErrorTpl5">
         <input nz-input formControlName="department" placeholder="Enter Department" />
-        <ng-template #userErrorTpl let-control>
+        <ng-template #userErrorTpl5 let-control>
           <ng-container *ngIf="control.hasError('required')">Please input employee department</ng-container>
         </ng-template>
       </nz-form-control>
@@ -71,9 +71,9 @@
 
     <nz-form-item>
       <nz-form-label [nzSpan]="7" nzRequired> Position</nz-form-label>
-      <nz-form-control [nzSpan]="12" nzHasFeedback [nzErrorTip]="userErrorTpl">
+      <nz-form-control [nzSpan]="12" nzHasFeedback [nzErrorTip]="userErrorTpl6">
         <input nz-input formControlName="position" placeholder="Enter position" />
-        <ng-template #userErrorTpl let-control>
+        <ng-template #userErrorTpl6 let-control>
           <ng-container *ngIf="control.hasError('required')">Please input employee position!</ng-container>
         </ng-template>
       </nz-form-control>
@@ -82,9 +82,9 @@
 
     <nz-form-item>
       <nz-form-label [nzSpan]="7" nzRequired>Username</nz-form-label>
-      <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorTpl">
+      <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorTpl7">
         <input nz-input formControlName="userName" placeholder="Enter Username" />
-        <ng-template #userErrorTpl let-control>
+        <ng-template #userErrorTpl7 let-control>
           <ng-container *ngIf="control.hasError('required')">Please input your username!</ng-container>
           <ng-container *ngIf="control.hasError('duplicated')">The username is already exist!</ng-container>
         </ng-template>
